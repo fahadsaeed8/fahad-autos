@@ -175,7 +175,7 @@ export default function Home() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-          <div className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center">
+          <div className="mb-14 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center">
             <h3 className="text-xl font-bold text-amber-900">
               {isUr ? 'خصوصی مہارت: فیاٹ، میسی، فورڈ + ٹاپ لنک' : 'Special Focus: Fiat, Massey, Ford + Top Link'}
             </h3>
