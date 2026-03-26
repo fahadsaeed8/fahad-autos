@@ -40,7 +40,7 @@ export default function TopNavbar() {
       }`}
     >
       <div className="mx-auto flex max-w-8xl flex-wrap items-center justify-between gap-3 px-4 py-4 md:px-8">
-        <div className="-ml-1 flex items-center justify-start gap-3 md:-ml-2">
+        <div className="-ml-1 flex items-center justify-start gap-3 md:-ml-12">
           <Image src="/new-logo.png" alt="Fahad Autos logo" width={420} height={130} className="h-24 w-80 object-contain" />
         </div>
 
