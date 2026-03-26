@@ -5,9 +5,24 @@ import Link from 'next/link'
 import { useLanguage } from '@/app/lib/language-context'
 
 const highlights = [
-  { en: 'Fiat, Massey, Ford local parts specialist', ur: 'فیاٹ، میسی، فورڈ لوکل پارٹس اسپیشلسٹ' },
-  { en: 'Top Link & Lift Link wholesale dealer', ur: 'ٹاپ لنک اور لفٹ لنک ہول سیل ڈیلر' },
-  { en: 'Manufacturing and bulk supply support', ur: 'مینوفیکچرنگ اور بلک سپلائی سپورٹ' },
+  {
+    en: 'Fiat, Massey, Ford local parts specialist',
+    ur: 'فیاٹ، میسی، فورڈ لوکل پارٹس اسپیشلسٹ',
+    detailEn: 'Daily-use reliable local parts with model-wise fitting support.',
+    detailUr: 'روزمرہ استعمال کے مضبوط لوکل پارٹس، ماڈل کے مطابق فٹنگ گائیڈ کے ساتھ۔',
+  },
+  {
+    en: 'Top Link & Lift Link wholesale dealer',
+    ur: 'ٹاپ لنک اور لفٹ لنک ہول سیل ڈیلر',
+    detailEn: 'Strong wholesale network for shops, mechanics and market dealers.',
+    detailUr: 'دکانوں، مکینکس اور مارکیٹ ڈیلرز کے لئے مضبوط ہول سیل سپلائی چین۔',
+  },
+  {
+    en: 'Manufacturing and bulk supply support',
+    ur: 'مینوفیکچرنگ اور بلک سپلائی سپورٹ',
+    detailEn: 'Bulk quantity readiness for long-term buyers and workshops.',
+    detailUr: 'طویل مدتی خریداروں اور ورکشاپس کے لئے بلک مقدار میں مستقل دستیابی۔',
+  },
 ]
 
 const categories = [
@@ -61,12 +76,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-        <h2 className="text-3xl font-bold text-slate-900">{isUr ? 'ہمارے نمایاں فیچرز' : 'Our Highlights'}</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {highlights.map((item) => (
-            <article key={item.en} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="font-semibold text-blue-900">{isUr ? item.ur : item.en}</h3>
+      <section className="mx-auto max-w-7xl px-4 py-14 text-center md:px-8">
+        <div className="mb-8">
+          <h2 className="text-4xl font-extrabold text-slate-900 md:text-5xl">{isUr ? 'ہمارے نمایاں فیچرز' : 'Our Highlights'}</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
+          </p>
+        </div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {highlights.map((item, index) => (
+            <article
+              key={item.en}
+              className="group rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-cyan-300">
+                {index + 1}
+              </div>
+              <h3 className="mt-4 text-lg font-bold text-indigo-900">{isUr ? item.ur : item.en}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{isUr ? item.detailUr : item.detailEn}</p>
             </article>
           ))}
         </div>
@@ -74,7 +101,7 @@ export default function Home() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-          <div className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <div className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center">
             <h3 className="text-xl font-bold text-amber-900">
               {isUr ? 'خصوصی مہارت: فیاٹ، میسی، فورڈ + ٹاپ لنک' : 'Special Focus: Fiat, Massey, Ford + Top Link'}
             </h3>
