@@ -13,7 +13,7 @@ export default function AboutPage() {
         <p className="mt-5 leading-8 text-slate-700">
           {isUr
             ? 'وکی ٹریکٹر فہد آٹوز ایک خاندانی کاروبار ہے جہاں کسانوں اور مکینکس کی ضروریات کے مطابق معیاری ٹریکٹر پارٹس دستیاب کیے جاتے ہیں۔ ہمارا مقصد مناسب قیمت، اصل کوالٹی اور ایماندار رہنمائی فراہم کرنا ہے۔'
-            : 'Waqi Tractor Fahad Autos is a family-run business focused on supplying quality tractor parts for farmers and mechanics. Our mission is fair pricing, trusted quality and honest guidance for every customer.'}
+            : 'Vicky Tractor Fahad Autos is a family-run business focused on supplying quality tractor parts for farmers and mechanics. Our mission is fair pricing, trusted quality and honest guidance for every customer.'}
         </p>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">

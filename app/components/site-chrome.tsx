@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { LanguageProvider, useLanguage } from '@/app/lib/language-context'
 
@@ -23,12 +24,18 @@ function TopNavbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-blue-900/20 bg-slate-950/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-4 md:px-8">
+      <div className="mx-auto flex max-w-8xl flex-wrap items-center justify-between gap-3 px-4 py-4 md:px-8">
         <div>
-          <p className="text-lg font-extrabold tracking-wide text-amber-300">Waqi Tractor Fahad Autos</p>
-          <p className="text-xs text-blue-100" dir="rtl" lang="ur">
-            وکی ٹریکٹر فہد آٹوز
-          </p>
+          <div className="flex items-center justify-start gap-3">
+            <Image
+              src="/new-logo.png"
+              alt="Fahad Autos logo"
+              width={420}
+              height={130}
+              className="h-24 w-80 object-contain"
+            />
+          </div>
+     
         </div>
 
         <nav className="flex flex-wrap items-center gap-2 md:gap-4">
@@ -61,10 +68,18 @@ function SiteFooter() {
 
   return (
     <footer className="border-t border-slate-800 bg-slate-950 text-slate-300">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:grid-cols-3 md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:grid-cols-[1.6fr_1fr_1fr] md:px-8">
         <div>
-          <h3 className="text-lg font-bold text-amber-300">Waqi Tractor Fahad Autos</h3>
-          <p className="mt-2 text-sm leading-6">
+          <div className="flex items-center justify-start">
+            <Image
+              src="/new-logo.png"
+              alt="Fahad Autos logo"
+              width={460}
+              height={140}
+              className="h-24 w-80 object-contain md:w-96"
+            />
+          </div>
+          <p className="mt-3 text-sm leading-7">
             {lang === 'en'
               ? 'Trusted local tractor parts shop in Lahore for farmers, mechanics and workshops.'
               : 'لاہور میں کسانوں، مکینک اور ورکشاپس کے لئے قابل اعتماد ٹریکٹر پارٹس کی دکان۔'}
@@ -86,7 +101,7 @@ function SiteFooter() {
       </div>
       <div className="border-t border-slate-800 px-4 py-4 text-center text-xs text-slate-400">
         {lang === 'en'
-          ? 'Copyright 2026 Waqi Tractor Fahad Autos. All rights reserved.'
+          ? 'Copyright 2026 Vicky Tractor Fahad Autos. All rights reserved.'
           : 'کاپی رائٹ 2026 وکی ٹریکٹر فہد آٹوز۔ جملہ حقوق محفوظ ہیں۔'}
       </div>
     </footer>

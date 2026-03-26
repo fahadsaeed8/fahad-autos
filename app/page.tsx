@@ -37,7 +37,7 @@ export default function Home() {
             <p className="mt-4 max-w-xl text-sm text-blue-100 md:text-base">
               {isUr
                 ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
-                : 'Waqi Tractor Fahad Autos deals in Fiat, Massey and Ford local parts, with Top Link and Lift Link wholesale dealing and manufacturing support.'}
+                : 'Vicky Tractor Fahad Autos deals in Fiat, Massey and Ford local parts, with Top Link and Lift Link wholesale dealing and manufacturing support.'}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/parts" className="rounded-lg bg-amber-400 px-5 py-3 text-sm font-bold text-slate-950">
@@ -51,7 +51,7 @@ export default function Home() {
           <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
             <Image
               src="/business-card.png"
-              alt="Waqi Tractor Fahad Autos business card"
+              alt="Vicky Tractor Fahad Autos business card"
               width={1280}
               height={720}
               className="h-full w-full rounded-xl object-cover"
