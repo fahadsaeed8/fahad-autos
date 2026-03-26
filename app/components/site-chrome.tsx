@@ -2,6 +2,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { LanguageProvider, useLanguage } from '@/app/lib/language-context'
 
 type NavItem = {
@@ -21,9 +23,23 @@ const navItems: NavItem[] = [
 
 function TopNavbar() {
   const { lang, toggleLang } = useLanguage()
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 20)
+    onScroll()
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-blue-900/20 bg-slate-950/95 backdrop-blur">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
+        isScrolled
+          ? 'border-blue-900/20 bg-slate-950/95 backdrop-blur'
+          : 'border-transparent bg-gradient-to-r from-slate-950/40 via-blue-950/35 to-slate-900/40'
+      }`}
+    >
       <div className="mx-auto flex max-w-8xl flex-wrap items-center justify-between gap-3 px-4 py-4 md:px-8">
         <div>
           <div className="flex items-center justify-start gap-3">
@@ -109,10 +125,13 @@ function SiteFooter() {
 }
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
+
   return (
     <LanguageProvider>
       <TopNavbar />
-      {children}
+      <div className={isHomePage ? '' : 'pt-28'}>{children}</div>
       <SiteFooter />
     </LanguageProvider>
   )
