@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useLanguage } from '@/app/lib/language-context'
 
 const highlights = [
@@ -26,17 +27,90 @@ const highlights = [
 ]
 
 const categories = [
-  'Fiat Local Parts',
-  'Massey Local Parts',
-  'Ford Local Parts',
-  'Top Link',
-  'Lift Link',
-  'Hydraulic & Linkage Items',
+  {
+    key: 'fiat',
+    title: 'Fiat Local Parts',
+    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
+    en: {
+      overview: 'Fiat local tractor parts available with practical quality for local farming needs.',
+      items: ['Local market fitting support', 'Regular stock availability', 'Retail and wholesale supply'],
+    },
+    ur: {
+      overview: 'فیاٹ کے لوکل ٹریکٹر پارٹس مقامی کھیتی باڑی کی ضروریات کے مطابق دستیاب ہیں۔',
+      items: ['لوکل مارکیٹ فٹنگ سپورٹ', 'مستقل اسٹاک دستیابی', 'ریٹیل اور ہول سیل سپلائی'],
+    },
+  },
+  {
+    key: 'massey',
+    title: 'Massey Local Parts',
+    image: 'https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=1200&q=80',
+    en: {
+      overview: 'Massey local parts range for mechanics and farmers with reliable compatibility.',
+      items: ['Model-based guidance', 'Workshop-friendly supply', 'Daily-use durable quality'],
+    },
+    ur: {
+      overview: 'میسی کے لوکل پارٹس مکینکس اور کسان بھائیوں کی ضروریات کے مطابق دستیاب ہیں۔',
+      items: ['ماڈل کے مطابق رہنمائی', 'ورکشاپ کے لئے بہتر سپلائی', 'روزمرہ استعمال کے لئے مضبوط کوالٹی'],
+    },
+  },
+  {
+    key: 'ford',
+    title: 'Ford Local Parts',
+    image: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1200&q=80',
+    en: {
+      overview: 'Ford local tractor parts for replacement and maintenance with easy availability.',
+      items: ['Reliable local options', 'Mechanic support', 'Retail and bulk quantity'],
+    },
+    ur: {
+      overview: 'فورڈ ٹریکٹر کے لوکل پارٹس مرمت اور تبدیلی کے لئے آسانی سے دستیاب ہیں۔',
+      items: ['قابلِ اعتماد لوکل آپشنز', 'مکینک سپورٹ', 'ریٹیل اور بلک مقدار'],
+    },
+  },
+  {
+    key: 'toplink',
+    title: 'Top Link',
+    image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=1200&q=80',
+    en: {
+      overview: 'Top Link is one of our core products with wholesale dealing support.',
+      items: ['Multiple sizes available', 'Wholesale dealer rates', 'Bulk order handling'],
+    },
+    ur: {
+      overview: 'ٹاپ لنک ہماری بنیادی مصنوعات میں شامل ہے اور ہول سیل سپورٹ کے ساتھ دستیاب ہے۔',
+      items: ['مختلف سائز دستیاب', 'ہول سیل ڈیلر ریٹس', 'بلک آرڈر ہینڈلنگ'],
+    },
+  },
+  {
+    key: 'liftlink',
+    title: 'Lift Link',
+    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80',
+    en: {
+      overview: 'Lift Link stock is available with stable supply for market demand.',
+      items: ['Market-demand items', 'Consistent stock flow', 'Dealer quantity available'],
+    },
+    ur: {
+      overview: 'لفٹ لنک کا اسٹاک مارکیٹ ڈیمانڈ کے مطابق مستقل سپلائی کے ساتھ دستیاب ہے۔',
+      items: ['مارکیٹ ڈیمانڈ آئٹمز', 'مسلسل اسٹاک فلو', 'ڈیلر مقدار دستیاب'],
+    },
+  },
+  {
+    key: 'hydraulic',
+    title: 'Hydraulic & Linkage Items',
+    image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1200&q=80',
+    en: {
+      overview: 'Hydraulic and linkage items available for local repairs and field work support.',
+      items: ['Linkage-related local items', 'Workshop demand stock', 'Wholesale and retail availability'],
+    },
+    ur: {
+      overview: 'ہائیڈرولک اور لنکیج آئٹمز مقامی مرمت اور کھیت کے کام کے لئے دستیاب ہیں۔',
+      items: ['لنکیج سے متعلق لوکل آئٹمز', 'ورکشاپ ڈیمانڈ اسٹاک', 'ہول سیل اور ریٹیل دستیابی'],
+    },
+  },
 ]
 
 export default function Home() {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
+  const [activeCategory, setActiveCategory] = useState(categories[0])
 
   return (
     <main className="min-h-screen bg-slate-100">
@@ -111,13 +185,39 @@ export default function Home() {
                 : 'Our core specialization is Fiat, Massey and Ford local parts, Top Link, Lift Link, and related linkage items with wholesale and manufacturing capabilities.'}
             </p>
           </div>
-          <h2 className="text-3xl font-bold text-slate-900">{isUr ? 'پارٹس کی کیٹیگریز' : 'Parts Categories'}</h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {categories.map((category) => (
-              <div key={category} className="rounded-xl border border-blue-100 bg-blue-50 p-4 font-semibold text-blue-900">
-                {category}
-              </div>
-            ))}
+          <div className="text-center">
+            <h2 className="text-4xl font-extrabold text-slate-900 md:text-5xl">{isUr ? 'پارٹس کی کیٹیگریز' : 'Parts Categories'}</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              {isUr ? 'ہر کیٹیگری میں معیاری اور قابلِ اعتماد پارٹس دستیاب ہیں۔' : 'Reliable and quality stock available across every category.'}
+            </p>
+          </div>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+            {categories.map((category) => {
+              const isActive = activeCategory.key === category.key
+              return (
+                <button
+                  key={category.key}
+                  type="button"
+                  onClick={() => setActiveCategory(category)}
+                  className={`overflow-hidden rounded-2xl border text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${isActive ? 'border-cyan-400 ring-2 ring-cyan-200' : 'border-indigo-100'
+                    }`}
+                >
+                  <Image
+                    src={category.image}
+                    alt={category.title}
+                    width={1000}
+                    height={650}
+                    className="h-36 w-full object-cover"
+                  />
+                  <div className="bg-gradient-to-b from-white to-indigo-50/40 p-4">
+                    <h3 className="text-lg font-bold text-indigo-900">{category.title}</h3>
+                    <p className="mt-1 text-sm text-slate-600">
+                      {isUr ? 'مزید تفصیل دیکھنے کے لئے کلک کریں' : 'Click to view related details'}
+                    </p>
+                  </div>
+                </button>
+              )
+            })}
           </div>
         </div>
       </section>
