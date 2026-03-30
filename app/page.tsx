@@ -3,6 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { SectionHeading } from '@/app/components/section-heading'
+import { categoryImages } from '@/app/lib/site-images'
 import { useLanguage } from '@/app/lib/language-context'
 
 const highlights = [
@@ -30,7 +32,7 @@ const categories = [
   {
     key: 'fiat',
     title: 'Fiat Local Parts',
-    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.fiat,
     en: {
       overview: 'Fiat local tractor parts available with practical quality for local farming needs.',
       items: ['Local market fitting support', 'Regular stock availability', 'Retail and wholesale supply'],
@@ -43,7 +45,7 @@ const categories = [
   {
     key: 'massey',
     title: 'Massey Local Parts',
-    image: 'https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.massey,
     en: {
       overview: 'Massey local parts range for mechanics and farmers with reliable compatibility.',
       items: ['Model-based guidance', 'Workshop-friendly supply', 'Daily-use durable quality'],
@@ -56,7 +58,7 @@ const categories = [
   {
     key: 'ford',
     title: 'Ford Local Parts',
-    image: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.ford,
     en: {
       overview: 'Ford local tractor parts for replacement and maintenance with easy availability.',
       items: ['Reliable local options', 'Mechanic support', 'Retail and bulk quantity'],
@@ -69,7 +71,7 @@ const categories = [
   {
     key: 'toplink',
     title: 'Top Link',
-    image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.toplink,
     en: {
       overview: 'Top Link is one of our core products with wholesale dealing support.',
       items: ['Multiple sizes available', 'Wholesale dealer rates', 'Bulk order handling'],
@@ -82,7 +84,7 @@ const categories = [
   {
     key: 'liftlink',
     title: 'Lift Link',
-    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.liftlink,
     en: {
       overview: 'Lift Link stock is available with stable supply for market demand.',
       items: ['Market-demand items', 'Consistent stock flow', 'Dealer quantity available'],
@@ -95,7 +97,7 @@ const categories = [
   {
     key: 'hydraulic',
     title: 'Hydraulic & Linkage Items',
-    image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.hydraulic,
     en: {
       overview: 'Hydraulic and linkage items available for local repairs and field work support.',
       items: ['Linkage-related local items', 'Workshop demand stock', 'Wholesale and retail availability'],
@@ -148,9 +150,17 @@ export default function Home() {
             <p className="inline-block rounded-full bg-amber-300 px-3 py-1 text-xs font-bold tracking-wide text-slate-950">
               {isUr ? 'قابلِ اعتماد پارٹس پارٹنر' : 'TRUSTED PARTS PARTNER'}
             </p>
-            <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl">
-              {isUr ? 'ہر ٹریکٹر پارٹ ایک جگہ' : 'All Tractor Parts Under One Roof'}
-            </h1>
+            <SectionHeading
+              as="h1"
+              variant="dark"
+              size="hero"
+              className="mt-4"
+              primaryEn="All Tractor Parts"
+              accentEn="Under One Roof"
+              primaryUr="ہر ٹریکٹر پارٹ"
+              accentUr="ایک جگہ"
+              isUr={isUr}
+            />
             <p className="mt-4 max-w-xl text-sm text-blue-100 md:text-base">
               {isUr
                 ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
@@ -180,22 +190,40 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl px-4 py-14 text-center md:px-8">
         <div className="mb-8">
-          <h2 className="text-4xl font-extrabold text-slate-900 md:text-5xl">{isUr ? 'ہمارے نمایاں فیچرز' : 'Our Highlights'}</h2>
+          <SectionHeading
+            primaryEn="Our"
+            accentEn="Highlights"
+            primaryUr="ہمارے نمایاں"
+            accentUr="فیچرز"
+            isUr={isUr}
+          />
           <p className="mt-2 text-sm text-slate-600">
             {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
           </p>
         </div>
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3">
           {highlights.map((item, index) => (
             <article
               key={item.en}
-              className="group rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              className="group overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_14px_40px_-18px_rgba(15,23,42,0.22)] ring-1 ring-slate-900/5 transition hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(30,58,138,0.35)]"
             >
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-cyan-300">
-                {index + 1}
+              <div className="h-1.5 bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600" aria-hidden />
+              <div className="flex items-start gap-4 px-5 py-5 md:gap-5 md:px-6 md:py-6">
+                <div
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-sm font-bold text-cyan-300 shadow-inner md:h-14 md:w-14 md:text-base"
+                  aria-hidden
+                >
+                  {index + 1}
+                </div>
+                <div className="min-w-0 flex-1 text-start" dir={isUr ? 'rtl' : 'ltr'}>
+                  <h3 className="text-[15px] font-bold leading-snug tracking-tight text-indigo-950 md:text-base">
+                    {isUr ? item.ur : item.en}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {isUr ? item.detailUr : item.detailEn}
+                  </p>
+                </div>
               </div>
-              <h3 className="mt-4 text-lg font-bold text-indigo-900">{isUr ? item.ur : item.en}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{isUr ? item.detailUr : item.detailEn}</p>
             </article>
           ))}
         </div>
@@ -204,9 +232,17 @@ export default function Home() {
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
           <div className="mb-14 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center">
-            <h3 className="text-xl font-bold text-amber-900">
-              {isUr ? 'خصوصی مہارت: فیاٹ، میسی، فورڈ + ٹاپ لنک' : 'Special Focus: Fiat, Massey, Ford + Top Link'}
-            </h3>
+            <SectionHeading
+              as="h3"
+              size="card"
+              primaryEn="Special Focus:"
+              accentEn="Fiat, Massey, Ford + Top Link"
+              primaryUr="خصوصی مہارت:"
+              accentUr="فیاٹ، میسی، فورڈ + ٹاپ لنک"
+              isUr={isUr}
+              primaryClassName="text-amber-950"
+              accentClassName="text-amber-800"
+            />
             <p className="mt-2 text-sm text-amber-800">
               {isUr
                 ? 'ہماری بنیادی اسپیشلٹی فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک، اور متعلقہ لنکیج آئٹمز کی ہول سیل اور مینوفیکچرنگ ہے۔'
@@ -214,7 +250,13 @@ export default function Home() {
             </p>
           </div>
           <div className="text-center">
-            <h2 className="text-4xl font-extrabold text-slate-900 md:text-5xl">{isUr ? 'پارٹس کی کیٹیگریز' : 'Parts Categories'}</h2>
+            <SectionHeading
+              primaryEn="Parts"
+              accentEn="Categories"
+              primaryUr="پارٹس کی"
+              accentUr="کیٹیگریز"
+              isUr={isUr}
+            />
             <p className="mt-2 text-sm text-slate-600">
               {isUr ? 'ہر کیٹیگری میں معیاری اور قابلِ اعتماد پارٹس دستیاب ہیں۔' : 'Reliable and quality stock available across every category.'}
             </p>
@@ -255,7 +297,14 @@ export default function Home() {
         <div className="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-indigo-300/20 blur-3xl" />
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
           <div className="text-center">
-            <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl">{isUr ? 'ہم پر اعتماد کیوں؟' : 'Why Trust Our Shop?'}</h2>
+            <SectionHeading
+              variant="dark"
+              primaryEn="Why Trust"
+              accentEn="Our Shop?"
+              primaryUr="ہم پر اعتماد"
+              accentUr="کیوں؟"
+              isUr={isUr}
+            />
             <p className="mx-auto mt-3 max-w-3xl text-sm text-cyan-100/90">
               {isUr
                 ? 'لوکل مارکیٹ کے تجربے اور مستقل سپلائی کی بنیاد پر کسان اور مکینک ہم پر اعتماد کرتے ہیں۔'
@@ -278,9 +327,14 @@ export default function Home() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-          <h2 className="text-center text-4xl font-extrabold text-slate-900 md:text-5xl">
-            {isUr ? 'ہول سیل اور مینوفیکچرنگ ورک فلو' : 'Wholesale & Manufacturing Workflow'}
-          </h2>
+          <SectionHeading
+            centered
+            primaryEn="Wholesale & Manufacturing"
+            accentEn="Workflow"
+            primaryUr="ہول سیل اور مینوفیکچرنگ"
+            accentUr="ورک فلو"
+            isUr={isUr}
+          />
           <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-slate-600">
             {isUr
               ? 'آرڈر سے لے کر سپلائی تک ہر مرحلے میں واضح رہنمائی، درست ریٹ اور بروقت سہولت دی جاتی ہے۔'

@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { LanguageProvider } from '@/app/lib/language-context'
 import SiteFooter from '@/app/components/site-footer'
 import TopNavbar from '@/app/components/top-navbar'
+import WhatsAppFloat from '@/app/components/whatsapp-float'
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -14,6 +15,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       <TopNavbar />
       <div className={isHomePage ? '' : 'pt-28'}>{children}</div>
       <SiteFooter />
+      <WhatsAppFloat />
     </LanguageProvider>
   )
 }

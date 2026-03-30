@@ -1,10 +1,12 @@
 'use client'
 
 import Image from 'next/image'
+import { SectionHeading } from '@/app/components/section-heading'
 import { useLanguage } from '@/app/lib/language-context'
 
 export default function SiteFooter() {
   const { lang } = useLanguage()
+  const isUr = lang === 'ur'
 
   return (
     <footer className="border-t border-slate-800 bg-slate-950 text-slate-300">
@@ -26,13 +28,29 @@ export default function SiteFooter() {
           </p>
         </div>
         <div>
-          <h4 className="font-semibold text-white">{lang === 'en' ? 'Quick Contact' : 'فوری رابطہ'}</h4>
+          <SectionHeading
+            as="h4"
+            variant="dark"
+            size="footer"
+            primaryEn="Quick"
+            accentEn="Contact"
+            primaryUr="فوری"
+            accentUr="رابطہ"
+            isUr={isUr}
+          />
           <p className="mt-2 text-sm">0321-4964013</p>
           <p className="text-sm">0300-4785384</p>
           <p className="text-sm">Ph: 37700794</p>
         </div>
         <div>
-          <h4 className="font-semibold text-white">{lang === 'en' ? 'Address' : 'پتہ'}</h4>
+          <SectionHeading
+            as="h4"
+            variant="dark"
+            size="footer"
+            primaryEn="Address"
+            primaryUr="پتہ"
+            isUr={isUr}
+          />
           <p className="mt-2 text-sm">Shop No. 43, Ramzan Chamber, 91/140 Badami Bagh, Lahore</p>
           <p className="mt-2 text-sm" dir="rtl" lang="ur">
             دکان نمبر 43، رمضان چیمبر، 91/140 بادامی باغ، لاہور

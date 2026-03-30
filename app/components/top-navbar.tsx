@@ -41,7 +41,7 @@ export default function TopNavbar() {
     >
       <div
         className={`relative mx-auto flex max-w-8xl items-center justify-between gap-3 px-4 transition-all duration-300 md:px-8 ${
-          isScrolled ? 'py-2' : 'py-4'
+          isScrolled ? 'py-2' : 'py-2'
         }`}
       >
         <div className="-ml-1 flex items-center justify-start gap-3 md:-ml-12">

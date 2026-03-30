@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { SectionHeading } from '@/app/components/section-heading'
 
 type HeroSectionProps = {
   isUr: boolean
@@ -15,9 +16,17 @@ export default function HeroSection({ isUr }: HeroSectionProps) {
           <p className="inline-block rounded-full bg-amber-300 px-3 py-1 text-xs font-bold tracking-wide text-slate-950">
             {isUr ? 'قابلِ اعتماد پارٹس پارٹنر' : 'TRUSTED PARTS PARTNER'}
           </p>
-          <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl">
-            {isUr ? 'ہر ٹریکٹر پارٹ ایک جگہ' : 'All Tractor Parts Under One Roof'}
-          </h1>
+          <SectionHeading
+            as="h1"
+            variant="dark"
+            size="hero"
+            className="mt-4"
+            primaryEn="All Tractor Parts"
+            accentEn="Under One Roof"
+            primaryUr="ہر ٹریکٹر پارٹ"
+            accentUr="ایک جگہ"
+            isUr={isUr}
+          />
           <p className="mt-4 max-w-xl text-sm text-blue-100 md:text-base">
             {isUr
               ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
