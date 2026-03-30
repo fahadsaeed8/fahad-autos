@@ -10,20 +10,23 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-slate-100">
       <section className="mx-auto max-w-6xl px-4 py-14 md:px-8">
-        <SectionHeading
-          as="h1"
-          size="page"
-          primaryEn="Contact"
-          accentEn="Us"
-          primaryUr="رابطہ"
-          accentUr="کریں"
-          isUr={isUr}
-        />
-        <p className="mt-3 max-w-2xl text-slate-700">
-          {isUr
-            ? 'پارٹس کی قیمت، دستیابی یا بلک آرڈر کے لئے ہم سے فون پر رابطہ کریں۔'
-            : 'Call us for parts pricing, availability checks, and bulk workshop orders.'}
-        </p>
+        <div className="text-center">
+          <SectionHeading
+            as="h1"
+            size="page"
+            centered
+            primaryEn="Contact"
+            accentEn="Us"
+            primaryUr="رابطہ"
+            accentUr="کریں"
+            isUr={isUr}
+          />
+          <p className="mx-auto mt-3 max-w-2xl text-slate-700">
+            {isUr
+              ? 'پارٹس کی قیمت، دستیابی یا بلک آرڈر کے لئے ہم سے فون پر رابطہ کریں۔'
+              : 'Call us for parts pricing, availability checks, and bulk workshop orders.'}
+          </p>
+        </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

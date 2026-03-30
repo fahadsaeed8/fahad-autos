@@ -20,18 +20,21 @@ export default function GalleryPage() {
   return (
     <main className="min-h-screen bg-slate-100">
       <section className="mx-auto max-w-7xl px-4 py-14 md:px-8">
-        <SectionHeading
-          as="h1"
-          size="page"
-          primaryEn="Gallery"
-          primaryUr="گیلری"
-          isUr={isUr}
-        />
-        <p className="mt-3 max-w-3xl text-slate-700">
-          {lang === 'en'
-            ? 'A visual collection inspired by tractors, field work and heavy-duty machinery.'
-            : 'ٹریکٹر، کھیت اور ہیوی ڈیوٹی مشینری سے متعلق تصویری مجموعہ۔'}
-        </p>
+        <div className="text-center">
+          <SectionHeading
+            as="h1"
+            size="page"
+            centered
+            primaryEn="Gallery"
+            primaryUr="گیلری"
+            isUr={isUr}
+          />
+          <p className="mx-auto mt-3 max-w-3xl text-slate-700">
+            {lang === 'en'
+              ? 'A visual collection inspired by tractors, field work and heavy-duty machinery.'
+              : 'ٹریکٹر، کھیت اور ہیوی ڈیوٹی مشینری سے متعلق تصویری مجموعہ۔'}
+          </p>
+        </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {galleryImages.map((src, index) => (

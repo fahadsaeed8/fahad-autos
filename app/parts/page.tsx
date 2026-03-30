@@ -44,18 +44,19 @@ export default function PartsPage() {
   return (
     <main className="min-h-screen bg-slate-100">
       <section className="bg-gradient-to-r from-blue-900 to-slate-900 px-4 py-14 text-white md:px-8">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl text-center">
           <SectionHeading
             as="h1"
             variant="dark"
             size="page"
+            centered
             primaryEn="Tractor"
             accentEn="Parts"
             primaryUr="ٹریکٹر"
             accentUr="پارٹس"
             isUr={isUr}
           />
-          <p className="mt-3 max-w-3xl text-blue-100">
+          <p className="mx-auto mt-3 max-w-3xl text-blue-100">
             {isUr
               ? 'ہم فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک اور لنکیج پارٹس کی خصوصی سپلائی کرتے ہیں۔'
               : 'We specialize in Fiat, Massey and Ford local parts, including Top Link, Lift Link and linkage items.'}

@@ -12,7 +12,7 @@ const services = [
     primaryUr: 'برانڈ اسپیسفک سپورٹ',
     accentUr: '(فیاٹ / میسی / فورڈ)',
     detailEn:
-      'We help you pick the right local parts for your tractor model — not just “any” part, but what actually fits field use and workshop demand.',
+      'We help you pick the right local parts for your tractor model, not just “any” part, but what actually fits field use and workshop demand.',
     detailUr:
       'ہم صرف “کوئی بھی” پارٹ نہیں، بلکہ آپ کے ٹریکٹر ماڈل اور کھیت/ورکشاپ کی اصل ضرورت کے مطابق درست لوکل پارٹس کی رہنمائی دیتے ہیں۔',
     bulletsEn: [
@@ -56,7 +56,7 @@ const services = [
     primaryUr: 'مینوفیکچرنگ اور بلک',
     accentUr: 'آرڈر سپورٹ',
     detailEn:
-      'Long-term buyers and workshops can plan bulk orders with manufacturing-backed options where needed — clear communication from requirement to dispatch.',
+      'Long-term buyers and workshops can plan bulk orders with manufacturing-backed options where needed, with clear communication from requirement to dispatch.',
     detailUr:
       'طویل مدتی خریدار اور ورکشاپس بلک آرڈر پلان کر سکتے ہیں؛ جہاں ضرورت ہو مینوفیکچرنگ سپورٹ بھی، ضرورت سے لے کر سپلائی تک واضح باتچیت۔',
     bulletsEn: [
@@ -96,8 +96,8 @@ export default function ServicesPage() {
           />
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-blue-100/95">
             {isUr
-              ? 'ہم صرف پارٹس بیچنے تک محدود نہیں — فٹنگ، ہول سیل، اور بلک سپلائی تک ہماری سروسز کاروبار اور کسان دونوں کے لئے واضح اور قابلِ اعتماد ہیں۔'
-              : 'We are not limited to selling parts alone — from fitting guidance to wholesale and bulk supply, our services stay clear and dependable for dealers and farmers alike.'}
+              ? 'ہم صرف پارٹس بیچنے تک محدود نہیں، فٹنگ، ہول سیل، اور بلک سپلائی تک ہماری سروسز کاروبار اور کسان دونوں کے لئے واضح اور قابلِ اعتماد ہیں۔'
+              : 'We are not limited to selling parts alone, from fitting guidance to wholesale and bulk supply, our services stay clear and dependable for dealers and farmers alike.'}
           </p>
         </div>
       </section>
@@ -130,7 +130,7 @@ export default function ServicesPage() {
                       aria-hidden
                     />
                     <span className="inline-flex w-fit items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
-                      {String(index + 1).padStart(2, '0')} — {isUr ? 'سروس' : 'Service'}
+                      {String(index + 1).padStart(2, '0')} · {isUr ? 'سروس' : 'Service'}
                     </span>
                     <div className="mt-5" dir={isUr ? 'rtl' : 'ltr'}>
                       <SectionHeading
