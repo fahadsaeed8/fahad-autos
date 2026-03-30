@@ -9,7 +9,7 @@ const phones = [
   { labelEn: 'Mobile 2', labelUr: 'موبائل ۲', num: '0300-4785384', tel: '+923004785384' },
 ] as const
 
-const landline = { num: '37700794', tel: '+924237700794' }
+const landline = { display: '042-37700794', tel: '+924237700794' }
 
 const WHATSAPP_HREF = 'https://wa.me/923004785384'
 
@@ -96,7 +96,7 @@ export default function ContactPage() {
                         {isUr ? 'لینڈ لائن' : 'Landline'}
                       </span>
                       <a href={`tel:${landline.tel}`} className="text-lg font-bold tabular-nums text-indigo-950 hover:underline">
-                        {landline.num}
+                        {landline.display}
                       </a>
                     </div>
                   </li>
@@ -113,9 +113,9 @@ export default function ContactPage() {
                     className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-600 to-orange-800 text-white shadow-inner"
                     aria-hidden
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7">
-                      <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.709 16.709 0 006.682-6.07c.259-.363.463-.768.596-1.208a4.001 4.001 0 00-.472-3.036 4 4 0 00-1.065-1.104 4 4 0 00-5.52 5.066c.259.363.463.768.596 1.208a4.001 4.001 0 00-.472 3.036 4 4 0 001.065 1.104 4 4 0 005.52 0 4 4 0 001.065-1.104 4 4 0 00-.472-3.036 4.001 4.001 0 00-1.065-1.104 4 4 0 00-5.52 5.066c.259.363.463.768.596 1.208a4.001 4.001 0 00-.472 3.036 4 4 0 001.065 1.104 4 4 0 005.52 0 4 4 0 001.065-1.104 4 4 0 00-.472-3.036 4.001 4.001 0 00-1.065-1.104 4 4 0 00-5.52 5.066z" clipRule="evenodd" />
-                      <path d="M12 2.25a6.75 6.75 0 00-6.75 6.75c0 4.28 6.75 10.5 6.75 10.5s6.75-6.22 6.75-10.5A6.75 6.75 0 0012 2.25z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-7 w-7">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
                   </div>
                   <div className="min-w-0 flex-1 text-start" dir={isUr ? 'rtl' : 'ltr'}>
