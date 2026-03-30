@@ -30,10 +30,8 @@ export default function AboutPage() {
             <SectionHeading
               as="h2"
               size="card"
-              primaryEn="Experi"
-              accentEn="ence"
-              primaryUr="تجرب"
-              accentUr="ہ"
+              primaryEn="Experience"
+              primaryUr="تجربہ"
               isUr={isUr}
             />
             <p className="mt-2 text-sm text-slate-700">{isUr ? 'مقامی مارکیٹ میں مضبوط شناخت' : 'Strong local market understanding.'}</p>
@@ -42,10 +40,8 @@ export default function AboutPage() {
             <SectionHeading
               as="h2"
               size="card"
-              primaryEn="Tr"
-              accentEn="ust"
-              primaryUr="بھرو"
-              accentUr="سہ"
+              primaryEn="Trust"
+              primaryUr="بھروسہ"
               isUr={isUr}
             />
             <p className="mt-2 text-sm text-slate-700">{isUr ? 'کسٹمر سینٹرک اور شفاف لین دین' : 'Customer-first and transparent dealing.'}</p>
@@ -54,10 +50,8 @@ export default function AboutPage() {
             <SectionHeading
               as="h2"
               size="card"
-              primaryEn="Ser"
-              accentEn="vice"
-              primaryUr="سرو"
-              accentUr="س"
+              primaryEn="Service"
+              primaryUr="سروس"
               isUr={isUr}
             />
             <p className="mt-2 text-sm text-slate-700">{isUr ? 'تیز رسپانس اور بہتر مشورہ' : 'Quick response with practical recommendations.'}</p>

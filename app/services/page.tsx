@@ -82,18 +82,19 @@ export default function ServicesPage() {
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 to-slate-900 px-4 py-16 text-white md:px-8 md:py-20">
         <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
         <div className="pointer-events-none absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl">
+        <div className="relative mx-auto max-w-7xl text-center">
           <SectionHeading
             as="h1"
             variant="dark"
             size="page"
+            centered
             primaryEn="Our"
             accentEn="Services"
             primaryUr="ہماری"
             accentUr="سروسز"
             isUr={isUr}
           />
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-blue-100/95">
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-blue-100/95">
             {isUr
               ? 'ہم صرف پارٹس بیچنے تک محدود نہیں — فٹنگ، ہول سیل، اور بلک سپلائی تک ہماری سروسز کاروبار اور کسان دونوں کے لئے واضح اور قابلِ اعتماد ہیں۔'
               : 'We are not limited to selling parts alone — from fitting guidance to wholesale and bulk supply, our services stay clear and dependable for dealers and farmers alike.'}

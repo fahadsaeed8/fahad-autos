@@ -23,10 +23,8 @@ export default function GalleryPage() {
         <SectionHeading
           as="h1"
           size="page"
-          primaryEn="Gall"
-          accentEn="ery"
-          primaryUr="گیل"
-          accentUr="ری"
+          primaryEn="Gallery"
+          primaryUr="گیلری"
           isUr={isUr}
         />
         <p className="mt-3 max-w-3xl text-slate-700">

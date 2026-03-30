@@ -6,9 +6,10 @@ type SectionHeadingProps = {
   className?: string
   centered?: boolean
   primaryEn: string
-  accentEn: string
+  /** Omit or leave empty for a single-tone title (e.g. one word like “Address”). */
+  accentEn?: string
   primaryUr: string
-  accentUr: string
+  accentUr?: string
   isUr: boolean
   /** Override primary span classes (e.g. amber banner). */
   primaryClassName?: string
@@ -32,15 +33,15 @@ export function SectionHeading({
   className = '',
   centered = false,
   primaryEn,
-  accentEn,
+  accentEn = '',
   primaryUr,
-  accentUr,
+  accentUr = '',
   isUr,
   primaryClassName,
   accentClassName,
 }: SectionHeadingProps) {
   const primary = isUr ? primaryUr : primaryEn
-  const accent = isUr ? accentUr : accentEn
+  const accent = (isUr ? accentUr : accentEn).trim()
   const defaultPrimary = variant === 'light' ? 'text-slate-900' : 'text-white'
   const primaryCls = primaryClassName ?? defaultPrimary
   const defaultAccent =

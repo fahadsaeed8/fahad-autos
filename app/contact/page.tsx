@@ -44,10 +44,8 @@ export default function ContactPage() {
             <SectionHeading
               as="h2"
               size="card"
-              primaryEn="Addr"
-              accentEn="ess"
-              primaryUr="پت"
-              accentUr="ہ"
+              primaryEn="Address"
+              primaryUr="پتہ"
               isUr={isUr}
             />
             <p className="mt-3 text-slate-800">Shop No. 43, Ramzan Chamber, 91/140 Badami Bagh, Lahore</p>

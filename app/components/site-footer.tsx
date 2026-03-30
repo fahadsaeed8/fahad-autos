@@ -47,10 +47,8 @@ export default function SiteFooter() {
             as="h4"
             variant="dark"
             size="footer"
-            primaryEn="Addr"
-            accentEn="ess"
-            primaryUr="پت"
-            accentUr="ہ"
+            primaryEn="Address"
+            primaryUr="پتہ"
             isUr={isUr}
           />
           <p className="mt-2 text-sm">Shop No. 43, Ramzan Chamber, 91/140 Badami Bagh, Lahore</p>
