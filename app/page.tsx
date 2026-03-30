@@ -107,6 +107,34 @@ const categories = [
   },
 ]
 
+const trustStats = [
+  { value: '500+', en: 'Happy Buyers', ur: 'خوش گاہک' },
+  { value: '6', en: 'Core Categories', ur: 'بنیادی کیٹیگریز' },
+  { value: '3', en: 'Major Brands', ur: 'اہم برانڈز' },
+  { value: '24/7', en: 'Order Support', ur: 'آرڈر سپورٹ' },
+]
+
+const workflow = [
+  {
+    enTitle: 'Requirement Discussion',
+    urTitle: 'ضرورت کی سمجھ',
+    enText: 'Share model and part details, we verify the right fitting.',
+    urText: 'ٹریکٹر ماڈل اور پارٹ بتائیں، ہم درست فٹنگ کنفرم کرتے ہیں۔',
+  },
+  {
+    enTitle: 'Stock & Rate Confirmation',
+    urTitle: 'اسٹاک اور ریٹ کنفرمیشن',
+    enText: 'We confirm real-time stock and provide retail/wholesale pricing.',
+    urText: 'ہم فوری اسٹاک اور ریٹیل/ہول سیل ریٹس کنفرم کرتے ہیں۔',
+  },
+  {
+    enTitle: 'Delivery / Pickup',
+    urTitle: 'ڈیلیوری / پک اپ',
+    enText: 'Fast dispatch for market dealers, workshops and local buyers.',
+    urText: 'مارکیٹ ڈیلرز، ورکشاپس اور لوکل خریداروں کے لئے فوری سپلائی۔',
+  },
+]
+
 export default function Home() {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
@@ -218,6 +246,72 @@ export default function Home() {
                 </button>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#080f35] via-[#17205f] to-[#0a1138] text-white">
+        <div className="pointer-events-none absolute -left-20 top-10 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
+        <div className="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-indigo-300/20 blur-3xl" />
+        <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
+          <div className="text-center">
+            <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl">{isUr ? 'ہم پر اعتماد کیوں؟' : 'Why Trust Our Shop?'}</h2>
+            <p className="mx-auto mt-3 max-w-3xl text-sm text-cyan-100/90">
+              {isUr
+                ? 'لوکل مارکیٹ کے تجربے اور مستقل سپلائی کی بنیاد پر کسان اور مکینک ہم پر اعتماد کرتے ہیں۔'
+                : 'Farmers and mechanics trust us for practical guidance and reliable stock availability.'}
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+            {trustStats.map((stat) => (
+              <article
+                key={stat.en}
+                className="rounded-2xl border border-cyan-300/20 bg-white/10 p-6 text-center shadow-lg shadow-black/20 backdrop-blur-sm transition hover:-translate-y-1 hover:bg-white/15"
+              >
+                <p className="text-4xl font-extrabold text-cyan-300">{stat.value}</p>
+                <p className="mt-2 text-sm text-slate-100">{isUr ? stat.ur : stat.en}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
+          <h2 className="text-center text-4xl font-extrabold text-slate-900 md:text-5xl">
+            {isUr ? 'ہول سیل اور مینوفیکچرنگ ورک فلو' : 'Wholesale & Manufacturing Workflow'}
+          </h2>
+          <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-slate-600">
+            {isUr
+              ? 'آرڈر سے لے کر سپلائی تک ہر مرحلے میں واضح رہنمائی، درست ریٹ اور بروقت سہولت دی جاتی ہے۔'
+              : 'From inquiry to supply, each step is handled with clear communication, right pricing and timely support.'}
+          </p>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {workflow.map((step, index) => (
+              <article
+                key={step.enTitle}
+                className="relative rounded-2xl border border-indigo-100 bg-gradient-to-b from-indigo-50/70 to-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-900 text-xs font-bold text-cyan-300 shadow">
+                  {index + 1}
+                </div>
+                <h3 className="mt-4 text-lg font-bold text-indigo-900">{isUr ? step.urTitle : step.enTitle}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-700">{isUr ? step.urText : step.enText}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 rounded-2xl border border-cyan-200 bg-gradient-to-r from-cyan-50 to-indigo-50 p-6 text-center shadow-sm">
+            <p className="text-lg font-bold text-indigo-900">
+              {isUr ? 'بلک آرڈر یا ڈیلر ریٹس کے لئے ابھی رابطہ کریں' : 'Need bulk rates or dealership supply? Contact us now.'}
+            </p>
+            <div className="mt-4">
+              <Link
+                href="/contact"
+                className="inline-flex rounded-lg bg-indigo-900 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-800"
+              >
+                {isUr ? 'ابھی رابطہ کریں' : 'Contact Us Now'}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
