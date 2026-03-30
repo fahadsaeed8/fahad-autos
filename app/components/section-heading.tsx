@@ -1,8 +1,8 @@
 type SectionHeadingProps = {
-  as?: 'h1' | 'h2' | 'h3'
+  as?: 'h1' | 'h2' | 'h3' | 'h4'
   /** Light: slate + gradient accent. Dark: white + cyan (for blue/dark sections). */
   variant?: 'light' | 'dark'
-  size?: 'hero' | 'section' | 'page' | 'card'
+  size?: 'hero' | 'section' | 'compact' | 'page' | 'card' | 'footer'
   className?: string
   centered?: boolean
   primaryEn: string
@@ -19,8 +19,10 @@ type SectionHeadingProps = {
 const sizeClasses: Record<NonNullable<SectionHeadingProps['size']>, string> = {
   hero: 'text-4xl font-extrabold leading-tight md:text-6xl',
   section: 'text-4xl font-extrabold tracking-tight md:text-5xl',
+  compact: 'text-3xl font-extrabold tracking-tight md:text-4xl',
   page: 'text-4xl font-extrabold md:text-5xl',
   card: 'text-xl font-bold',
+  footer: 'text-sm font-semibold',
 }
 
 export function SectionHeading({
@@ -48,7 +50,10 @@ export function SectionHeading({
   const accentCls = accentClassName ?? defaultAccent
 
   return (
-    <Tag className={`${sizeClasses[size]} ${centered ? 'text-center ' : ''}${className}`.trim()}>
+    <Tag
+      dir={isUr ? 'rtl' : 'ltr'}
+      className={`${sizeClasses[size]} ${centered ? 'text-center ' : ''}${className}`.trim()}
+    >
       <span className={primaryCls}>{primary}</span>
       {accent ? (
         <>

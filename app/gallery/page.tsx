@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { SectionHeading } from '@/app/components/section-heading'
 import { useLanguage } from '@/app/lib/language-context'
 
 const galleryImages = [
@@ -14,11 +15,20 @@ const galleryImages = [
 
 export default function GalleryPage() {
   const { lang } = useLanguage()
+  const isUr = lang === 'ur'
 
   return (
     <main className="min-h-screen bg-slate-100">
       <section className="mx-auto max-w-7xl px-4 py-14 md:px-8">
-        <h1 className="text-4xl font-extrabold text-slate-900">{lang === 'en' ? 'Gallery' : 'گیلری'}</h1>
+        <SectionHeading
+          as="h1"
+          size="page"
+          primaryEn="Gall"
+          accentEn="ery"
+          primaryUr="گیل"
+          accentUr="ری"
+          isUr={isUr}
+        />
         <p className="mt-3 max-w-3xl text-slate-700">
           {lang === 'en'
             ? 'A visual collection inspired by tractors, field work and heavy-duty machinery.'
