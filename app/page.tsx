@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { SectionHeading } from '@/app/components/section-heading'
+import { categoryImages } from '@/app/lib/site-images'
 import { useLanguage } from '@/app/lib/language-context'
 
 const highlights = [
@@ -31,7 +32,7 @@ const categories = [
   {
     key: 'fiat',
     title: 'Fiat Local Parts',
-    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.fiat,
     en: {
       overview: 'Fiat local tractor parts available with practical quality for local farming needs.',
       items: ['Local market fitting support', 'Regular stock availability', 'Retail and wholesale supply'],
@@ -44,7 +45,7 @@ const categories = [
   {
     key: 'massey',
     title: 'Massey Local Parts',
-    image: 'https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.massey,
     en: {
       overview: 'Massey local parts range for mechanics and farmers with reliable compatibility.',
       items: ['Model-based guidance', 'Workshop-friendly supply', 'Daily-use durable quality'],
@@ -57,7 +58,7 @@ const categories = [
   {
     key: 'ford',
     title: 'Ford Local Parts',
-    image: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.ford,
     en: {
       overview: 'Ford local tractor parts for replacement and maintenance with easy availability.',
       items: ['Reliable local options', 'Mechanic support', 'Retail and bulk quantity'],
@@ -70,7 +71,7 @@ const categories = [
   {
     key: 'toplink',
     title: 'Top Link',
-    image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.toplink,
     en: {
       overview: 'Top Link is one of our core products with wholesale dealing support.',
       items: ['Multiple sizes available', 'Wholesale dealer rates', 'Bulk order handling'],
@@ -83,7 +84,7 @@ const categories = [
   {
     key: 'liftlink',
     title: 'Lift Link',
-    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.liftlink,
     en: {
       overview: 'Lift Link stock is available with stable supply for market demand.',
       items: ['Market-demand items', 'Consistent stock flow', 'Dealer quantity available'],
@@ -96,7 +97,7 @@ const categories = [
   {
     key: 'hydraulic',
     title: 'Hydraulic & Linkage Items',
-    image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1200&q=80',
+    image: categoryImages.hydraulic,
     en: {
       overview: 'Hydraulic and linkage items available for local repairs and field work support.',
       items: ['Linkage-related local items', 'Workshop demand stock', 'Wholesale and retail availability'],

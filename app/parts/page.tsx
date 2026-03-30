@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { SectionHeading } from '@/app/components/section-heading'
+import { partsPageImages } from '@/app/lib/site-images'
 import { useLanguage } from '@/app/lib/language-context'
 
 const parts = [
@@ -12,8 +13,7 @@ const parts = [
     primaryUr: 'Fiat, Massey, Ford',
     accentUr: 'Local Parts',
     desc: 'Complete local parts range for Fiat, Massey and Ford tractors for daily farming needs.',
-    image:
-      'https://images.unsplash.com/photo-1649322014009-f2f2da52d58d?auto=format&fit=crop&w=1200&q=80',
+    image: partsPageImages[0],
   },
   {
     title: 'Top Link & Lift Link Range',
@@ -22,8 +22,7 @@ const parts = [
     primaryUr: 'Top Link & Lift Link',
     accentUr: 'Range',
     desc: 'Top Link, Lift Link and related linkage items available in retail and wholesale quantity.',
-    image:
-      'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
+    image: partsPageImages[1],
   },
   {
     title: 'Wholesale + Manufacturing Supply',
@@ -32,8 +31,7 @@ const parts = [
     primaryUr: 'Wholesale +',
     accentUr: 'Manufacturing Supply',
     desc: 'Consistent supply support for dealers, workshops and market distributors with manufacturing options.',
-    image:
-      'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=1200&q=80',
+    image: partsPageImages[2],
   },
 ]
 

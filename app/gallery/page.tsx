@@ -3,16 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { SectionHeading } from '@/app/components/section-heading'
+import { galleryImages } from '@/app/lib/site-images'
 import { useLanguage } from '@/app/lib/language-context'
-
-const galleryImages = [
-  'https://images.unsplash.com/photo-1625246333195-78d73c0f1689?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1457530378978-8bac673b8062?auto=format&fit=crop&w=1200&q=80',
-] as const
 
 const captions = [
   { en: 'Field & fleet', ur: 'کھیت اور فلیٹ' },
