@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { SectionHeading } from '@/app/components/section-heading'
 import { useLanguage } from '@/app/lib/language-context'
 
 const highlights = [
@@ -148,9 +149,17 @@ export default function Home() {
             <p className="inline-block rounded-full bg-amber-300 px-3 py-1 text-xs font-bold tracking-wide text-slate-950">
               {isUr ? 'قابلِ اعتماد پارٹس پارٹنر' : 'TRUSTED PARTS PARTNER'}
             </p>
-            <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl">
-              {isUr ? 'ہر ٹریکٹر پارٹ ایک جگہ' : 'All Tractor Parts Under One Roof'}
-            </h1>
+            <SectionHeading
+              as="h1"
+              variant="dark"
+              size="hero"
+              className="mt-4"
+              primaryEn="All Tractor Parts"
+              accentEn="Under One Roof"
+              primaryUr="ہر ٹریکٹر پارٹ"
+              accentUr="ایک جگہ"
+              isUr={isUr}
+            />
             <p className="mt-4 max-w-xl text-sm text-blue-100 md:text-base">
               {isUr
                 ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
@@ -180,7 +189,13 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl px-4 py-14 text-center md:px-8">
         <div className="mb-8">
-          <h2 className="text-4xl font-extrabold text-slate-900 md:text-5xl">{isUr ? 'ہمارے نمایاں فیچرز' : 'Our Highlights'}</h2>
+          <SectionHeading
+            primaryEn="Our"
+            accentEn="Highlights"
+            primaryUr="ہمارے نمایاں"
+            accentUr="فیچرز"
+            isUr={isUr}
+          />
           <p className="mt-2 text-sm text-slate-600">
             {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
           </p>
@@ -204,9 +219,17 @@ export default function Home() {
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
           <div className="mb-14 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center">
-            <h3 className="text-xl font-bold text-amber-900">
-              {isUr ? 'خصوصی مہارت: فیاٹ، میسی، فورڈ + ٹاپ لنک' : 'Special Focus: Fiat, Massey, Ford + Top Link'}
-            </h3>
+            <SectionHeading
+              as="h3"
+              size="card"
+              primaryEn="Special Focus:"
+              accentEn="Fiat, Massey, Ford + Top Link"
+              primaryUr="خصوصی مہارت:"
+              accentUr="فیاٹ، میسی، فورڈ + ٹاپ لنک"
+              isUr={isUr}
+              primaryClassName="text-amber-950"
+              accentClassName="text-amber-800"
+            />
             <p className="mt-2 text-sm text-amber-800">
               {isUr
                 ? 'ہماری بنیادی اسپیشلٹی فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک، اور متعلقہ لنکیج آئٹمز کی ہول سیل اور مینوفیکچرنگ ہے۔'
@@ -214,7 +237,13 @@ export default function Home() {
             </p>
           </div>
           <div className="text-center">
-            <h2 className="text-4xl font-extrabold text-slate-900 md:text-5xl">{isUr ? 'پارٹس کی کیٹیگریز' : 'Parts Categories'}</h2>
+            <SectionHeading
+              primaryEn="Parts"
+              accentEn="Categories"
+              primaryUr="پارٹس کی"
+              accentUr="کیٹیگریز"
+              isUr={isUr}
+            />
             <p className="mt-2 text-sm text-slate-600">
               {isUr ? 'ہر کیٹیگری میں معیاری اور قابلِ اعتماد پارٹس دستیاب ہیں۔' : 'Reliable and quality stock available across every category.'}
             </p>
@@ -255,7 +284,14 @@ export default function Home() {
         <div className="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-indigo-300/20 blur-3xl" />
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
           <div className="text-center">
-            <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl">{isUr ? 'ہم پر اعتماد کیوں؟' : 'Why Trust Our Shop?'}</h2>
+            <SectionHeading
+              variant="dark"
+              primaryEn="Why Trust"
+              accentEn="Our Shop?"
+              primaryUr="ہم پر اعتماد"
+              accentUr="کیوں؟"
+              isUr={isUr}
+            />
             <p className="mx-auto mt-3 max-w-3xl text-sm text-cyan-100/90">
               {isUr
                 ? 'لوکل مارکیٹ کے تجربے اور مستقل سپلائی کی بنیاد پر کسان اور مکینک ہم پر اعتماد کرتے ہیں۔'
@@ -278,9 +314,14 @@ export default function Home() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-          <h2 className="text-center text-4xl font-extrabold text-slate-900 md:text-5xl">
-            {isUr ? 'ہول سیل اور مینوفیکچرنگ ورک فلو' : 'Wholesale & Manufacturing Workflow'}
-          </h2>
+          <SectionHeading
+            centered
+            primaryEn="Wholesale & Manufacturing"
+            accentEn="Workflow"
+            primaryUr="ہول سیل اور مینوفیکچرنگ"
+            accentUr="ورک فلو"
+            isUr={isUr}
+          />
           <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-slate-600">
             {isUr
               ? 'آرڈر سے لے کر سپلائی تک ہر مرحلے میں واضح رہنمائی، درست ریٹ اور بروقت سہولت دی جاتی ہے۔'
