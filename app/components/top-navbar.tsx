@@ -84,14 +84,15 @@ export default function TopNavbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
-        isHome ? homeNavBar : innerNavBar
-      }`}
+      className={`fixed inset-x-0 top-0 border-b transition-all duration-300 ${
+        mobileOpen ? 'z-[200]' : 'z-50'
+      } ${isHome ? homeNavBar : innerNavBar}`}
     >
+      {/* Stays above the dim overlay so menu / close controls stay visible on every page */}
       <div
         className={`relative mx-auto flex w-full max-w-8xl items-center justify-between gap-2 px-3 transition-all duration-300 sm:gap-3 sm:px-4 md:px-8 ${
-          isScrolled ? 'py-2' : 'py-2'
-        }`}
+          mobileOpen ? 'z-[210]' : ''
+        } ${isScrolled ? 'py-2' : 'py-2'}`}
       >
         {/* Logo: start side — left in EN (LTR), right in UR (RTL). Larger on small screens. */}
         <Link
@@ -152,10 +153,12 @@ export default function TopNavbar() {
 
           <button
             type="button"
-            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border shadow-sm transition md:hidden ${
+            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 shadow-md transition md:hidden ${
               mobileOpen
-                ? 'border-amber-300/80 bg-amber-300/20 text-amber-200 ring-2 ring-amber-300/40'
-                : 'border-white/20 bg-white/10 text-white hover:bg-white/20'
+                ? 'border-amber-400 bg-slate-900 text-white shadow-amber-900/40 ring-2 ring-amber-400/50'
+                : isScrolled
+                  ? 'border-slate-200 bg-white text-slate-900 shadow-sm hover:bg-slate-50'
+                  : 'border-white/25 bg-white/10 text-white hover:bg-white/20'
             }`}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
@@ -163,11 +166,17 @@ export default function TopNavbar() {
             onClick={() => setMobileOpen((o) => !o)}
           >
             {mobileOpen ? (
-              <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              <svg className="h-7 w-7 shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.75} aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+              <svg
+                className={`h-6 w-6 ${isScrolled ? 'text-slate-900' : 'text-white'}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
@@ -178,19 +187,19 @@ export default function TopNavbar() {
       {/* Mobile menu */}
       {mobileOpen ? (
         <div
-          className="fixed inset-0 z-[100] md:hidden"
+          className="fixed inset-0 z-[120] md:hidden"
           id="mobile-nav"
           role="dialog"
           aria-modal="true"
           aria-label={isUr ? 'مینو' : 'Menu'}
         >
           <div
-            className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"
             aria-hidden
             onClick={() => setMobileOpen(false)}
           />
           <nav
-            className={`absolute start-0 end-0 top-0 z-10 max-h-[90vh] overflow-y-auto border-b border-white/10 bg-slate-950/98 px-4 pb-6 pt-[4.75rem] shadow-2xl ${
+            className={`absolute start-0 end-0 top-0 z-10 max-h-[90vh] overflow-y-auto border-b border-white/10 bg-slate-950 px-4 pb-6 pt-[4.5rem] shadow-2xl ${
               isUr ? 'text-end' : 'text-start'
             }`}
             dir={isUr ? 'rtl' : 'ltr'}
