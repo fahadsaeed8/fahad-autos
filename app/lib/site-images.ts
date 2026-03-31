@@ -25,9 +25,14 @@ export const categoryImages = {
   hydraulic: siteImages.workshop,
 } as const
 
+/** Order matches parts page cards (reused across categories). */
 export const partsPageImages = [
+  siteImages.tractorFront,
   siteImages.greenTractor,
   siteImages.fieldTractor,
+  siteImages.workshop,
+  siteImages.irrigation,
+  siteImages.harvest,
   siteImages.wheatField,
 ] as const
 

@@ -61,15 +61,11 @@ export default function TopNavbar() {
     }
   }, [mobileOpen])
 
-  const isHome = pathname === '/'
-  const innerNavBar =
-    isScrolled
-      ? 'border-blue-900/30 bg-gradient-to-r from-slate-950/98 via-blue-950/98 to-slate-900/98 backdrop-blur-md'
-      : 'border-transparent bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900'
-  const homeNavBar =
-    isScrolled
-      ? 'border-blue-900/20 bg-slate-950/95 backdrop-blur'
-      : 'border-transparent bg-gradient-to-r from-slate-950/40 via-blue-950/35 to-slate-900/40'
+  /** Top: light glassy strip; after scroll (or mobile menu open): solid dark for contrast. */
+  const headerSurface =
+    isScrolled || mobileOpen
+      ? 'border-b border-slate-800/90 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 shadow-md shadow-black/25'
+      : 'border-transparent bg-gradient-to-r from-slate-950/45 via-blue-950/40 to-slate-900/45'
 
   const logoSizes = isScrolled
     ? 'h-14 w-auto max-w-[min(72vw,280px)] sm:max-w-[300px] md:h-16 md:max-w-[300px]'
@@ -84,9 +80,7 @@ export default function TopNavbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 border-b transition-all duration-300 ${
-        mobileOpen ? 'z-[200]' : 'z-50'
-      } ${isHome ? homeNavBar : innerNavBar}`}
+      className={`fixed inset-x-0 top-0 transition-all duration-300 ${mobileOpen ? 'z-[200]' : 'z-50'} ${headerSurface}`}
     >
       {/* Stays above the dim overlay so menu / close controls stay visible on every page */}
       <div

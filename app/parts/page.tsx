@@ -1,39 +1,11 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { SectionHeading } from '@/app/components/section-heading'
+import { PART_CATEGORIES } from '@/app/lib/parts-data'
 import { partsPageImages } from '@/app/lib/site-images'
 import { useLanguage } from '@/app/lib/language-context'
-
-const parts = [
-  {
-    title: 'Fiat, Massey, Ford Local Parts',
-    primaryEn: 'Fiat, Massey, Ford',
-    accentEn: 'Local Parts',
-    primaryUr: 'Fiat, Massey, Ford',
-    accentUr: 'Local Parts',
-    desc: 'Complete local parts range for Fiat, Massey and Ford tractors for daily farming needs.',
-    image: partsPageImages[0],
-  },
-  {
-    title: 'Top Link & Lift Link Range',
-    primaryEn: 'Top Link & Lift Link',
-    accentEn: 'Range',
-    primaryUr: 'Top Link & Lift Link',
-    accentUr: 'Range',
-    desc: 'Top Link, Lift Link and related linkage items available in retail and wholesale quantity.',
-    image: partsPageImages[1],
-  },
-  {
-    title: 'Wholesale + Manufacturing Supply',
-    primaryEn: 'Wholesale +',
-    accentEn: 'Manufacturing Supply',
-    primaryUr: 'Wholesale +',
-    accentUr: 'Manufacturing Supply',
-    desc: 'Consistent supply support for dealers, workshops and market distributors with manufacturing options.',
-    image: partsPageImages[2],
-  },
-]
 
 export default function PartsPage() {
   const { lang } = useLanguage()
@@ -54,33 +26,53 @@ export default function PartsPage() {
             accentUr="پارٹس"
             isUr={isUr}
           />
-          <p className="mx-auto mt-3 max-w-3xl text-blue-100">
+          <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-blue-100 md:text-base" dir={isUr ? 'rtl' : 'ltr'}>
             {isUr
-              ? 'ہم فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک اور لنکیج پارٹس کی خصوصی سپلائی کرتے ہیں۔'
-              : 'We specialize in Fiat, Massey and Ford local parts, including Top Link, Lift Link and linkage items.'}
+              ? 'فیاٹ، میسی، فورڈ کے لوکل پارٹس، انجن، ہائیڈرولک، لنکیج، کلچ، بریک، بجلی، پی ٹی او، کولنگ، کھیت اور ایرگیشن سے جڑے آئٹمز، ٹائر اور ہول سیل سپلائی۔'
+              : 'Fiat, Massey and Ford local parts — engine, hydraulics, linkage, clutch, brakes, electrical, PTO, cooling, field & irrigation items, tyres, belts and wholesale supply.'}
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-        <div className="grid gap-6 md:grid-cols-3">
-          {parts.map((part) => (
-            <article key={part.title} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-              <Image src={part.image} alt={part.title} width={1200} height={800} className="h-52 w-full object-cover" />
-              <div className="p-5">
-                <SectionHeading
-                  as="h2"
-                  size="card"
-                  primaryEn={part.primaryEn}
-                  accentEn={part.accentEn}
-                  primaryUr={part.primaryUr}
-                  accentUr={part.accentUr}
-                  isUr={isUr}
-                />
-                <p className="mt-3 text-sm leading-6 text-slate-700">{part.desc}</p>
-              </div>
-            </article>
-          ))}
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {PART_CATEGORIES.map((part) => {
+            const img = partsPageImages[part.imageIndex % partsPageImages.length]
+            return (
+              <Link
+                key={part.id}
+                href={`/parts/${part.id}`}
+                className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-indigo-300 hover:shadow-lg"
+              >
+                <article>
+                  <Image
+                    src={img}
+                    alt={isUr ? `${part.primaryUr} ${part.accentUr}` : `${part.primaryEn} ${part.accentEn}`}
+                    width={1200}
+                    height={800}
+                    className="h-48 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                  />
+                  <div className="p-5">
+                    <SectionHeading
+                      as="h2"
+                      size="card"
+                      primaryEn={part.primaryEn}
+                      accentEn={part.accentEn}
+                      primaryUr={part.primaryUr}
+                      accentUr={part.accentUr}
+                      isUr={isUr}
+                    />
+                    <p className="mt-3 text-sm leading-relaxed text-slate-700" dir={isUr ? 'rtl' : 'ltr'}>
+                      {isUr ? part.descUr : part.descEn}
+                    </p>
+                    <p className="mt-3 text-xs font-bold text-indigo-700 group-hover:underline" dir={isUr ? 'rtl' : 'ltr'}>
+                      {isUr ? 'مزید دیکھیں →' : 'View details →'}
+                    </p>
+                  </div>
+                </article>
+              </Link>
+            )
+          })}
         </div>
       </section>
     </main>
