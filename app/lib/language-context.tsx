@@ -21,7 +21,7 @@ function applyDocumentDirection(next: Lang) {
 
 export function LanguageProvider({
   children,
-  initialLang = 'en',
+  initialLang = 'ur',
 }: {
   children: React.ReactNode
   initialLang?: Lang
