@@ -32,6 +32,7 @@ const categories = [
   {
     key: 'fiat',
     title: 'Fiat Local Parts',
+    titleUr: 'فیاٹ لوکل پارٹس',
     image: categoryImages.fiat,
     en: {
       overview: 'Fiat local tractor parts available with practical quality for local farming needs.',
@@ -45,6 +46,7 @@ const categories = [
   {
     key: 'massey',
     title: 'Massey Local Parts',
+    titleUr: 'میسی لوکل پارٹس',
     image: categoryImages.massey,
     en: {
       overview: 'Massey local parts range for mechanics and farmers with reliable compatibility.',
@@ -58,6 +60,7 @@ const categories = [
   {
     key: 'ford',
     title: 'Ford Local Parts',
+    titleUr: 'فورڈ لوکل پارٹس',
     image: categoryImages.ford,
     en: {
       overview: 'Ford local tractor parts for replacement and maintenance with easy availability.',
@@ -71,6 +74,7 @@ const categories = [
   {
     key: 'toplink',
     title: 'Top Link',
+    titleUr: 'ٹاپ لنک',
     image: categoryImages.toplink,
     en: {
       overview: 'Top Link is one of our core products with wholesale dealing support.',
@@ -84,6 +88,7 @@ const categories = [
   {
     key: 'liftlink',
     title: 'Lift Link',
+    titleUr: 'لفٹ لنک',
     image: categoryImages.liftlink,
     en: {
       overview: 'Lift Link stock is available with stable supply for market demand.',
@@ -97,6 +102,7 @@ const categories = [
   {
     key: 'hydraulic',
     title: 'Hydraulic & Linkage Items',
+    titleUr: 'ہائیڈرولک اور لنکیج آئٹمز',
     image: categoryImages.hydraulic,
     en: {
       overview: 'Hydraulic and linkage items available for local repairs and field work support.',
@@ -264,6 +270,7 @@ export default function Home() {
           <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
             {categories.map((category) => {
               const isActive = activeCategory.key === category.key
+              const categoryLabel = isUr ? category.titleUr : category.title
               return (
                 <button
                   key={category.key}
@@ -274,13 +281,15 @@ export default function Home() {
                 >
                   <Image
                     src={category.image}
-                    alt={category.title}
+                    alt={categoryLabel}
                     width={1000}
                     height={650}
                     className="h-36 w-full object-cover"
                   />
                   <div className="bg-gradient-to-b from-white to-indigo-50/40 p-4">
-                    <h3 className="text-lg font-bold text-indigo-900">{category.title}</h3>
+                    <h3 className="text-lg font-bold text-indigo-900" dir={isUr ? 'rtl' : 'ltr'}>
+                      {categoryLabel}
+                    </h3>
                     <p className="mt-1 text-sm text-slate-600">
                       {isUr ? 'مزید تفصیل دیکھنے کے لئے کلک کریں' : 'Click to view related details'}
                     </p>
