@@ -25,3 +25,42 @@ body {
 html[dir='rtl'] body {
   text-align: start;
 }
+
+/* Urdu typography: readable Nastaliq + slightly larger & heavier body copy (village / mobile readers). */
+html[lang='ur'] body {
+  font-family: var(--font-urdu), 'Noto Nastaliq Urdu', 'Geeza Pro', 'Segoe UI', Tahoma, serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang='ur'] p,
+html[lang='ur'] .font-urdu {
+  font-weight: 500;
+  line-height: 1.9;
+}
+
+html[lang='ur'] .text-xs {
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  font-weight: 500;
+}
+
+html[lang='ur'] .text-sm {
+  font-size: 0.9375rem;
+  line-height: 1.85;
+  font-weight: 500;
+}
+
+html[lang='ur'] .text-base {
+  line-height: 1.85;
+}
+
+html[lang='ur'] h1,
+html[lang='ur'] h2,
+html[lang='ur'] h3,
+html[lang='ur'] h4 {
+  font-weight: 700;
+  line-height: 1.35;
+}
