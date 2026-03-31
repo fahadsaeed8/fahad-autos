@@ -11,6 +11,21 @@ function navLinkActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
+/** Match each page’s first hero so the fixed bar doesn’t look like a separate grey strip. */
+function idleHeaderSurface(pathname: string) {
+  if (pathname === '/') {
+    return 'border-transparent bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900'
+  }
+  if (
+    pathname.startsWith('/gallery') ||
+    pathname.startsWith('/about') ||
+    pathname.startsWith('/contact')
+  ) {
+    return 'border-transparent bg-slate-950'
+  }
+  return 'border-transparent bg-gradient-to-r from-blue-900 to-slate-900'
+}
+
 type NavItem = {
   href: string
   en: string
@@ -61,11 +76,11 @@ export default function TopNavbar() {
     }
   }, [mobileOpen])
 
-  /** Top: light glassy strip; after scroll (or mobile menu open): solid dark for contrast. */
+  /** Top: same solid treatment as the hero below; after scroll (or mobile menu open): compact dark bar. */
   const headerSurface =
     isScrolled || mobileOpen
       ? 'border-b border-slate-800/90 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 shadow-md shadow-black/25'
-      : 'border-transparent bg-gradient-to-r from-slate-950/45 via-blue-950/40 to-slate-900/45'
+      : idleHeaderSurface(pathname)
 
   const logoSizes = isScrolled
     ? 'h-14 w-auto max-w-[min(72vw,280px)] sm:max-w-[300px] md:h-16 md:max-w-[300px]'
