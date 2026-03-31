@@ -144,16 +144,10 @@ export default function GalleryPage() {
                 : 'The gallery sets the mood. Use contact or parts for correct fitting and stock.'}
             </p>
             <div className="relative mt-8 flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex min-w-[140px] justify-center rounded-xl bg-amber-400 px-8 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-amber-300"
-              >
+              <Link href="/contact" className="btn-cta-amber-lg">
                 {isUr ? 'رابطہ' : 'Contact'}
               </Link>
-              <Link
-                href="/parts"
-                className="inline-flex min-w-[140px] justify-center rounded-xl border-2 border-white/25 bg-white/10 px-8 py-3.5 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20"
-              >
+              <Link href="/parts" className="btn-cta-outline-on-dark">
                 {isUr ? 'پارٹس کی فہرست' : 'Browse parts'}
               </Link>
             </div>

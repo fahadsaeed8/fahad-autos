@@ -205,7 +205,7 @@ export default function ContactPage() {
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-emerald-800 shadow-md transition hover:bg-emerald-50 md:mt-0 md:w-auto"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-emerald-800 shadow-md transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-emerald-50 hover:shadow-xl active:scale-[0.98] md:mt-0 md:w-auto"
             >
               {isUr ? 'چیٹ کھولیں' : 'Open chat'}
             </Link>
