@@ -44,7 +44,7 @@ export default function TopNavbar() {
           isScrolled ? 'py-2' : 'py-2'
         }`}
       >
-        <div className="-ml-1 flex items-center justify-start gap-3 md:-ml-12">
+        <div className="-ms-1 flex items-center justify-start gap-3 md:-ms-12">
           <Image
             src="/new-logo.png"
             alt="Fahad Autos logo"

@@ -17,15 +17,18 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const cookieStore = await cookies()
+  const initialLang = cookieStore.get('site-lang')?.value === 'ur' ? 'ur' : 'en'
+
   return (
-    <html lang="en">
+    <html lang={initialLang} dir={initialLang === 'ur' ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <body className={inter.className}>
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome initialLang={initialLang}>{children}</SiteChrome>
       </body>
     </html>
   )

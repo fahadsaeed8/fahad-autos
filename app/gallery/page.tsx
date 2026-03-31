@@ -28,7 +28,7 @@ export default function GalleryPage() {
         <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-14 text-center md:px-8 md:pb-20 md:pt-20">
-          <div className="mx-auto mb-8 inline-flex max-w-2xl flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-cyan-100/95 backdrop-blur-md md:flex-row md:items-center md:justify-center md:gap-3 md:text-left">
+          <div className="mx-auto mb-8 inline-flex max-w-2xl flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-cyan-100/95 backdrop-blur-md md:flex-row md:items-center md:justify-center md:gap-3 md:text-start">
             <span className="inline-flex shrink-0 items-center justify-center rounded-lg bg-amber-400/90 px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-slate-950">
               {isUr ? 'کیوں' : 'Why'}
             </span>
@@ -62,7 +62,7 @@ export default function GalleryPage() {
       <div className="relative -mt-6 rounded-t-[2rem] bg-slate-100 pb-16 pt-10 md:rounded-t-[2.5rem] md:pb-24 md:pt-14">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           {/* Intro strip */}
-          <div className="mb-10 flex flex-col items-center gap-4 text-center md:mb-14 md:flex-row md:justify-between md:text-left">
+          <div className="mb-10 flex flex-col items-center gap-4 text-center md:mb-14 md:flex-row md:justify-between md:text-start">
             <div className="max-w-xl" dir={isUr ? 'rtl' : 'ltr'}>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
                 {isUr ? 'مناظر' : 'Scenes'}

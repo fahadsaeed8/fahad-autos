@@ -269,7 +269,7 @@ export default function Home() {
                   key={category.key}
                   type="button"
                   onClick={() => setActiveCategory(category)}
-                  className={`overflow-hidden rounded-2xl border text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${isActive ? 'border-cyan-400 ring-2 ring-cyan-200' : 'border-indigo-100'
+                  className={`overflow-hidden rounded-2xl border text-start shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${isActive ? 'border-cyan-400 ring-2 ring-cyan-200' : 'border-indigo-100'
                     }`}
                 >
                   <Image

@@ -20,3 +20,8 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-start-rgb));
 }
+
+/* Urdu: document dir comes from <html dir="rtl"> (see language-context + layout). */
+html[dir='rtl'] body {
+  text-align: start;
+}
