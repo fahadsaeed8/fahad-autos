@@ -29,7 +29,7 @@ export default function PartsPage() {
           <p className={`mx-auto max-w-3xl text-sm leading-relaxed text-blue-100 md:text-base ${isUr ? 'mt-5' : 'mt-3'}`} dir={isUr ? 'rtl' : 'ltr'}>
             {isUr
               ? 'فیاٹ، میسی، فورڈ کے لوکل پارٹس، انجن، ہائیڈرولک، لنکیج، کلچ، بریک، بجلی، پی ٹی او، کولنگ، کھیت اور ایرگیشن سے جڑے آئٹمز، ٹائر اور ہول سیل سپلائی۔'
-              : 'Fiat, Massey and Ford local parts — engine, hydraulics, linkage, clutch, brakes, electrical, PTO, cooling, field & irrigation items, tyres, belts and wholesale supply.'}
+              : 'Fiat, Massey and Ford local parts: engine, hydraulics, linkage, clutch, brakes, electrical, PTO, cooling, field & irrigation items, tyres, belts and wholesale supply.'}
           </p>
         </div>
       </section>

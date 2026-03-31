@@ -103,7 +103,7 @@ export default function TopNavbar() {
           mobileOpen ? 'z-[210]' : ''
         } ${isScrolled ? 'py-2' : 'py-2'}`}
       >
-        {/* Logo: start side — left in EN (LTR), right in UR (RTL). Larger on small screens. */}
+        {/* Logo: start side (left in EN LTR, right in UR RTL). Larger on small screens. */}
         <Link
           href="/"
           className="flex min-w-0 shrink items-center justify-start md:ms-6 lg:ms-10"

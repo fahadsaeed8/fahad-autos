@@ -2,7 +2,7 @@ import { partsPageImages } from '@/app/lib/site-images'
 
 const N = partsPageImages.length
 
-/** imageIndex 0..N-1 — each card can use a different stock image */
+/** imageIndex 0..N-1; each card can use a different stock image */
 export type PartSubItem = {
   en: string
   ur: string
@@ -181,7 +181,7 @@ export const PART_CATEGORIES: PartCategory[] = [
       sub(
         'Service filter kits (oil + fuel + air)',
         'سروس فلٹر کٹ آئل فیول ہوا',
-        'One kit for seasonal service — saves matching part numbers at the shop.',
+        'One kit for seasonal service; saves matching part numbers at the shop.',
         'موسمی سروس ایک کٹ میں؛ دکان پر نمبر میچنگ آسان۔',
         3
       ),
