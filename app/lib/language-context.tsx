@@ -12,8 +12,21 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>('en')
+function applyDocumentDirection(next: Lang) {
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  root.lang = next === 'ur' ? 'ur' : 'en'
+  root.dir = next === 'ur' ? 'rtl' : 'ltr'
+}
+
+export function LanguageProvider({
+  children,
+  initialLang = 'ur',
+}: {
+  children: React.ReactNode
+  initialLang?: Lang
+}) {
+  const [lang, setLang] = useState<Lang>(initialLang)
 
   useEffect(() => {
     const cookieMatch = document.cookie.match(/(?:^|; )site-lang=(en|ur)/)
@@ -26,6 +39,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       setLang(stored)
     }
   }, [])
+
+  useEffect(() => {
+    applyDocumentDirection(lang)
+  }, [lang])
 
   useEffect(() => {
     window.localStorage.setItem('site-lang', lang)

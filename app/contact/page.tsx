@@ -13,6 +13,9 @@ const landline = { display: '042-37700794', tel: '+924237700794' }
 
 const WHATSAPP_HREF = 'https://wa.me/923004785384'
 
+const EMAIL = 'hajisaeed2018@gmail.com'
+const MAILTO_HREF = `mailto:${EMAIL}`
+
 export default function ContactPage() {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
@@ -38,15 +41,15 @@ export default function ContactPage() {
           />
           <p className="mt-5 text-lg leading-relaxed text-blue-100/95">
             {isUr
-              ? 'پارٹس کی قیمت، دستیابی یا بلک آرڈر کے لئے فون، واٹس ایپ یا دکان پر رابطہ کریں۔'
-              : 'Reach us by phone, WhatsApp or visit the shop for parts pricing, availability and bulk orders.'}
+              ? 'پارٹس کی قیمت، دستیابی یا بلک آرڈر کے لئے فون، ای میل، واٹس ایپ یا دکان پر رابطہ کریں۔'
+              : 'Reach us by phone, email, WhatsApp or visit the shop for parts pricing, availability and bulk orders.'}
           </p>
         </div>
       </section>
 
       <div className="relative -mt-8 rounded-t-[2rem] bg-slate-100 px-4 pb-16 pt-10 md:rounded-t-[2.5rem] md:px-8 md:pb-24 md:pt-14">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+          <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
             {/* Phone card */}
             <article className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_14px_40px_-18px_rgba(15,23,42,0.18)] ring-1 ring-slate-900/5">
               <div className="h-1.5 bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600" aria-hidden />
@@ -99,6 +102,47 @@ export default function ContactPage() {
                         {landline.display}
                       </a>
                     </div>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            {/* Email */}
+            <article className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_14px_40px_-18px_rgba(15,23,42,0.18)] ring-1 ring-slate-900/5">
+              <div className="h-1.5 bg-gradient-to-r from-rose-500 via-red-600 to-rose-700" aria-hidden />
+              <div className="p-6 md:p-8">
+                <div className="flex items-start gap-4">
+                  <div
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-cyan-300 shadow-inner"
+                    aria-hidden
+                  >
+                    <img src="/icons/mail.svg" alt="" width={32} height={32} className="h-8 w-8 shrink-0 object-contain" decoding="async" />
+                  </div>
+                  <div className="min-w-0 flex-1 text-start" dir={isUr ? 'rtl' : 'ltr'}>
+                    <SectionHeading
+                      as="h2"
+                      size="card"
+                      className="!text-xl md:!text-2xl"
+                      primaryEn="Email"
+                      primaryUr="ای میل"
+                      isUr={isUr}
+                    />
+                    <p className="mt-1 text-sm text-slate-500">
+                      {isUr ? 'قیمت یا آرڈر کی تفصیل بھیجیں' : 'Send quotes, orders or questions'}
+                    </p>
+                  </div>
+                </div>
+                <ul className="mt-6 space-y-3">
+                  <li>
+                    <a
+                      href={MAILTO_HREF}
+                      className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50/80 px-4 py-3 transition hover:border-indigo-200 hover:bg-indigo-50/50"
+                    >
+                      <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                        {isUr ? 'ای میل' : 'Email'}
+                      </span>
+                      <span className="break-all text-end text-base font-bold leading-snug text-indigo-950 md:text-lg">{EMAIL}</span>
+                    </a>
                   </li>
                 </ul>
               </div>

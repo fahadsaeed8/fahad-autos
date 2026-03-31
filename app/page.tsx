@@ -32,6 +32,7 @@ const categories = [
   {
     key: 'fiat',
     title: 'Fiat Local Parts',
+    titleUr: 'فیاٹ لوکل پارٹس',
     image: categoryImages.fiat,
     en: {
       overview: 'Fiat local tractor parts available with practical quality for local farming needs.',
@@ -45,6 +46,7 @@ const categories = [
   {
     key: 'massey',
     title: 'Massey Local Parts',
+    titleUr: 'میسی لوکل پارٹس',
     image: categoryImages.massey,
     en: {
       overview: 'Massey local parts range for mechanics and farmers with reliable compatibility.',
@@ -58,6 +60,7 @@ const categories = [
   {
     key: 'ford',
     title: 'Ford Local Parts',
+    titleUr: 'فورڈ لوکل پارٹس',
     image: categoryImages.ford,
     en: {
       overview: 'Ford local tractor parts for replacement and maintenance with easy availability.',
@@ -71,6 +74,7 @@ const categories = [
   {
     key: 'toplink',
     title: 'Top Link',
+    titleUr: 'ٹاپ لنک',
     image: categoryImages.toplink,
     en: {
       overview: 'Top Link is one of our core products with wholesale dealing support.',
@@ -84,6 +88,7 @@ const categories = [
   {
     key: 'liftlink',
     title: 'Lift Link',
+    titleUr: 'لفٹ لنک',
     image: categoryImages.liftlink,
     en: {
       overview: 'Lift Link stock is available with stable supply for market demand.',
@@ -97,6 +102,7 @@ const categories = [
   {
     key: 'hydraulic',
     title: 'Hydraulic & Linkage Items',
+    titleUr: 'ہائیڈرولک اور لنکیج آئٹمز',
     image: categoryImages.hydraulic,
     en: {
       overview: 'Hydraulic and linkage items available for local repairs and field work support.',
@@ -147,7 +153,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 text-white">
         <div className="mx-auto grid max-w-8xl gap-10 px-4 pb-16 pt-36 md:grid-cols-2 md:px-16 md:pb-24 md:pt-40">
           <div>
-            <p className="inline-block rounded-full bg-amber-300 px-3 py-1 text-xs font-bold tracking-wide text-slate-950">
+            <p className={`inline-block rounded-full bg-amber-300 px-3 ${isUr ? 'md:mb-4' : ''}  py-1 text-xs font-bold tracking-wide text-slate-950`}>
               {isUr ? 'قابلِ اعتماد پارٹس پارٹنر' : 'TRUSTED PARTS PARTNER'}
             </p>
             <SectionHeading
@@ -161,7 +167,7 @@ export default function Home() {
               accentUr="ایک جگہ"
               isUr={isUr}
             />
-            <p className="mt-4 max-w-xl text-sm text-blue-100 md:text-base">
+            <p className={`max-w-xl text-sm text-blue-100 md:text-base ${isUr ? 'mt-5' : 'mt-4'}`}>
               {isUr
                 ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
                 : 'Vicky Tractor Fahad Autos deals in Fiat, Massey and Ford local parts, with Top Link and Lift Link wholesale dealing and manufacturing support.'}
@@ -197,7 +203,7 @@ export default function Home() {
             accentUr="فیچرز"
             isUr={isUr}
           />
-          <p className="mt-2 text-sm text-slate-600">
+          <p className={`text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-2'}`}>
             {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
           </p>
         </div>
@@ -243,7 +249,7 @@ export default function Home() {
               primaryClassName="text-amber-950"
               accentClassName="text-amber-800"
             />
-            <p className="mt-2 text-sm text-amber-800">
+            <p className={`text-sm text-amber-800 ${isUr ? 'mt-5' : 'mt-2'}`}>
               {isUr
                 ? 'ہماری بنیادی اسپیشلٹی فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک، اور متعلقہ لنکیج آئٹمز کی ہول سیل اور مینوفیکچرنگ ہے۔'
                 : 'Our core specialization is Fiat, Massey and Ford local parts, Top Link, Lift Link, and related linkage items with wholesale and manufacturing capabilities.'}
@@ -257,30 +263,33 @@ export default function Home() {
               accentUr="کیٹیگریز"
               isUr={isUr}
             />
-            <p className="mt-2 text-sm text-slate-600">
+            <p className={`text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-2'}`}>
               {isUr ? 'ہر کیٹیگری میں معیاری اور قابلِ اعتماد پارٹس دستیاب ہیں۔' : 'Reliable and quality stock available across every category.'}
             </p>
           </div>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
             {categories.map((category) => {
               const isActive = activeCategory.key === category.key
+              const categoryLabel = isUr ? category.titleUr : category.title
               return (
                 <button
                   key={category.key}
                   type="button"
                   onClick={() => setActiveCategory(category)}
-                  className={`overflow-hidden rounded-2xl border text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${isActive ? 'border-cyan-400 ring-2 ring-cyan-200' : 'border-indigo-100'
+                  className={`overflow-hidden rounded-2xl border text-start shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${isActive ? 'border-cyan-400 ring-2 ring-cyan-200' : 'border-indigo-100'
                     }`}
                 >
                   <Image
                     src={category.image}
-                    alt={category.title}
+                    alt={categoryLabel}
                     width={1000}
                     height={650}
                     className="h-36 w-full object-cover"
                   />
                   <div className="bg-gradient-to-b from-white to-indigo-50/40 p-4">
-                    <h3 className="text-lg font-bold text-indigo-900">{category.title}</h3>
+                    <h3 className="text-lg font-bold text-indigo-900" dir={isUr ? 'rtl' : 'ltr'}>
+                      {categoryLabel}
+                    </h3>
                     <p className="mt-1 text-sm text-slate-600">
                       {isUr ? 'مزید تفصیل دیکھنے کے لئے کلک کریں' : 'Click to view related details'}
                     </p>
@@ -305,7 +314,7 @@ export default function Home() {
               accentUr="کیوں؟"
               isUr={isUr}
             />
-            <p className="mx-auto mt-3 max-w-3xl text-sm text-cyan-100/90">
+            <p className={`mx-auto max-w-3xl text-sm text-cyan-100/90 ${isUr ? 'mt-5' : 'mt-3'}`}>
               {isUr
                 ? 'لوکل مارکیٹ کے تجربے اور مستقل سپلائی کی بنیاد پر کسان اور مکینک ہم پر اعتماد کرتے ہیں۔'
                 : 'Farmers and mechanics trust us for practical guidance and reliable stock availability.'}
@@ -335,7 +344,7 @@ export default function Home() {
             accentUr="ورک فلو"
             isUr={isUr}
           />
-          <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-slate-600">
+          <p className={`mx-auto max-w-3xl text-center text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-3'}`}>
             {isUr
               ? 'آرڈر سے لے کر سپلائی تک ہر مرحلے میں واضح رہنمائی، درست ریٹ اور بروقت سہولت دی جاتی ہے۔'
               : 'From inquiry to supply, each step is handled with clear communication, right pricing and timely support.'}

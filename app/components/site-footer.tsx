@@ -41,6 +41,14 @@ export default function SiteFooter() {
           <p className="mt-2 text-sm">0321-4964013</p>
           <p className="text-sm">0300-4785384</p>
           <p className="text-sm">Ph: 37700794</p>
+          <p className="mt-2 text-sm">
+            <a
+              href="mailto:hajisaeed2018@gmail.com"
+              className="text-cyan-300/95 underline-offset-2 hover:text-white hover:underline"
+            >
+              hajisaeed2018@gmail.com
+            </a>
+          </p>
         </div>
         <div>
           <SectionHeading
