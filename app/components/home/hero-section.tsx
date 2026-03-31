@@ -27,7 +27,7 @@ export default function HeroSection({ isUr }: HeroSectionProps) {
             accentUr="ایک جگہ"
             isUr={isUr}
           />
-          <p className="mt-4 max-w-xl text-sm text-blue-100 md:text-base">
+          <p className={`max-w-xl text-sm text-blue-100 md:text-base ${isUr ? 'mt-5' : 'mt-4'}`}>
             {isUr
               ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
               : 'Vicky Tractor Fahad Autos deals in Fiat, Massey and Ford local parts, with Top Link and Lift Link wholesale dealing and manufacturing support.'}

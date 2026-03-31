@@ -58,7 +58,7 @@ export default function PartCategoryPage() {
             accentUr={category.accentUr}
             isUr={isUr}
           />
-          <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-blue-100 md:text-base" dir={isUr ? 'rtl' : 'ltr'}>
+          <p className={`mx-auto max-w-3xl text-sm leading-relaxed text-blue-100 md:text-base ${isUr ? 'mt-5' : 'mt-4'}`} dir={isUr ? 'rtl' : 'ltr'}>
             {isUr ? category.descUr : category.descEn}
           </p>
         </div>

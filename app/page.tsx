@@ -167,7 +167,7 @@ export default function Home() {
               accentUr="ایک جگہ"
               isUr={isUr}
             />
-            <p className="mt-4 max-w-xl text-sm text-blue-100 md:text-base">
+            <p className={`max-w-xl text-sm text-blue-100 md:text-base ${isUr ? 'mt-5' : 'mt-4'}`}>
               {isUr
                 ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
                 : 'Vicky Tractor Fahad Autos deals in Fiat, Massey and Ford local parts, with Top Link and Lift Link wholesale dealing and manufacturing support.'}
@@ -203,7 +203,7 @@ export default function Home() {
             accentUr="فیچرز"
             isUr={isUr}
           />
-          <p className="mt-2 text-sm text-slate-600">
+          <p className={`text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-2'}`}>
             {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
           </p>
         </div>
@@ -249,7 +249,7 @@ export default function Home() {
               primaryClassName="text-amber-950"
               accentClassName="text-amber-800"
             />
-            <p className="mt-2 text-sm text-amber-800">
+            <p className={`text-sm text-amber-800 ${isUr ? 'mt-5' : 'mt-2'}`}>
               {isUr
                 ? 'ہماری بنیادی اسپیشلٹی فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک، اور متعلقہ لنکیج آئٹمز کی ہول سیل اور مینوفیکچرنگ ہے۔'
                 : 'Our core specialization is Fiat, Massey and Ford local parts, Top Link, Lift Link, and related linkage items with wholesale and manufacturing capabilities.'}
@@ -263,7 +263,7 @@ export default function Home() {
               accentUr="کیٹیگریز"
               isUr={isUr}
             />
-            <p className="mt-2 text-sm text-slate-600">
+            <p className={`text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-2'}`}>
               {isUr ? 'ہر کیٹیگری میں معیاری اور قابلِ اعتماد پارٹس دستیاب ہیں۔' : 'Reliable and quality stock available across every category.'}
             </p>
           </div>
@@ -314,7 +314,7 @@ export default function Home() {
               accentUr="کیوں؟"
               isUr={isUr}
             />
-            <p className="mx-auto mt-3 max-w-3xl text-sm text-cyan-100/90">
+            <p className={`mx-auto max-w-3xl text-sm text-cyan-100/90 ${isUr ? 'mt-5' : 'mt-3'}`}>
               {isUr
                 ? 'لوکل مارکیٹ کے تجربے اور مستقل سپلائی کی بنیاد پر کسان اور مکینک ہم پر اعتماد کرتے ہیں۔'
                 : 'Farmers and mechanics trust us for practical guidance and reliable stock availability.'}
@@ -344,7 +344,7 @@ export default function Home() {
             accentUr="ورک فلو"
             isUr={isUr}
           />
-          <p className="mx-auto mt-3 max-w-3xl text-center text-sm text-slate-600">
+          <p className={`mx-auto max-w-3xl text-center text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-3'}`}>
             {isUr
               ? 'آرڈر سے لے کر سپلائی تک ہر مرحلے میں واضح رہنمائی، درست ریٹ اور بروقت سہولت دی جاتی ہے۔'
               : 'From inquiry to supply, each step is handled with clear communication, right pricing and timely support.'}

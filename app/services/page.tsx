@@ -94,7 +94,7 @@ export default function ServicesPage() {
             accentUr="سروسز"
             isUr={isUr}
           />
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-blue-100/95">
+          <p className={`mx-auto max-w-2xl text-lg leading-relaxed text-blue-100/95 ${isUr ? 'mt-5' : 'mt-4'}`}>
             {isUr
               ? 'ہم صرف پارٹس بیچنے تک محدود نہیں، فٹنگ، ہول سیل، اور بلک سپلائی تک ہماری سروسز کاروبار اور کسان دونوں کے لئے واضح اور قابلِ اعتماد ہیں۔'
               : 'We are not limited to selling parts alone, from fitting guidance to wholesale and bulk supply, our services stay clear and dependable for dealers and farmers alike.'}
@@ -146,7 +146,7 @@ export default function ServicesPage() {
                       />
                     </div>
                     <p
-                      className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg"
+                      className={`text-base leading-relaxed text-slate-600 md:text-lg ${isUr ? 'mt-5' : 'mt-4'}`}
                       dir={isUr ? 'rtl' : 'ltr'}
                     >
                       {isUr ? service.detailUr : service.detailEn}

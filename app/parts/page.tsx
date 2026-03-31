@@ -26,7 +26,7 @@ export default function PartsPage() {
             accentUr="پارٹس"
             isUr={isUr}
           />
-          <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-blue-100 md:text-base" dir={isUr ? 'rtl' : 'ltr'}>
+          <p className={`mx-auto max-w-3xl text-sm leading-relaxed text-blue-100 md:text-base ${isUr ? 'mt-5' : 'mt-3'}`} dir={isUr ? 'rtl' : 'ltr'}>
             {isUr
               ? 'فیاٹ، میسی، فورڈ کے لوکل پارٹس، انجن، ہائیڈرولک، لنکیج، کلچ، بریک، بجلی، پی ٹی او، کولنگ، کھیت اور ایرگیشن سے جڑے آئٹمز، ٹائر اور ہول سیل سپلائی۔'
               : 'Fiat, Massey and Ford local parts — engine, hydraulics, linkage, clutch, brakes, electrical, PTO, cooling, field & irrigation items, tyres, belts and wholesale supply.'}
@@ -62,7 +62,7 @@ export default function PartsPage() {
                       accentUr={part.accentUr}
                       isUr={isUr}
                     />
-                    <p className="mt-3 text-sm leading-relaxed text-slate-700" dir={isUr ? 'rtl' : 'ltr'}>
+                    <p className={`text-sm leading-relaxed text-slate-700 ${isUr ? 'mt-5' : 'mt-3'}`} dir={isUr ? 'rtl' : 'ltr'}>
                       {isUr ? part.descUr : part.descEn}
                     </p>
                     <p className="mt-3 text-xs font-bold text-indigo-700 group-hover:underline" dir={isUr ? 'rtl' : 'ltr'}>

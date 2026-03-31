@@ -31,7 +31,7 @@ export default function CategoriesSection({ isUr }: CategoriesSectionProps) {
             primaryClassName="text-amber-950"
             accentClassName="text-amber-800"
           />
-          <p className="mt-2 text-sm text-amber-800">
+          <p className={`text-sm text-amber-800 ${isUr ? 'mt-5' : 'mt-2'}`}>
             {isUr
               ? 'ہماری بنیادی اسپیشلٹی فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک، اور متعلقہ لنکیج آئٹمز کی ہول سیل اور مینوفیکچرنگ ہے۔'
               : 'Our core specialization is Fiat, Massey and Ford local parts, Top Link, Lift Link, and related linkage items with wholesale and manufacturing capabilities.'}
