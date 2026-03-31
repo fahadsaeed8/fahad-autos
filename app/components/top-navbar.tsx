@@ -2,8 +2,14 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/app/lib/language-context'
+
+function navLinkActive(pathname: string, href: string) {
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
 
 type NavItem = {
   href: string
@@ -21,6 +27,7 @@ const navItems: NavItem[] = [
 ]
 
 export default function TopNavbar() {
+  const pathname = usePathname()
   const { lang, toggleLang } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -31,12 +38,20 @@ export default function TopNavbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const isHome = pathname === '/'
+  const innerNavBar =
+    isScrolled
+      ? 'border-blue-900/30 bg-gradient-to-r from-slate-950/98 via-blue-950/98 to-slate-900/98 backdrop-blur-md'
+      : 'border-transparent bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900'
+  const homeNavBar =
+    isScrolled
+      ? 'border-blue-900/20 bg-slate-950/95 backdrop-blur'
+      : 'border-transparent bg-gradient-to-r from-slate-950/40 via-blue-950/35 to-slate-900/40'
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
-        isScrolled
-          ? 'border-blue-900/20 bg-slate-950/95 backdrop-blur'
-          : 'border-transparent bg-gradient-to-r from-slate-950/40 via-blue-950/35 to-slate-900/40'
+        isHome ? homeNavBar : innerNavBar
       }`}
     >
       <div
@@ -55,15 +70,23 @@ export default function TopNavbar() {
         </div>
 
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-3 md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-lg px-3 py-2 text-base font-semibold text-white transition hover:bg-white/10"
-            >
-              {lang === 'en' ? item.en : item.ur}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = navLinkActive(pathname, item.href)
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? 'page' : undefined}
+                className={`rounded-lg px-3 py-2 text-base font-semibold transition ${
+                  active
+                    ? 'bg-amber-300/25 text-amber-50 ring-1 ring-amber-300/50 shadow-sm'
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                {lang === 'en' ? item.en : item.ur}
+              </Link>
+            )
+          })}
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
