@@ -97,7 +97,7 @@ export default function TopNavbar() {
         {/* Logo: start side — left in EN (LTR), right in UR (RTL). Larger on small screens. */}
         <Link
           href="/"
-          className="flex min-w-0 shrink items-center justify-start md:-ms-12"
+          className="flex min-w-0 shrink items-center justify-start md:ms-6 lg:ms-10"
         >
           <Image
             src="/new-logo.png"

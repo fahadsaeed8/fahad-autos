@@ -153,7 +153,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 text-white">
         <div className="mx-auto grid max-w-8xl gap-10 px-4 pb-16 pt-36 md:grid-cols-2 md:px-16 md:pb-24 md:pt-40">
           <div>
-            <p className="inline-block rounded-full bg-amber-300 px-3 py-1 text-xs font-bold tracking-wide text-slate-950">
+            <p className={`inline-block rounded-full bg-amber-300 px-3 ${isUr ? 'md:mb-4' : ''}  py-1 text-xs font-bold tracking-wide text-slate-950`}>
               {isUr ? 'قابلِ اعتماد پارٹس پارٹنر' : 'TRUSTED PARTS PARTNER'}
             </p>
             <SectionHeading
