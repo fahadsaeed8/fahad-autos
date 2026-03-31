@@ -33,10 +33,10 @@ export default function HeroSection({ isUr }: HeroSectionProps) {
               : 'Vicky Tractor Fahad Autos deals in Fiat, Massey and Ford local parts, with Top Link and Lift Link wholesale dealing and manufacturing support.'}
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/parts" className="rounded-lg bg-amber-400 px-5 py-3 text-sm font-bold text-slate-950">
+            <Link href="/parts" className="btn-cta-amber">
               {isUr ? 'پارٹس دیکھیں' : 'Explore Parts'}
             </Link>
-            <Link href="/contact" className="rounded-lg border border-white px-5 py-3 text-sm font-bold">
+            <Link href="/contact" className="btn-cta-outline-light">
               {isUr ? 'رابطہ کریں' : 'Contact Us'}
             </Link>
           </div>

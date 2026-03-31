@@ -102,16 +102,10 @@ export default function PartCategoryPage() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 sm:flex-row">
-          <Link
-            href="/parts"
-            className="inline-flex items-center rounded-xl border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-800 transition hover:border-indigo-400 hover:text-indigo-900"
-          >
+          <Link href="/parts" className="btn-cta-back">
             {isUr ? '← تمام کیٹیگریز' : '← All categories'}
           </Link>
-          <Link
-            href="/contact"
-            className="inline-flex rounded-xl bg-indigo-900 px-6 py-3 text-sm font-bold text-white shadow transition hover:bg-indigo-800"
-          >
+          <Link href="/contact" className="btn-cta-indigo-xl">
             {isUr ? 'اس کیٹیگری کے لیے رابطہ' : 'Contact about this category'}
           </Link>
         </div>

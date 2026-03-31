@@ -172,26 +172,17 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <Link
-              href="/contact"
-              className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-indigo-900 px-6 py-3 text-sm font-bold text-white transition hover:bg-indigo-800 md:mt-0 md:w-auto"
-            >
+            <Link href="/contact" className="btn-cta-indigo-xl mt-6 w-full md:mt-0 md:w-auto">
               {isUr ? 'مکمل پتہ اور رابطہ' : 'Full address & contact'}
             </Link>
           </div>
 
           {/* CTA */}
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/parts"
-              className="inline-flex rounded-xl bg-amber-400 px-8 py-3.5 text-sm font-bold text-slate-950 shadow-md transition hover:bg-amber-300"
-            >
+            <Link href="/parts" className="btn-cta-amber-lg">
               {isUr ? 'پارٹس دیکھیں' : 'View parts'}
             </Link>
-            <Link
-              href="/contact"
-              className="inline-flex rounded-xl border-2 border-slate-300 bg-white px-8 py-3.5 text-sm font-bold text-slate-800 transition hover:bg-slate-50"
-            >
+            <Link href="/contact" className="btn-cta-outline-slate">
               {isUr ? 'رابطہ' : 'Contact'}
             </Link>
           </div>

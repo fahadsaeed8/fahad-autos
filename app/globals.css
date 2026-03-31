@@ -64,3 +64,31 @@ html[lang='ur'] h4 {
   font-weight: 700;
   line-height: 1.35;
 }
+
+@layer components {
+  /* Shared hover: lift, shadow, slight press on active — use on primary CTAs site-wide */
+  .btn-cta-amber {
+    @apply inline-flex items-center justify-center rounded-lg bg-amber-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-md active:translate-y-0 active:scale-[0.98];
+  }
+  .btn-cta-amber-lg {
+    @apply inline-flex min-w-[140px] items-center justify-center rounded-xl bg-amber-400 px-8 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-xl active:scale-[0.98];
+  }
+  .btn-cta-outline-light {
+    @apply inline-flex items-center justify-center rounded-lg border border-white px-5 py-3 text-sm font-bold text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-white/15 active:scale-[0.98];
+  }
+  .btn-cta-outline-on-dark {
+    @apply inline-flex min-w-[140px] items-center justify-center rounded-xl border-2 border-white/25 bg-white/10 px-8 py-3.5 text-sm font-bold text-white backdrop-blur transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-white/25 hover:shadow-lg active:scale-[0.98];
+  }
+  .btn-cta-indigo {
+    @apply inline-flex items-center justify-center rounded-lg bg-indigo-900 px-6 py-3 text-sm font-bold text-white shadow transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-indigo-800 hover:shadow-lg active:scale-[0.98];
+  }
+  .btn-cta-indigo-xl {
+    @apply inline-flex items-center justify-center rounded-xl bg-indigo-900 px-6 py-3 text-sm font-bold text-white transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-indigo-800 hover:shadow-lg active:scale-[0.98];
+  }
+  .btn-cta-outline-slate {
+    @apply inline-flex items-center justify-center rounded-xl border-2 border-slate-300 bg-white px-8 py-3.5 text-sm font-bold text-slate-800 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-indigo-400 hover:bg-slate-50 hover:shadow-md active:scale-[0.98];
+  }
+  .btn-cta-back {
+    @apply inline-flex items-center rounded-xl border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-800 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-indigo-400 hover:text-indigo-900 hover:shadow-md active:scale-[0.98];
+  }
+}

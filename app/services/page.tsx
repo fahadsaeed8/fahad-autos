@@ -191,7 +191,7 @@ export default function ServicesPage() {
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex rounded-xl bg-amber-400 px-8 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:bg-amber-300"
+            className="btn-cta-amber-lg mt-6"
           >
             {isUr ? 'رابطہ صفحہ' : 'Go to Contact'}
           </Link>

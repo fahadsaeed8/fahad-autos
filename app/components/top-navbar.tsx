@@ -87,10 +87,10 @@ export default function TopNavbar() {
     : 'h-[4.25rem] w-auto max-w-[min(78vw,320px)] sm:h-[4.75rem] sm:max-w-[340px] md:h-24 md:max-w-[380px]'
 
   const linkClass = (active: boolean) =>
-    `rounded-lg px-4 py-3 text-base font-semibold transition md:px-3 md:py-2 ${
+    `rounded-lg px-4 py-3 text-base font-semibold transition duration-200 ease-out md:px-3 md:py-2 ${
       active
-        ? 'bg-amber-300/25 text-amber-50 ring-1 ring-amber-300/50 shadow-sm'
-        : 'text-white hover:bg-white/10'
+        ? 'bg-amber-300/25 text-amber-50 ring-1 ring-amber-300/50 shadow-sm hover:bg-amber-300/40 hover:shadow-md'
+        : 'text-white hover:bg-white/15 hover:shadow-sm'
     }`
 
   return (
@@ -162,7 +162,7 @@ export default function TopNavbar() {
 
           <button
             type="button"
-            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 shadow-md transition md:hidden ${
+            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 shadow-md transition duration-200 active:scale-95 md:hidden ${
               mobileOpen
                 ? 'border-amber-400 bg-slate-900 text-white shadow-amber-900/40 ring-2 ring-amber-400/50'
                 : isScrolled
