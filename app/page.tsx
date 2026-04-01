@@ -194,20 +194,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 text-center md:px-8">
-        <div className="mb-8">
-          <SectionHeading
-            primaryEn="Our"
-            accentEn="Highlights"
-            primaryUr="ہمارے نمایاں"
-            accentUr="فیچرز"
-            isUr={isUr}
+      <section className="relative overflow-hidden py-14 md:py-16">
+        <div className="pointer-events-none absolute inset-0">
+          <Image
+            src="/images/highlights-bg.jpg"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
           />
-          <p className={`text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-2'}`}>
-            {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
-          </p>
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/75 to-slate-950/88"
+            aria-hidden
+          />
         </div>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 text-center md:px-8">
+          <div className="mb-8">
+            <SectionHeading
+              variant="dark"
+              primaryEn="Our"
+              accentEn="Highlights"
+              primaryUr="ہمارے نمایاں"
+              accentUr="فیچرز"
+              isUr={isUr}
+            />
+            <p className={`text-sm text-blue-100/90 ${isUr ? 'mt-5' : 'mt-2'}`}>
+              {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
+            </p>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-3">
           {highlights.map((item, index) => (
             <article
               key={item.en}
@@ -232,6 +247,7 @@ export default function Home() {
               </div>
             </article>
           ))}
+          </div>
         </div>
       </section>
 
