@@ -10,6 +10,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         urdu: ['var(--font-urdu)', 'Noto Nastaliq Urdu', 'serif'],
+        poster: ['var(--font-poster)', 'Impact', 'Arial Black', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

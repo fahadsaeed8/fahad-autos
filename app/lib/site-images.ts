@@ -16,13 +16,35 @@ export const siteImages = {
   wheatField: `https://images.unsplash.com/photo-1502741338009-cac2772e18bc?${q}`,
 } as const
 
+/** Stand-in product photos until the shop's own pictures replace them. */
+export const partImages = {
+  brands: '/parts/fiat-parts.jpg',
+  'engine-filters': '/parts/filters.jpg',
+  hydraulic: '/parts/hydraulic.jpg',
+  'top-lift-link': '/parts/top-link.jpg',
+  'clutch-gear': '/parts/clutch.jpg',
+  'brakes-steer': '/parts/brakes.jpg',
+  electrical: '/parts/electrical.jpg',
+  pto: '/parts/pto.jpg',
+  cooling: '/parts/radiator.jpg',
+  'belts-bearings': '/parts/belts.jpg',
+  'farming-field': '/parts/field-parts.jpg',
+  tyres: '/parts/tyres.jpg',
+  wholesale: '/parts/wholesale.jpg',
+} as const
+
+export function imageForPart(id: string) {
+  if (id in partImages) return partImages[id as keyof typeof partImages]
+  return partImages.brands
+}
+
 export const categoryImages = {
-  fiat: siteImages.tractorFront,
-  massey: siteImages.harvest,
-  ford: siteImages.greenTractor,
-  toplink: siteImages.fieldTractor,
-  liftlink: siteImages.wheatField,
-  hydraulic: siteImages.workshop,
+  fiat: '/parts/fiat-parts.jpg',
+  massey: '/parts/massey-parts.jpg',
+  ford: '/parts/ford-parts.jpg',
+  toplink: '/parts/top-link.jpg',
+  liftlink: '/parts/lift-link.jpg',
+  hydraulic: '/parts/hydraulic.jpg',
 } as const
 
 /** Order matches parts page cards (reused across categories). */
@@ -36,12 +58,12 @@ export const partsPageImages = [
   siteImages.wheatField,
 ] as const
 
-/** Captions: field, hydraulics, machinery, irrigation, linkage, harvest */
+/** Each frame matches its gallery caption. Stand-ins until the shop's own photos replace them. */
 export const galleryImages = [
-  siteImages.fieldTractor,
-  siteImages.workshop,
-  siteImages.tractorFront,
-  siteImages.irrigation,
-  siteImages.greenTractor,
-  siteImages.harvest,
+  '/gallery/field.jpg',
+  '/gallery/hydraulic.jpg',
+  '/gallery/machinery.jpg',
+  '/gallery/irrigation.jpg',
+  '/gallery/linkage.jpg',
+  '/gallery/harvest.jpg',
 ] as const

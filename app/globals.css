@@ -17,8 +17,139 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  color: #f4f0e6;
+  background: #0c0c0c;
+  top: 0 !important;
+}
+
+.google-translate-host {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+iframe.skiptranslate,
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+@keyframes land-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.land-marquee {
+  animation: land-marquee 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .land-marquee {
+    animation: none;
+  }
+}
+
+@keyframes rise-line {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes glow-breath {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.72;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.16);
+    opacity: 1;
+  }
+}
+
+@keyframes glow-corner {
+  0%,
+  100% {
+    transform: translate(22%, 0) scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(22%, 0) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes stroke-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes slow-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.rise {
+  animation: rise-line 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rise-d1 { animation-delay: 0.12s; }
+.rise-d2 { animation-delay: 0.24s; }
+.rise-d3 { animation-delay: 0.36s; }
+.rise-d4 { animation-delay: 0.48s; }
+.rise-d5 { animation-delay: 0.6s; }
+.rise-d6 { animation-delay: 0.72s; }
+
+.glow-breath {
+  left: 50%;
+  top: 50%;
+  animation: glow-breath 8s ease-in-out infinite;
+}
+
+.glow-corner {
+  animation: glow-corner 8s ease-in-out infinite;
+}
+
+.stroke-pulse {
+  animation: stroke-pulse 7s ease-in-out infinite;
+}
+
+.slow-zoom {
+  animation: slow-zoom 18s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .glow-breath,
+  .glow-corner,
+  .stroke-pulse,
+  .slow-zoom {
+    animation: none;
+  }
 }
 
 /* Urdu: document dir comes from <html dir="rtl"> (see language-context + layout). */
@@ -63,6 +194,19 @@ html[lang='ur'] h3,
 html[lang='ur'] h4 {
   font-weight: 700;
   line-height: 1.35;
+}
+
+/* Nastaliq brand lockup needs extra line box so stacked lines do not collide. */
+html[lang='ur'] h1.brand-title {
+  font-size: 2.15rem;
+  line-height: 2.2;
+}
+
+@media (min-width: 768px) {
+  html[lang='ur'] h1.brand-title {
+    font-size: 3rem;
+    line-height: 2.05;
+  }
 }
 
 @layer components {

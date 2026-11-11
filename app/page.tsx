@@ -3,36 +3,39 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { SectionHeading } from '@/app/components/section-heading'
+import { GlowEllipse, Reveal } from '@/app/components/motion'
+import ShopCards from '@/app/components/shop-card'
 import { categoryImages } from '@/app/lib/site-images'
+import { brand } from '@/app/lib/brand'
+import { PART_CATEGORIES } from '@/app/lib/parts-data'
 import { useLanguage } from '@/app/lib/language-context'
 
 const highlights = [
   {
-    en: 'Fiat, Massey, Ford local parts specialist',
-    ur: 'فیاٹ، میسی، فورڈ لوکل پارٹس اسپیشلسٹ',
-    detailEn: 'Daily-use reliable local parts with model-wise fitting support.',
-    detailUr: 'روزمرہ استعمال کے مضبوط لوکل پارٹس، ماڈل کے مطابق فٹنگ گائیڈ کے ساتھ۔',
+    en: 'Fiat, New Holland and other brands',
+    ur: 'فیاٹ، نیو ہالینڈ اور دیگر برانڈز',
+    detailEn: 'The part is matched to the tractor model before a rate is given.',
+    detailUr: 'ریٹ دینے سے پہلے پارٹ ٹریکٹر کے ماڈل سے ملایا جاتا ہے۔',
   },
   {
-    en: 'Top Link & Lift Link wholesale dealer',
-    ur: 'ٹاپ لنک اور لفٹ لنک ہول سیل ڈیلر',
-    detailEn: 'Strong wholesale network for shops, mechanics and market dealers.',
-    detailUr: 'دکانوں، مکینکس اور مارکیٹ ڈیلرز کے لئے مضبوط ہول سیل سپلائی چین۔',
+    en: 'Wholesale rates and export packing',
+    ur: 'ہول سیل ریٹ اور ایکسپورٹ پیکنگ',
+    detailEn: 'Stock, quality and packing are confirmed before the price is sent.',
+    detailUr: 'قیمت بھیجنے سے پہلے اسٹاک، کوالٹی اور پیکنگ کنفرم کی جاتی ہے۔',
   },
   {
-    en: 'Manufacturing and bulk supply support',
-    ur: 'مینوفیکچرنگ اور بلک سپلائی سپورٹ',
-    detailEn: 'Bulk quantity readiness for long-term buyers and workshops.',
-    detailUr: 'طویل مدتی خریداروں اور ورکشاپس کے لئے بلک مقدار میں مستقل دستیابی۔',
+    en: 'Quotations for overseas buyers',
+    ur: 'بیرونِ ملک خریداروں کے لئے کوٹیشن',
+    detailEn: 'Importers, distributors and workshops receive a written quote. Packing and shipment follow the order.',
+    detailUr: 'درآمدکنندگان، ڈسٹری بیوٹرز اور ورکشاپس کو تحریری کوٹ ملتا ہے۔ پیکنگ اور شپمنٹ آرڈر کے بعد ہوتی ہے۔',
   },
 ]
 
 const categories = [
   {
     key: 'fiat',
-    title: 'Fiat Local Parts',
-    titleUr: 'فیاٹ لوکل پارٹس',
+    title: 'Fiat Spare Parts',
+    titleUr: 'فیاٹ اسپیئر پارٹس',
     image: categoryImages.fiat,
     en: {
       overview: 'Fiat local tractor parts available with practical quality for local farming needs.',
@@ -45,8 +48,8 @@ const categories = [
   },
   {
     key: 'massey',
-    title: 'Massey Local Parts',
-    titleUr: 'میسی لوکل پارٹس',
+    title: 'Massey Spare Parts',
+    titleUr: 'میسی اسپیئر پارٹس',
     image: categoryImages.massey,
     en: {
       overview: 'Massey local parts range for mechanics and farmers with reliable compatibility.',
@@ -59,8 +62,8 @@ const categories = [
   },
   {
     key: 'ford',
-    title: 'Ford Local Parts',
-    titleUr: 'فورڈ لوکل پارٹس',
+    title: 'Ford Spare Parts',
+    titleUr: 'فورڈ اسپیئر پارٹس',
     image: categoryImages.ford,
     en: {
       overview: 'Ford local tractor parts for replacement and maintenance with easy availability.',
@@ -115,31 +118,82 @@ const categories = [
   },
 ]
 
-const trustStats = [
-  { value: '500+', en: 'Happy Buyers', ur: 'خوش گاہک' },
-  { value: '6', en: 'Core Categories', ur: 'بنیادی کیٹیگریز' },
-  { value: '3', en: 'Major Brands', ur: 'اہم برانڈز' },
-  { value: '24/7', en: 'Order Support', ur: 'آرڈر سپورٹ' },
+const tradePoints = [
+  { en: 'Written quote', ur: 'تحریری کوٹ' },
+  { en: 'Stock checked first', ur: 'پہلے اسٹاک چیک' },
+  { en: 'Wholesale and retail', ur: 'ہول سیل اور ریٹیل' },
+  { en: 'Export packing', ur: 'ایکسپورٹ پیکنگ' },
 ]
 
 const workflow = [
   {
-    enTitle: 'Requirement Discussion',
-    urTitle: 'ضرورت کی سمجھ',
-    enText: 'Share model and part details, we verify the right fitting.',
-    urText: 'ٹریکٹر ماڈل اور پارٹ بتائیں، ہم درست فٹنگ کنفرم کرتے ہیں۔',
+    enTitle: 'Send the parts list',
+    urTitle: 'پارٹس لسٹ بھیجیں',
+    enText: 'Brand, model, part name and quantity. A photo of the old part helps.',
+    urText: 'برانڈ، ماڈل، پارٹ کا نام اور تعداد۔ پرانے پارٹ کی تصویر مدد کرتی ہے۔',
   },
   {
-    enTitle: 'Stock & Rate Confirmation',
-    urTitle: 'اسٹاک اور ریٹ کنفرمیشن',
-    enText: 'We confirm real-time stock and provide retail/wholesale pricing.',
-    urText: 'ہم فوری اسٹاک اور ریٹیل/ہول سیل ریٹس کنفرم کرتے ہیں۔',
+    enTitle: 'Stock, quality and price',
+    urTitle: 'اسٹاک، کوالٹی اور قیمت',
+    enText: 'We confirm what is in stock, the quality, and the wholesale or retail rate.',
+    urText: 'ہم اسٹاک، کوالٹی اور ہول سیل یا ریٹیل ریٹ کنفرم کرتے ہیں۔',
   },
   {
-    enTitle: 'Delivery / Pickup',
-    urTitle: 'ڈیلیوری / پک اپ',
-    enText: 'Fast dispatch for market dealers, workshops and local buyers.',
-    urText: 'مارکیٹ ڈیلرز، ورکشاپس اور لوکل خریداروں کے لئے فوری سپلائی۔',
+    enTitle: 'Packing and shipment',
+    urTitle: 'پیکنگ اور شپمنٹ',
+    enText: 'After the order, packing is done at the shop and shipment is coordinated with your forwarder.',
+    urText: 'آرڈر کے بعد پیکنگ دکان پر ہوتی ہے اور شپمنٹ آپ کے فارورڈر کے ساتھ طے ہوتی ہے۔',
+  },
+]
+
+const cardWash = [
+  'linear-gradient(155deg, rgba(217,185,106,0.62) 0%, #161616 58%)',
+  'linear-gradient(205deg, #A6853A 0%, #1a1408 48%, #0c0c0c 100%)',
+  'linear-gradient(165deg, rgba(184,146,61,0.5) 0%, #12100c 64%)',
+]
+
+const factsEn = ['25 years experience', 'Fiat', 'Massey', 'Ford', 'New Holland', 'Top Link', 'All tractor parts', 'Lahore, Pakistan']
+const factsUr = ['۲۵ سال کا تجربہ', 'فیاٹ', 'میسی', 'فورڈ', 'نیو ہالینڈ', 'ٹاپ لنک', 'ٹریکٹر کی تمام چیزیں', 'لاہور، پاکستان']
+
+const quoteSend = [
+  { en: 'Tractor brand and model', ur: 'ٹریکٹر کا برانڈ اور ماڈل' },
+  { en: 'Part name, or a photo of the old part', ur: 'پارٹ کا نام، یا پرانے پارٹ کی تصویر' },
+  { en: 'Quantity', ur: 'تعداد' },
+  { en: 'Wholesale or retail', ur: 'ہول سیل یا ریٹیل' },
+  { en: 'For export: destination city or port, so packing can be planned', ur: 'ایکسپورٹ کے لئے: منزل کا شہر یا پورٹ، تاکہ پیکنگ طے ہو' },
+]
+
+const quoteReply = [
+  { en: 'Whether that part is in stock', ur: 'وہ پارٹ اسٹاک میں ہے یا نہیں' },
+  { en: 'The quality being offered, written on the quote', ur: 'جو کوالٹی دی جا رہی ہے، کوٹ پر لکھی ہوئی' },
+  { en: 'The rate', ur: 'ریٹ' },
+  { en: 'A packing note when the order is for shipment', ur: 'شپمنٹ والے آرڈر پر پیکنگ کی تفصیل' },
+]
+
+const faqs = [
+  {
+    qEn: 'Are these genuine parts?',
+    qUr: 'کیا یہ اوریجنل پارٹس ہیں؟',
+    aEn: 'The shop deals in local parts for Fiat, Massey and Ford. Top Link is sold wholesale and manufactured here. The quotation names what is being offered. A local part is not described as genuine.',
+    aUr: 'دکان فیاٹ، میسی اور فورڈ کے لوکل پارٹس رکھتی ہے۔ ٹاپ لنک ہول سیل بھی ہے اور یہیں بنتا بھی ہے۔ کوٹیشن میں لکھا ہوتا ہے کیا دیا جا رہا ہے۔ لوکل پارٹ کو اوریجنل نہیں لکھا جاتا۔',
+  },
+  {
+    qEn: 'Is every part in stock?',
+    qUr: 'کیا ہر پارٹ اسٹاک میں ہے؟',
+    aEn: 'The counter covers engine, clutch, hydraulics, linkage, brakes, electrical, PTO, cooling, belts, tyres and field items. A named part is checked in stock before the rate is sent.',
+    aUr: 'کاؤنٹر پر انجن، کلچ، ہائیڈرولک، لنکیج، بریک، بجلی، پی ٹی او، کولنگ، بیلٹ، ٹائر اور کھیت کے سامان آتے ہیں۔ جس پارٹ کا نام آئے، ریٹ سے پہلے اس کا اسٹاک دیکھا جاتا ہے۔',
+  },
+  {
+    qEn: 'Can I buy one piece, or only a carton?',
+    qUr: 'ایک عدد بھی ملے گا، یا صرف کارٹن؟',
+    aEn: 'Both. A workshop can buy retail and a dealer can buy wholesale. The quantity you need is written on the quote.',
+    aUr: 'دونوں۔ ورکشاپ ریٹیل لے سکتی ہے اور ڈیلر ہول سیل۔ جو تعداد چاہیے وہ کوٹ پر لکھی جاتی ہے۔',
+  },
+  {
+    qEn: 'How does an order leave Lahore?',
+    qUr: 'آرڈر لاہور سے کیسے جاتا ہے؟',
+    aEn: 'You send the list. We reply with stock and a rate. After the order, packing is done at Shop No. 43, Ramzan Chamber, Badami Bagh, and shipment is coordinated with your forwarder.',
+    aUr: 'آپ لسٹ بھیجتے ہیں۔ ہم اسٹاک اور ریٹ واپس بھیجتے ہیں۔ آرڈر کے بعد پیکنگ دکان نمبر 43، رمضان چیمبر، بادامی باغ پر ہوتی ہے، اور شپمنٹ آپ کے فارورڈر کے ساتھ طے ہوتی ہے۔',
   },
 ]
 
@@ -147,143 +201,136 @@ export default function Home() {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
   const [activeCategory, setActiveCategory] = useState(categories[0])
+  const poster = isUr ? '' : 'font-poster uppercase tracking-[0.02em]'
+  const facts = isUr ? factsUr : factsEn
+  const activeCopy = isUr ? activeCategory.ur : activeCategory.en
 
   return (
-    <main className="min-h-screen bg-slate-100">
-      <section className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 text-white">
-        <div className="mx-auto grid max-w-8xl gap-10 px-4 pb-16 pt-36 md:grid-cols-2 md:px-16 md:pb-24 md:pt-40">
-          <div>
-            <p className={`inline-block rounded-full bg-amber-300 px-3 ${isUr ? 'md:mb-4' : ''}  py-1 text-xs font-bold tracking-wide text-slate-950`}>
-              {isUr ? 'قابلِ اعتماد پارٹس پارٹنر' : 'TRUSTED PARTS PARTNER'}
+    <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
+      <section className="relative overflow-hidden">
+        <GlowEllipse />
+        <p
+          aria-hidden
+          className="stroke-pulse pointer-events-none absolute left-[34%] top-1/2 hidden -translate-y-1/2 font-poster text-[14rem] uppercase leading-none tracking-wide text-transparent lg:block"
+          style={{ WebkitTextStroke: '1px rgba(184,146,61,0.28)' }}
+        >
+          Parts
+        </p>
+        <div className="relative z-10 mx-auto grid w-full min-w-0 max-w-8xl items-center gap-10 px-8 pb-16 pt-32 md:px-14 md:pb-20 md:pt-36 lg:grid-cols-2 lg:gap-14 lg:px-20 lg:pb-24 lg:pt-40">
+          <div className="min-w-0" style={{ containerType: 'inline-size' }}>
+            <p className="rise max-w-full font-mono text-[13px] uppercase tracking-[0.14em] text-[#B8923D] sm:tracking-[0.18em]">
+              {isUr ? brand.channelsUr : brand.channelsEn}
             </p>
-            <SectionHeading
-              as="h1"
-              variant="dark"
-              size="hero"
-              className="mt-4"
-              primaryEn="All Tractor Parts"
-              accentEn="Under One Roof"
-              primaryUr="ہر ٹریکٹر پارٹ"
-              accentUr="ایک جگہ"
-              isUr={isUr}
-            />
-            <p className={`max-w-xl text-sm text-blue-100 md:text-base ${isUr ? 'mt-5' : 'mt-4'}`}>
-              {isUr
-                ? 'وکی ٹریکٹر فہد آٹوز میں فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک اور لفٹ لنک کی ہول سیل ڈیلنگ اور مینوفیکچرنگ سپورٹ دستیاب ہے۔'
-                : 'Vicky Tractor Fahad Autos deals in Fiat, Massey and Ford local parts, with Top Link and Lift Link wholesale dealing and manufacturing support.'}
+            <h1
+              className={`mt-4 max-w-full text-[#F4F0E6] ${poster} ${isUr ? 'rise rise-d1 text-[clamp(2.8rem,14cqw,5.6rem)]' : 'text-[clamp(3.6rem,20cqw,8rem)] leading-[0.88]'}`}
+              style={isUr ? { lineHeight: 1.7 } : undefined}
+            >
+              {isUr ? (
+                'فہد ٹریکٹرز اینڈ آٹوز'
+              ) : (
+                <>
+                  <span className="rise rise-d1 block">Fahad</span>
+                  <span className="rise rise-d2 block text-[#B8923D]">Tractors</span>
+                  <span className="rise rise-d3 block text-transparent" style={{ WebkitTextStroke: '0.035em #6d645e' }}>
+                    and Autos
+                  </span>
+                </>
+              )}
+            </h1>
+            <p className="rise rise-d4 mt-6 max-w-xl font-mono text-sm leading-7 text-[#A39B90]">
+              {isUr ? brand.lineUr : brand.lineEn}
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/parts" className="btn-cta-amber">
-                {isUr ? 'پارٹس دیکھیں' : 'Explore Parts'}
+            <p className="rise rise-d5 mt-3 font-mono text-sm tracking-wide text-[#F5E8C8]">
+              {isUr ? brand.yearsUr : brand.yearsEn}
+            </p>
+            <div className="rise rise-d6 mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex min-h-12 items-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-6 text-sm font-semibold tracking-wide text-[#1A1408]"
+              >
+                {isUr ? 'کوٹیشن مانگیں' : 'Request a quotation'}
               </Link>
-              <Link href="/contact" className="btn-cta-outline-light">
-                {isUr ? 'رابطہ کریں' : 'Contact Us'}
+              <Link
+                href="/parts"
+                className="inline-flex min-h-12 items-center rounded-full border border-[#B8923D]/50 px-6 text-sm font-semibold tracking-wide text-[#F4F0E6] hover:border-[#F5E8C8] hover:text-[#F5E8C8]"
+              >
+                {isUr ? 'پارٹس دیکھیں' : 'Explore Parts'}
               </Link>
             </div>
           </div>
-          <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur">
-            <Image
-              src="/business-card.png"
-              alt="Vicky Tractor Fahad Autos business card"
-              width={1280}
-              height={720}
-              className="h-full w-full rounded-xl object-cover"
-              priority
-            />
+          <div className="rise rise-d2 relative w-full min-w-0">
+            <div className="pointer-events-none absolute -bottom-3 -end-3 start-3 top-3 hidden border-4 border-[#B8923D] lg:block" aria-hidden />
+            <div className="relative w-full">
+              <ShopCards isUr={isUr} />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-14 md:py-16">
-        <div className="pointer-events-none absolute inset-0">
-          <Image
-            src="/images/highlights-bg.jpg"
-            alt=""
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/75 to-slate-950/88"
-            aria-hidden
-          />
-        </div>
-        <div className="relative z-10 mx-auto max-w-7xl px-4 text-center md:px-8">
-          <div className="mb-8">
-            <SectionHeading
-              variant="dark"
-              primaryEn="Our"
-              accentEn="Highlights"
-              primaryUr="ہمارے نمایاں"
-              accentUr="فیچرز"
-              isUr={isUr}
-            />
-            <p className={`text-sm text-blue-100/90 ${isUr ? 'mt-5' : 'mt-2'}`}>
-              {isUr ? 'معیار، قیمت اور سپلائی میں ہماری اصل پہچان' : 'Our edge in quality, pricing and dependable supply'}
-            </p>
-          </div>
-          <div className="grid gap-6 lg:grid-cols-3">
-          {highlights.map((item, index) => (
-            <article
-              key={item.en}
-              className="group overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_14px_40px_-18px_rgba(15,23,42,0.22)] ring-1 ring-slate-900/5 transition hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(30,58,138,0.35)]"
-            >
-              <div className="h-1.5 bg-gradient-to-r from-cyan-500 via-indigo-600 to-violet-600" aria-hidden />
-              <div className="flex items-start gap-4 px-5 py-5 md:gap-5 md:px-6 md:py-6">
-                <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-sm font-bold text-cyan-300 shadow-inner md:h-14 md:w-14 md:text-base"
-                  aria-hidden
-                >
-                  {index + 1}
-                </div>
-                <div className="min-w-0 flex-1 text-start" dir={isUr ? 'rtl' : 'ltr'}>
-                  <h3 className="text-[15px] font-bold leading-snug tracking-tight text-indigo-950 md:text-base">
-                    {isUr ? item.ur : item.en}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    {isUr ? item.detailUr : item.detailEn}
-                  </p>
-                </div>
-              </div>
-            </article>
+      <div className="overflow-hidden border-y border-white/10 py-4">
+        <div className="land-marquee flex w-max gap-10">
+          {[...facts, ...facts].map((fact, index) => (
+            <span key={`${fact}-${index}`} className="font-mono text-xs uppercase tracking-[0.18em] text-[#A39B90]">
+              {fact}
+              <span className="mx-10 text-[#B8923D]">/</span>
+            </span>
           ))}
+        </div>
+      </div>
+
+      <section className="relative overflow-hidden border-b border-white/10 py-16 md:py-20">
+        <GlowEllipse />
+        <div className="relative z-10 mx-auto max-w-8xl px-8 md:px-14 lg:px-20">
+          <Reveal>
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
+            {isUr ? 'کام' : 'The work'}
+          </p>
+          <h2 className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'معیار، قیمت اور سپلائی' : 'Quality, price and supply'}
+          </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            {highlights.map((item, index) => (
+              <Reveal key={item.en} delay={index * 90} className="h-full">
+              <article
+                className="group relative h-full overflow-hidden rounded-[22px] border border-[#B8923D]/35 p-6 transition duration-500 hover:-translate-y-2"
+                style={{ background: cardWash[index % cardWash.length] }}
+              >
+                <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
+                <p
+                  className="pointer-events-none font-poster text-7xl leading-none text-transparent"
+                  style={{ WebkitTextStroke: '1.5px #6d645e' }}
+                >
+                  0{index + 1}
+                </p>
+                <h3 className={`relative mt-2 text-[#F4F0E6] ${poster} ${isUr ? 'text-2xl' : 'text-3xl'} leading-tight`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                  {isUr ? item.ur : item.en}
+                </h3>
+                <p className="relative mt-3 font-mono text-sm leading-7 text-[#F4F0E6]/80" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                  {isUr ? item.detailUr : item.detailEn}
+                </p>
+              </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-          <div className="mb-14 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center">
-            <SectionHeading
-              as="h3"
-              size="card"
-              primaryEn="Special Focus:"
-              accentEn="Fiat, Massey, Ford + Top Link"
-              primaryUr="خصوصی مہارت:"
-              accentUr="فیاٹ، میسی، فورڈ + ٹاپ لنک"
-              isUr={isUr}
-              primaryClassName="text-amber-950"
-              accentClassName="text-amber-800"
-            />
-            <p className={`text-sm text-amber-800 ${isUr ? 'mt-5' : 'mt-2'}`}>
-              {isUr
-                ? 'ہماری بنیادی اسپیشلٹی فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک، اور متعلقہ لنکیج آئٹمز کی ہول سیل اور مینوفیکچرنگ ہے۔'
-                : 'Our core specialization is Fiat, Massey and Ford local parts, Top Link, Lift Link, and related linkage items with wholesale and manufacturing capabilities.'}
-            </p>
-          </div>
-          <div className="text-center">
-            <SectionHeading
-              primaryEn="Parts"
-              accentEn="Categories"
-              primaryUr="پارٹس کی"
-              accentUr="کیٹیگریز"
-              isUr={isUr}
-            />
-            <p className={`text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-2'}`}>
-              {isUr ? 'ہر کیٹیگری میں معیاری اور قابلِ اعتماد پارٹس دستیاب ہیں۔' : 'Reliable and quality stock available across every category.'}
-            </p>
-          </div>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+      <section className="relative overflow-hidden border-b border-white/10 py-16 md:py-20">
+        <GlowEllipse place="corner" />
+        <div className="relative z-10 mx-auto max-w-8xl px-8 md:px-14 lg:px-20">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
+            {isUr ? 'اسٹاک' : 'The stock'}
+          </p>
+          <h2 className={`mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'پارٹس کی کیٹیگریز' : 'Parts categories'}
+          </h2>
+          <p className="mt-4 max-w-2xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+            {isUr
+              ? 'فیاٹ، نیو ہالینڈ اور دیگر برانڈز کے اسپیئر پارٹس، ٹاپ لنک، لفٹ لنک اور لنکیج۔'
+              : 'Spare parts for Fiat, New Holland and other brands, plus Top Link, Lift Link and linkage.'}
+          </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((category) => {
               const isActive = activeCategory.key === category.key
               const categoryLabel = isUr ? category.titleUr : category.title
@@ -292,102 +339,203 @@ export default function Home() {
                   key={category.key}
                   type="button"
                   onClick={() => setActiveCategory(category)}
-                  className={`overflow-hidden rounded-2xl border text-start shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg ${isActive ? 'border-cyan-400 ring-2 ring-cyan-200' : 'border-indigo-100'
-                    }`}
+                  className={`group relative h-64 overflow-hidden rounded-[22px] border text-start transition duration-500 hover:-translate-y-2 ${isActive ? 'border-[#F5E8C8]' : 'border-white/15 hover:border-[#B8923D]'}`}
                 >
-                  <Image
-                    src={category.image}
-                    alt={categoryLabel}
-                    width={1000}
-                    height={650}
-                    className="h-36 w-full object-cover"
-                  />
-                  <div className="bg-gradient-to-b from-white to-indigo-50/40 p-4">
-                    <h3 className="text-lg font-bold text-indigo-900" dir={isUr ? 'rtl' : 'ltr'}>
+                  <Image src={category.image} alt={categoryLabel} width={1000} height={650} className="slow-zoom absolute inset-0 h-full w-full object-cover" />
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/10 via-[#8A6B25]/40 to-[#0c0c0c]/95" />
+                  <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#B8923D] to-transparent" />
+                  <span className="absolute inset-x-0 bottom-0 p-5">
+                    <h3 className={`text-[#F4F0E6] ${poster} text-2xl leading-tight`} style={isUr ? { lineHeight: 1.7 } : undefined}>
                       {categoryLabel}
                     </h3>
-                    <p className="mt-1 text-sm text-slate-600">
-                      {isUr ? 'مزید تفصیل دیکھنے کے لئے کلک کریں' : 'Click to view related details'}
-                    </p>
-                  </div>
+                  </span>
                 </button>
               )
             })}
           </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#080f35] via-[#17205f] to-[#0a1138] text-white">
-        <div className="pointer-events-none absolute -left-20 top-10 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-indigo-300/20 blur-3xl" />
-        <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-          <div className="text-center">
-            <SectionHeading
-              variant="dark"
-              primaryEn="Why Trust"
-              accentEn="Our Shop?"
-              primaryUr="ہم پر اعتماد"
-              accentUr="کیوں؟"
-              isUr={isUr}
-            />
-            <p className={`mx-auto max-w-3xl text-sm text-cyan-100/90 ${isUr ? 'mt-5' : 'mt-3'}`}>
-              {isUr
-                ? 'لوکل مارکیٹ کے تجربے اور مستقل سپلائی کی بنیاد پر کسان اور مکینک ہم پر اعتماد کرتے ہیں۔'
-                : 'Farmers and mechanics trust us for practical guidance and reliable stock availability.'}
+          <article className="relative mt-4 overflow-hidden rounded-[22px] border border-[#B8923D]/40 bg-[#161616] p-6">
+            <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#B8923D]">
+              {isUr ? activeCategory.titleUr : activeCategory.title}
             </p>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-            {trustStats.map((stat) => (
-              <article
-                key={stat.en}
-                className="rounded-2xl border border-cyan-300/20 bg-white/10 p-6 text-center shadow-lg shadow-black/20 backdrop-blur-sm transition hover:-translate-y-1 hover:bg-white/15"
-              >
-                <p className="text-4xl font-extrabold text-cyan-300">{stat.value}</p>
-                <p className="mt-2 text-sm text-slate-100">{isUr ? stat.ur : stat.en}</p>
-              </article>
-            ))}
-          </div>
+            <p className="mt-3 max-w-3xl text-base leading-7 text-[#F4F0E6]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+              {activeCopy.overview}
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {activeCopy.items.map((item) => (
+                <li key={item} className="border border-white/15 px-3 py-1 font-mono text-xs text-[#A39B90]">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-          <SectionHeading
-            centered
-            primaryEn="Wholesale & Manufacturing"
-            accentEn="Workflow"
-            primaryUr="ہول سیل اور مینوفیکچرنگ"
-            accentUr="ورک فلو"
-            isUr={isUr}
-          />
-          <p className={`mx-auto max-w-3xl text-center text-sm text-slate-600 ${isUr ? 'mt-5' : 'mt-3'}`}>
-            {isUr
-              ? 'آرڈر سے لے کر سپلائی تک ہر مرحلے میں واضح رہنمائی، درست ریٹ اور بروقت سہولت دی جاتی ہے۔'
-              : 'From inquiry to supply, each step is handled with clear communication, right pricing and timely support.'}
+      <section className="border-b border-white/10 py-16 md:py-20">
+        <div className="mx-auto max-w-8xl px-8 md:px-14 lg:px-20">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
+            {isUr ? 'فہرست' : 'The range'}
           </p>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {workflow.map((step, index) => (
+          <h2 className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'دکان پر جو پارٹس آتے ہیں' : 'What the counter actually stocks'}
+          </h2>
+          <p className="mt-4 max-w-2xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+            {isUr
+              ? 'یہ وہی گروپ ہیں جو پارٹس کے صفحے پر ہیں۔ جس پارٹ کا نام کوٹ میں آئے، اس کا اسٹاک الگ سے چیک ہوتا ہے۔'
+              : 'These are the same groups as the parts page. A part named on a quote is checked in stock on its own.'}
+          </p>
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {PART_CATEGORIES.map((part, index) => (
               <article
-                key={step.enTitle}
-                className="relative rounded-2xl border border-indigo-100 bg-gradient-to-b from-indigo-50/70 to-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                key={part.id}
+                className="group relative overflow-hidden rounded-[22px] border border-[#B8923D]/35 p-6 transition duration-500 hover:-translate-y-2"
+                style={{ background: cardWash[index % cardWash.length] }}
               >
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-900 text-xs font-bold text-cyan-300 shadow">
-                  {index + 1}
-                </div>
-                <h3 className="mt-4 text-lg font-bold text-indigo-900">{isUr ? step.urTitle : step.enTitle}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-700">{isUr ? step.urText : step.enText}</p>
+                <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
+                <h3 className={`relative text-[#F4F0E6] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                  {isUr ? `${part.primaryUr} ${part.accentUr}` : `${part.primaryEn} ${part.accentEn}`}
+                </h3>
+                <p className="mt-3 font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                  {isUr ? part.descUr : part.descEn}
+                </p>
+                <ul className="mt-4 space-y-2">
+                  {part.items.slice(0, 4).map((item) => (
+                    <li key={item.en} className="text-sm text-[#F4F0E6]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                      {isUr ? item.ur : item.en}
+                    </li>
+                  ))}
+                </ul>
+                <Link href={`/parts/${part.id}`} className="mt-5 inline-flex font-mono text-xs uppercase tracking-[0.16em] text-[#B8923D] hover:text-[#F5E8C8]">
+                  {isUr ? 'پوری فہرست' : 'Full list'}
+                </Link>
               </article>
             ))}
           </div>
-          <div className="mt-10 rounded-2xl border border-cyan-200 bg-gradient-to-r from-cyan-50 to-indigo-50 p-6 text-center shadow-sm">
-            <p className="text-lg font-bold text-indigo-900">
-              {isUr ? 'بلک آرڈر یا ڈیلر ریٹس کے لئے ابھی رابطہ کریں' : 'Need bulk rates or dealership supply? Contact us now.'}
+        </div>
+      </section>
+
+      <section className="border-b border-white/10 py-16 md:py-20">
+        <div className="mx-auto max-w-8xl px-8 md:px-14 lg:px-20">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
+            {isUr ? 'کوٹ' : 'The quote'}
+          </p>
+          <h2 className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'کوٹ میں کیا مانگا اور کیا لکھا جاتا ہے' : 'What a quotation asks for, and what it answers'}
+          </h2>
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
+            <article className="relative overflow-hidden rounded-[22px] bg-gradient-to-br from-[#8A6B25] via-[#B8923D] to-[#D9B96A] p-6 text-[#1A1408] transition duration-500 hover:-translate-y-2">
+              <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-white/70 to-transparent" />
+              <h3 className={`text-[#1A1408] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                {isUr ? 'آپ بھیجیں' : 'You send'}
+              </h3>
+              <ol className="mt-5 space-y-3">
+                {quoteSend.map((item, index) => (
+                  <li key={item.en} className="flex gap-3 text-sm text-[#1A1408]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                    <span className="font-mono text-xs text-[#3d2e10]">0{index + 1}</span>
+                    <span>{isUr ? item.ur : item.en}</span>
+                  </li>
+                ))}
+              </ol>
+            </article>
+            <article
+              className="relative overflow-hidden rounded-[22px] border border-[#B8923D]/40 p-6 transition duration-500 hover:-translate-y-2"
+              style={{ background: 'linear-gradient(205deg, rgba(217,185,106,0.34) 0%, #161616 52%)' }}
+            >
+              <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
+              <h3 className={`text-[#F5E8C8] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                {isUr ? 'ہم واپس لکھتے ہیں' : 'We write back'}
+              </h3>
+              <ol className="mt-5 space-y-3">
+                {quoteReply.map((item, index) => (
+                  <li key={item.en} className="flex gap-3 text-sm text-[#F4F0E6]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                    <span className="font-mono text-xs text-[#B8923D]">0{index + 1}</span>
+                    <span>{isUr ? item.ur : item.en}</span>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          </div>
+          <p className="mt-6 max-w-3xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+            {isUr
+              ? 'دکان نمبر 43، رمضان چیمبر، بادامی باغ، لاہور۔ فیاٹ، میسی اور فورڈ کے لوکل پارٹس۔ ٹاپ لنک کے ہول سیل ڈیلر اور مینوفیکچرر۔'
+              : 'Shop No. 43, Ramzan Chamber, Badami Bagh, Lahore. Local parts for Fiat, Massey and Ford. Wholesale dealer and manufacturer of Top Link.'}
+          </p>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-b border-white/10 py-16 md:py-20">
+        <GlowEllipse />
+        <div className="relative z-10 mx-auto max-w-8xl px-8 md:px-14 lg:px-20">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
+            {isUr ? 'سوال' : 'Questions'}
+          </p>
+          <h2 className={`mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'خریدار جو پوچھتے ہیں' : 'What buyers ask'}
+          </h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {faqs.map((item, index) => (
+              <Reveal key={item.qEn} delay={(index % 2) * 80}>
+              <article className="relative h-full overflow-hidden rounded-[22px] border border-white/10 bg-[#161616] p-6 transition duration-500 hover:-translate-y-2 hover:border-[#B8923D]">
+                <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#B8923D] to-transparent" />
+                <h3 className={`text-[#F4F0E6] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                  {isUr ? item.qUr : item.qEn}
+                </h3>
+                <p className="mt-3 font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                  {isUr ? item.aUr : item.aEn}
+                </p>
+              </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24">
+        <div className="mx-auto grid max-w-8xl gap-10 px-8 md:grid-cols-[0.8fr_1.2fr] md:px-14 lg:px-20">
+          <div>
+            <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
+              {isUr ? 'آرڈر' : 'The order'}
             </p>
-            <div className="mt-4">
-              <Link href="/contact" className="btn-cta-indigo">
-                {isUr ? 'ابھی رابطہ کریں' : 'Contact Us Now'}
-              </Link>
-            </div>
+            <h2 className={`mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+              {isUr ? 'انکوائری سے شپمنٹ تک' : 'From enquiry to shipment'}
+            </h2>
+          </div>
+          <div className="grid gap-4">
+            {workflow.map((step, index) => (
+              <article key={step.enTitle} className="border-t border-white/15 pt-4">
+                <p className="font-mono text-xs tracking-[0.18em] text-[#B8923D]">0{index + 1}</p>
+                <h3 className={`mt-2 text-[#F4F0E6] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                  {isUr ? step.urTitle : step.enTitle}
+                </h3>
+                <p className="mt-2 max-w-xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                  {isUr ? step.urText : step.enText}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div className="mx-auto mt-8 flex max-w-8xl flex-wrap gap-3 px-8 md:px-14 lg:px-20">
+          {tradePoints.map((point) => (
+            <span key={point.en} className="border border-white/15 px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] text-[#F5E8C8]">
+              {isUr ? point.ur : point.en}
+            </span>
+          ))}
+        </div>
+        <div className="mx-auto mt-14 max-w-8xl px-8 md:px-14 lg:px-20">
+          <div className="bg-gradient-to-br from-[#2A2416] via-[#141210] to-[#0c0c0c] px-6 py-12 md:px-12">
+            <h2 className={`max-w-3xl text-[#F5E8C8] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+              {isUr ? 'پارٹس لسٹ بھیجیں' : 'Send the parts list'}
+            </h2>
+            <p className="mt-4 max-w-xl font-mono text-sm leading-7 text-[#A39B90]">
+              {isUr ? 'ہم اسٹاک اور ریٹ کے ساتھ کوٹیشن واپس بھیجتے ہیں۔' : 'We reply with stock and a rate.'}
+            </p>
+            <Link
+              href="/contact"
+              className="mt-8 inline-flex min-h-12 items-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-6 text-sm font-semibold tracking-wide text-[#1A1408]"
+            >
+              {isUr ? 'کوٹیشن مانگیں' : 'Request a quotation'}
+            </Link>
           </div>
         </div>
       </section>

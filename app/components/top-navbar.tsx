@@ -4,6 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
+import LanguageMenu from '@/app/components/language-menu'
+import { GlowEllipse } from '@/app/components/motion'
 import { useLanguage } from '@/app/lib/language-context'
 
 function navLinkActive(pathname: string, href: string) {
@@ -12,18 +15,8 @@ function navLinkActive(pathname: string, href: string) {
 }
 
 /** Match each page’s first hero so the fixed bar doesn’t look like a separate grey strip. */
-function idleHeaderSurface(pathname: string) {
-  if (pathname === '/') {
-    return 'border-transparent bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900'
-  }
-  if (
-    pathname.startsWith('/gallery') ||
-    pathname.startsWith('/about') ||
-    pathname.startsWith('/contact')
-  ) {
-    return 'border-transparent bg-slate-950'
-  }
-  return 'border-transparent bg-gradient-to-r from-blue-900 to-slate-900'
+function idleHeaderSurface() {
+  return 'border-b-2 border-[#B8923D] bg-[#0c0c0c]'
 }
 
 type NavItem = {
@@ -43,7 +36,7 @@ const navItems: NavItem[] = [
 
 export default function TopNavbar() {
   const pathname = usePathname()
-  const { lang, toggleLang } = useLanguage()
+  const { lang } = useLanguage()
   const isUr = lang === 'ur'
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -79,8 +72,8 @@ export default function TopNavbar() {
   /** Top: same solid treatment as the hero below; after scroll (or mobile menu open): compact dark bar. */
   const headerSurface =
     isScrolled || mobileOpen
-      ? 'border-b border-slate-800/90 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 shadow-md shadow-black/25'
-      : idleHeaderSurface(pathname)
+      ? 'border-b-2 border-[#B8923D] bg-[#0c0c0c] shadow-md shadow-black/40'
+      : idleHeaderSurface()
 
   const logoSizes = isScrolled
     ? 'h-14 w-auto max-w-[min(72vw,280px)] sm:max-w-[300px] md:h-16 md:max-w-[300px]'
@@ -89,28 +82,31 @@ export default function TopNavbar() {
   const linkClass = (active: boolean) =>
     `rounded-lg px-4 py-3 text-base font-semibold transition duration-200 ease-out md:px-3 md:py-2 ${
       active
-        ? 'bg-amber-300/25 text-amber-50 ring-1 ring-amber-300/50 shadow-sm hover:bg-amber-300/40 hover:shadow-md'
-        : 'text-white hover:bg-white/15 hover:shadow-sm'
+        ? 'bg-[#B8923D]/20 text-[#F5E8C8] ring-1 ring-[#B8923D]/60'
+        : 'text-[#F4F0E6] hover:bg-white/10 hover:text-[#F5E8C8]'
     }`
 
   return (
     <header
       className={`fixed inset-x-0 top-0 transition-all duration-300 ${mobileOpen ? 'z-[200]' : 'z-50'} ${headerSurface}`}
     >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <GlowEllipse place="header" />
+      </div>
       {/* Stays above the dim overlay so menu / close controls stay visible on every page */}
       <div
-        className={`relative mx-auto flex w-full max-w-8xl items-center justify-between gap-2 px-3 transition-all duration-300 sm:gap-3 sm:px-4 md:px-8 ${
+        className={`relative mx-auto flex w-full max-w-8xl items-center justify-between gap-2 px-8 transition-all duration-300 sm:gap-3 md:px-14 lg:px-20 ${
           mobileOpen ? 'z-[210]' : ''
         } ${isScrolled ? 'py-2' : 'py-2'}`}
       >
         {/* Logo: start side (left in EN LTR, right in UR RTL). Larger on small screens. */}
         <Link
           href="/"
-          className="flex min-w-0 shrink items-center justify-start md:ms-6 lg:ms-10"
+          className="relative z-0 flex min-w-0 shrink items-center justify-start"
         >
           <Image
             src="/new-logo.png"
-            alt="Fahad Autos logo"
+            alt="Fahad Tractor Parts and Services logo"
             width={420}
             height={130}
             priority
@@ -119,7 +115,7 @@ export default function TopNavbar() {
         </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-2 md:flex md:gap-3"
+          className="absolute left-1/2 z-30 hidden -translate-x-1/2 items-center gap-2 md:flex md:gap-3"
           aria-label="Main"
         >
           {navItems.map((item) => {
@@ -138,27 +134,8 @@ export default function TopNavbar() {
         </nav>
 
         {/* End: language + menu (mobile). EN: both on the right; UR: mirrored to the left via dir. */}
-        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
-          <button
-            type="button"
-            onClick={toggleLang}
-            className="group relative inline-flex shrink-0 items-center rounded-xl border border-amber-300/70 bg-slate-900/70 p-1 text-xs font-bold shadow-lg shadow-slate-950/40 transition hover:border-amber-300 sm:text-sm"
-          >
-            <span
-              className={`rounded-lg px-2 py-1.5 transition sm:px-3 ${
-                lang === 'en' ? 'bg-amber-300 text-slate-950' : 'text-amber-200 group-hover:text-amber-100'
-              }`}
-            >
-              ENG
-            </span>
-            <span
-              className={`rounded-lg px-2 py-1.5 transition sm:px-3 ${
-                lang === 'ur' ? 'bg-amber-300 text-slate-950' : 'text-amber-200 group-hover:text-amber-100'
-              }`}
-            >
-              اردو
-            </span>
-          </button>
+        <div className="relative z-30 flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
+          <LanguageMenu />
 
           <button
             type="button"
@@ -193,46 +170,48 @@ export default function TopNavbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen ? (
-        <div
-          className="fixed inset-0 z-[120] md:hidden"
-          id="mobile-nav"
-          role="dialog"
-          aria-modal="true"
-          aria-label={isUr ? 'مینو' : 'Menu'}
-        >
-          <div
-            className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"
-            aria-hidden
-            onClick={() => setMobileOpen(false)}
-          />
-          <nav
-            className={`absolute start-0 end-0 top-0 z-10 max-h-[90vh] overflow-y-auto border-b border-white/10 bg-slate-950 px-4 pb-6 pt-[4.5rem] shadow-2xl ${
-              isUr ? 'text-end' : 'text-start'
-            }`}
-            dir={isUr ? 'rtl' : 'ltr'}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="mx-auto flex max-w-md flex-col gap-1">
-              {navItems.map((item) => {
-                const active = navLinkActive(pathname, item.href)
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    aria-current={active ? 'page' : undefined}
-                    className={`${linkClass(active)} block w-full`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {lang === 'en' ? item.en : item.ur}
-                  </Link>
-                )
-              })}
-            </div>
-          </nav>
-        </div>
-      ) : null}
+      {mobileOpen
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-[180] md:hidden"
+              id="mobile-nav"
+              role="dialog"
+              aria-modal="true"
+              aria-label={isUr ? 'مینو' : 'Menu'}
+            >
+              <button
+                type="button"
+                className="absolute inset-0 bg-[#0c0c0c]/80"
+                aria-label={isUr ? 'مینو بند کریں' : 'Close menu'}
+                onClick={() => setMobileOpen(false)}
+              />
+              <nav
+                className={`absolute start-4 end-4 top-24 z-10 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-[22px] border border-[#B8923D]/40 bg-[#161616] p-3 shadow-2xl ${
+                  isUr ? 'text-end' : 'text-start'
+                }`}
+                dir={isUr ? 'rtl' : 'ltr'}
+              >
+                <div className="flex flex-col gap-1">
+                  {navItems.map((item) => {
+                    const active = navLinkActive(pathname, item.href)
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        aria-current={active ? 'page' : undefined}
+                        className={`${linkClass(active)} block w-full`}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {lang === 'en' ? item.en : item.ur}
+                      </Link>
+                    )
+                  })}
+                </div>
+              </nav>
+            </div>,
+            document.body,
+          )
+        : null}
     </header>
   )
 }

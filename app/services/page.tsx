@@ -1,38 +1,58 @@
 'use client'
 
 import Link from 'next/link'
-import { SectionHeading } from '@/app/components/section-heading'
+import { GlowEllipse } from '@/app/components/motion'
 import { useLanguage } from '@/app/lib/language-context'
 
 const services = [
   {
+    key: 'export',
+    primaryEn: 'International Sales',
+    accentEn: '& Export',
+    primaryUr: 'بین الاقوامی سیلز',
+    accentUr: 'اور ایکسپورٹ',
+    detailEn:
+      'Importers and distributors send a parts list and receive a written quotation. We then follow the order through packing and shipment from Lahore.',
+    detailUr:
+      'درآمدکنندگان اور ڈسٹری بیوٹرز پارٹس لسٹ بھیجتے ہیں اور تحریری کوٹیشن پاتے ہیں۔ اس کے بعد آرڈر پیکنگ اور لاہور سے شپمنٹ تک فالو ہوتا ہے۔',
+    bulletsEn: [
+      'Quotations for Fiat, New Holland and other tractor brands',
+      'Order follow-up by email and WhatsApp',
+      'Packing and shipment coordination from Pakistan',
+    ],
+    bulletsUr: [
+      'فیاٹ، نیو ہالینڈ اور دیگر ٹریکٹر برانڈز کی کوٹیشن',
+      'ای میل اور واٹس ایپ پر آرڈر فالو اپ',
+      'پاکستان سے پیکنگ اور شپمنٹ کوآرڈینیشن',
+    ],
+  },
+  {
     key: 'brands',
     primaryEn: 'Brand-Specific Support',
-    accentEn: '(Fiat / Massey / Ford)',
+    accentEn: 'Fiat / New Holland / others',
     primaryUr: 'برانڈ اسپیسفک سپورٹ',
-    accentUr: '(فیاٹ / میسی / فورڈ)',
+    accentUr: 'فیاٹ / نیو ہالینڈ / دیگر',
     detailEn:
-      'We help you pick the right local parts for your tractor model, not just “any” part, but what actually fits field use and workshop demand.',
+      'We help you pick the right local parts for your tractor model, not just any part, but what actually fits field use and workshop demand.',
     detailUr:
-      'ہم صرف “کوئی بھی” پارٹ نہیں، بلکہ آپ کے ٹریکٹر ماڈل اور کھیت/ورکشاپ کی اصل ضرورت کے مطابق درست لوکل پارٹس کی رہنمائی دیتے ہیں۔',
+      'ہم صرف کوئی بھی پارٹ نہیں، بلکہ آپ کے ٹریکٹر ماڈل اور کھیت یا ورکشاپ کی اصل ضرورت کے مطابق درست لوکل پارٹس کی رہنمائی دیتے ہیں۔',
     bulletsEn: [
-      'Model-wise fitting guidance for Fiat, Massey and Ford',
+      'Model-wise fitting guidance for Fiat, New Holland and other brands',
       'Practical advice for daily farming and repair use',
       'Retail and wholesale quantity options',
     ],
     bulletsUr: [
-      'فیاٹ، میسی اور فورڈ کے لئے ماڈل کے مطابق فٹنگ گائیڈ',
+      'فیاٹ، نیو ہالینڈ اور دیگر برانڈز کے لئے ماڈل کے مطابق فٹنگ گائیڈ',
       'روزمرہ کھیت اور مرمت کے لئے عملی مشورہ',
       'ریٹیل اور ہول سیل دونوں میں دستیابی',
     ],
-    panel: 'from-indigo-700 via-slate-900 to-slate-950',
   },
   {
     key: 'toplink',
     primaryEn: 'Top Link & Lift Link',
-    accentEn: 'Wholesale Network',
+    accentEn: 'Wholesale',
     primaryUr: 'ٹاپ لنک اور لفٹ لنک',
-    accentUr: 'ہول سیل نیٹ ورک',
+    accentUr: 'ہول سیل',
     detailEn:
       'Strong wholesale dealing for shops and market dealers who need steady Top Link and Lift Link stock with clear rates and repeat supply.',
     detailUr:
@@ -40,163 +60,112 @@ const services = [
     bulletsEn: [
       'Top Link and Lift Link in dealer-focused quantities',
       'Support for market shops and workshop demand',
-      'Consistent stock flow for repeat buyers',
+      'Repeat orders at wholesale rates',
     ],
     bulletsUr: [
       'ٹاپ لنک اور لفٹ لنک ڈیلر لیول مقدار میں',
       'مارکیٹ دکانوں اور ورکشاپ ڈیمانڈ کے مطابق',
-      'بار بار خریداروں کے لئے مستقل سپلائی',
+      'بار بار آرڈر ہول سیل ریٹ پر',
     ],
-    panel: 'from-cyan-800 via-blue-950 to-slate-950',
   },
   {
     key: 'bulk',
-    primaryEn: 'Manufacturing & Bulk',
-    accentEn: 'Order Support',
-    primaryUr: 'مینوفیکچرنگ اور بلک',
-    accentUr: 'آرڈر سپورٹ',
+    primaryEn: 'Top Link',
+    accentEn: 'Manufacturing',
+    primaryUr: 'ٹاپ لنک',
+    accentUr: 'مینوفیکچرنگ',
     detailEn:
-      'Long-term buyers and workshops can plan bulk orders with manufacturing-backed options where needed, with clear communication from requirement to dispatch.',
+      'Top Link is manufactured at the shop and sold wholesale. Other parts are quoted only after the stock is checked. Orders can be picked up in Badami Bagh or packed for shipment.',
     detailUr:
-      'طویل مدتی خریدار اور ورکشاپس بلک آرڈر پلان کر سکتے ہیں؛ جہاں ضرورت ہو مینوفیکچرنگ سپورٹ بھی، ضرورت سے لے کر سپلائی تک واضح باتچیت۔',
+      'ٹاپ لنک دکان پر بنتا ہے اور ہول سیل بکتا ہے۔ باقی پارٹس کا کوٹ اسٹاک چیک کے بعد ہوتا ہے۔ آرڈر بادامی باغ سے لیا جا سکتا ہے یا شپمنٹ کے لئے پیک کیا جا سکتا ہے۔',
     bulletsEn: [
-      'Bulk pricing and quantity planning for serious buyers',
-      'Manufacturing support where the job needs it',
-      'Fast coordination for dispatch and pickup',
+      'Top Link made and packed for dealers',
+      'Other parts quoted from checked stock',
+      'Shop pickup, or packing for shipment',
     ],
     bulletsUr: [
-      'سنجیدہ خریداروں کے لئے بلک ریٹ اور مقدار کی پلاننگ',
-      'ضرورت کے مطابق مینوفیکچرنگ سپورٹ',
-      'ڈیلیوری اور پک اپ کے لئے تیز رابطہ',
+      'ڈیلر کے لئے بنا اور پیک کیا ہوا ٹاپ لنک',
+      'باقی پارٹس چیک شدہ اسٹاک سے کوٹ',
+      'دکان سے پک اپ، یا شپمنٹ کے لئے پیکنگ',
     ],
-    panel: 'from-amber-700/90 via-slate-900 to-slate-950',
   },
+]
+
+const cardWash = [
+  'linear-gradient(155deg, rgba(217,185,106,0.5) 0%, #161616 58%)',
+  'linear-gradient(205deg, rgba(166,133,58,0.55) 0%, #1a1408 48%, #0c0c0c 100%)',
+  'linear-gradient(165deg, rgba(184,146,61,0.4) 0%, #12100c 64%)',
+  'linear-gradient(180deg, rgba(217,185,106,0.28) 0%, #161616 52%)',
 ]
 
 export default function ServicesPage() {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
+  const poster = isUr ? '' : 'font-poster uppercase tracking-[0.02em]'
 
   return (
-    <main className="min-h-screen bg-slate-100">
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 to-slate-900 px-4 py-16 text-white md:px-8 md:py-20">
-        <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
-        <div className="pointer-events-none absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl text-center">
-          <SectionHeading
-            as="h1"
-            variant="dark"
-            size="page"
-            centered
-            primaryEn="Our"
-            accentEn="Services"
-            primaryUr="ہماری"
-            accentUr="سروسز"
-            isUr={isUr}
-          />
-          <p className={`mx-auto max-w-2xl text-lg leading-relaxed text-blue-100/95 ${isUr ? 'mt-5' : 'mt-4'}`}>
+    <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
+      <section className="relative overflow-hidden px-8 pb-6 pt-28 md:px-14 md:pt-32 lg:px-20">
+        <GlowEllipse />
+        <div className="relative z-10 mx-auto max-w-8xl">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'سروس' : 'The work'}</p>
+          <h1
+            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-5xl' : 'text-6xl md:text-7xl'} leading-none`}
+            style={isUr ? { lineHeight: 1.7 } : undefined}
+          >
+            {isUr ? 'ہماری سروسز' : 'Our services'}
+          </h1>
+          <p className="mt-4 max-w-2xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
             {isUr
-              ? 'ہم صرف پارٹس بیچنے تک محدود نہیں، فٹنگ، ہول سیل، اور بلک سپلائی تک ہماری سروسز کاروبار اور کسان دونوں کے لئے واضح اور قابلِ اعتماد ہیں۔'
-              : 'We are not limited to selling parts alone, from fitting guidance to wholesale and bulk supply, our services stay clear and dependable for dealers and farmers alike.'}
+              ? 'ریٹ سے پہلے اسٹاک اور کوالٹی کنفرم ہوتی ہے۔ کوٹیشن، آرڈر، پیکنگ اور شپمنٹ لاہور کی دکان سے ہوتی ہے۔'
+              : 'Stock and quality are confirmed before the rate. Quotations, orders, packing and shipment are handled from the Lahore shop.'}
           </p>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 py-14 md:px-8">
-        <div className="mb-12 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
-            {isUr ? 'تفصیل سے' : 'In detail'}
-          </p>
-          <h2 className="mt-2 text-2xl font-extrabold text-slate-900 md:text-3xl">
-            {isUr ? 'ہم کیا فراہم کرتے ہیں' : 'What we provide'}
-          </h2>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600" />
+      <section className="mx-auto max-w-8xl px-8 pb-16 md:px-14 lg:px-20">
+        <div className="grid gap-4 lg:grid-cols-2">
+          {services.map((service, index) => (
+            <article
+              key={service.key}
+              className="relative overflow-hidden rounded-[22px] border border-[#B8923D]/35 p-6"
+              style={{ background: cardWash[index % cardWash.length] }}
+            >
+              <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
+              <p className="font-poster text-6xl leading-none text-transparent" style={{ WebkitTextStroke: '1.5px #6d645e' }}>
+                0{index + 1}
+              </p>
+              <h2 className={`relative mt-2 text-[#F4F0E6] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                {isUr ? `${service.primaryUr} ${service.accentUr}` : `${service.primaryEn} ${service.accentEn}`}
+              </h2>
+              <p className="relative mt-3 font-mono text-sm leading-7 text-[#F4F0E6]/85" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                {isUr ? service.detailUr : service.detailEn}
+              </p>
+              <ul className="relative mt-4 space-y-2">
+                {(isUr ? service.bulletsUr : service.bulletsEn).map((line) => (
+                  <li key={line} className="text-sm text-[#F4F0E6]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                    <span className="me-2 font-mono text-xs text-[#B8923D]">/</span>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
 
-        <div className="flex flex-col gap-16 md:gap-20">
-          {services.map((service, index) => {
-            const reverse = index % 2 === 1
-            return (
-              <article
-                key={service.key}
-                className="group overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-[0_20px_50px_-15px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/5"
-              >
-                <div
-                  className={`flex flex-col md:min-h-[320px] md:flex-row ${reverse ? 'md:flex-row-reverse' : ''}`}
-                >
-                  <div className="relative flex flex-1 flex-col justify-center p-8 md:p-12 lg:p-14 ps-10 md:ps-14">
-                    <div
-                      className="absolute inset-y-0 start-0 w-1 bg-gradient-to-b from-cyan-500 to-indigo-600 md:w-1.5"
-                      aria-hidden
-                    />
-                    <span className="inline-flex w-fit items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
-                      {String(index + 1).padStart(2, '0')} · {isUr ? 'سروس' : 'Service'}
-                    </span>
-                    <div className="mt-5" dir={isUr ? 'rtl' : 'ltr'}>
-                      <SectionHeading
-                        as="h2"
-                        size="compact"
-                        className="!text-2xl md:!text-3xl"
-                        primaryEn={service.primaryEn}
-                        accentEn={service.accentEn}
-                        primaryUr={service.primaryUr}
-                        accentUr={service.accentUr}
-                        isUr={isUr}
-                        accentClassName="bg-gradient-to-r from-cyan-600 to-indigo-600 bg-clip-text text-transparent"
-                      />
-                    </div>
-                    <p
-                      className={`text-base leading-relaxed text-slate-600 md:text-lg ${isUr ? 'mt-5' : 'mt-4'}`}
-                      dir={isUr ? 'rtl' : 'ltr'}
-                    >
-                      {isUr ? service.detailUr : service.detailEn}
-                    </p>
-                    <ul className="mt-6 space-y-3">
-                      {(isUr ? service.bulletsUr : service.bulletsEn).map((line) => (
-                        <li
-                          key={line}
-                          className="flex gap-3 text-sm leading-relaxed text-slate-800 md:text-base"
-                          dir={isUr ? 'rtl' : 'ltr'}
-                        >
-                          <span
-                            className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-gradient-to-br from-cyan-500 to-indigo-600"
-                            aria-hidden
-                          />
-                          <span>{line}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div
-                    className={`relative flex min-h-[200px] flex-1 items-center justify-center bg-gradient-to-br p-10 md:min-h-0 md:max-w-md lg:max-w-lg ${service.panel}`}
-                  >
-                    <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.06%22%3E%3Cpath%20d%3D%22M0%2038.59l2.83-2.83%201.41%201.41L1.41%2040H0v-1.41zM0%201.4l2.83%202.83%201.41-1.41L1.41%200H0v1.41zM38.59%2040l-2.83-2.83%201.41-1.41L40%2038.59V40h-1.41zM40%201.41l-2.83%202.83-1.41-1.41L38.59%200H40v1.41zM20%2018.6l2.83-2.83%201.41%201.41L21.41%2020l2.83%202.83-1.41%201.41L20%2021.41l-2.83%202.83-1.41-1.41L18.59%2020l-2.83-2.83%201.41-1.41L20%2018.59z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-80" />
-                    <span
-                      className="relative text-7xl font-black tabular-nums text-white/[0.12] transition group-hover:text-white/20 md:text-8xl"
-                      aria-hidden
-                    >
-                      {index + 1}
-                    </span>
-                  </div>
-                </div>
-              </article>
-            )
-          })}
-        </div>
-
-        <div className="mt-16 overflow-hidden rounded-3xl border border-indigo-200/80 bg-gradient-to-r from-indigo-950 via-slate-900 to-blue-950 px-6 py-10 text-center shadow-xl md:px-12">
-          <p className="text-lg font-bold text-white md:text-xl">
-            {isUr ? 'بلک ریٹ، ڈیلر سپلائی یا ماڈل کی تصدیق کے لئے رابطہ کریں۔' : 'Contact us for bulk rates, dealer supply, or model-wise part verification.'}
+        <article className="relative mt-4 overflow-hidden rounded-[22px] bg-gradient-to-br from-[#8A6B25] via-[#B8923D] to-[#D9B96A] p-6 text-[#1A1408] md:flex md:items-center md:justify-between md:gap-8">
+          <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-white/70 to-transparent" />
+          <p className={`max-w-2xl ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'پارٹس لسٹ بھیجیں، ہم اسٹاک اور ریٹ کے ساتھ کوٹیشن واپس بھیجتے ہیں۔' : 'Send a parts list. We reply with stock and a rate.'}
           </p>
           <Link
             href="/contact"
-            className="btn-cta-amber-lg mt-6"
+            className="mt-6 inline-flex min-h-12 shrink-0 items-center rounded-full bg-[#1A1408] px-6 text-sm font-semibold text-[#F5E8C8] md:mt-0"
           >
             {isUr ? 'رابطہ صفحہ' : 'Go to Contact'}
           </Link>
-        </div>
-      </div>
+        </article>
+      </section>
     </main>
   )
 }
