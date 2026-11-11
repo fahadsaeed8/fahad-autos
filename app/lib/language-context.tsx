@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { readTranslateCode } from '@/app/lib/translate-languages'
 
 export type Lang = 'en' | 'ur'
 
@@ -21,7 +22,7 @@ function applyDocumentDirection(next: Lang) {
 
 export function LanguageProvider({
   children,
-  initialLang = 'ur',
+  initialLang = 'en',
 }: {
   children: React.ReactNode
   initialLang?: Lang
@@ -41,6 +42,7 @@ export function LanguageProvider({
   }, [])
 
   useEffect(() => {
+    if (readTranslateCode()) return
     applyDocumentDirection(lang)
   }, [lang])
 

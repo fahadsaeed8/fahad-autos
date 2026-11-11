@@ -873,13 +873,14 @@ export const PART_CATEGORIES: PartCategory[] = [
   },
   {
     id: 'wholesale',
-    primaryEn: 'Wholesale +',
-    accentEn: 'Manufacturing',
-    primaryUr: 'ہول سیل +',
-    accentUr: 'مینوفیکچرنگ',
-    descEn: 'Bulk packs for dealers and workshops; manufacturing support where repeat orders need it.',
+    primaryEn: 'Wholesale',
+    accentEn: 'Supply',
+    primaryUr: 'ہول سیل',
+    accentUr: 'سپلائی',
+    descEn:
+      'Cartons for dealers and workshops. Top Link is manufactured here and sold wholesale. Other lines are quoted only after the stock is checked.',
     descUr:
-      'ڈیلر اور ورکشاپ کے لیے بلک پیکج؛ بار بار آرڈر پر مینوفیکچرنگ سپورٹ جہاں ضرورت ہو۔',
+      'ڈیلر اور ورکشاپ کے کارٹن۔ ٹاپ لنک یہیں بنتا ہے اور ہول سیل بکتا ہے۔ باقی پارٹس کا کوٹ اسٹاک چیک کے بعد ہوتا ہے۔',
     imageIndex: 5,
     items: [
       sub(
@@ -890,17 +891,17 @@ export const PART_CATEGORIES: PartCategory[] = [
         5
       ),
       sub(
-        'Bush & sleeve manufacturing',
-        'بش اور سلیو مینوفیکچرنگ',
-        'Custom bronze or nylon bush runs from sample or drawing.',
-        'نمونہ یا نقشے سے کسٹم رن۔',
+        'Top Link wholesale cartons',
+        'ٹاپ لنک ہول سیل کارٹن',
+        'Manufactured Top Link packed for dealers, size confirmed on the order.',
+        'ڈیلر کے لئے بنا ہوا ٹاپ لنک، سائز آرڈر پر کنفرم۔',
         6
       ),
       sub(
-        'Dealer display kits',
-        'ڈیلر ڈسپلے کٹ',
-        'Sample boards for counter explanation to farmers.',
-        'کسانوں کو سمجھانے کے نمونے۔',
+        'Mixed spare cartons',
+        'مکس اسپیئر کارٹن',
+        'A dealer carton of named parts, counted before it is sealed.',
+        'نام والے پارٹس کا ڈیلر کارٹن، سیل سے پہلے گنتی۔',
         0
       ),
       sub(
@@ -918,10 +919,10 @@ export const PART_CATEGORIES: PartCategory[] = [
         2
       ),
       sub(
-        'Custom batch runs (MOQ applies)',
-        'کسٹم بیچ مینوفیکچرنگ MOQ',
-        'Volume pricing when you commit to minimum order quantity.',
-        'کم از کم آرڈر پر قیمت۔',
+        'Lift link dealer packs',
+        'لفٹ لنک ڈیلر پیک',
+        'Lower-link sets counted for a dealer order, not a guessed carton size.',
+        'ڈیلر آرڈر کے لفٹ لنک سیٹ، اندازے کا کارٹن نہیں۔',
         3
       ),
     ],

@@ -1,30 +1,31 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { SectionHeading } from '@/app/components/section-heading'
+import { brand } from '@/app/lib/brand'
 import { useLanguage } from '@/app/lib/language-context'
 
 export default function SiteFooter() {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
+  const address = isUr ? brand.addressUr : brand.addressEn
 
   return (
-    <footer className="border-t border-slate-800 bg-slate-950 text-slate-300">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:grid-cols-[1.6fr_1fr_1fr] md:px-8">
+    <footer className="border-t border-[#B8923D]/40 bg-[#0c0c0c] text-[#A39B90]">
+      <div className="mx-auto grid max-w-8xl gap-8 px-8 py-10 md:grid-cols-[1.6fr_1fr_1fr] md:px-14 lg:px-20">
         <div>
-          <div className="flex items-center justify-start">
+          <Link href="/" className="inline-flex">
             <Image
               src="/new-logo.png"
-              alt="Fahad Autos logo"
+              alt="Fahad Tractor Parts and Services logo"
               width={460}
               height={140}
               className="h-24 w-80 object-contain md:w-96"
             />
-          </div>
-          <p className="mt-3 text-sm leading-7">
-            {lang === 'en'
-              ? 'Trusted local tractor parts shop in Lahore for farmers, mechanics and workshops.'
-              : 'لاہور میں کسانوں، مکینک اور ورکشاپس کے لئے قابل اعتماد ٹریکٹر پارٹس کی دکان۔'}
+          </Link>
+          <p className="mt-4 max-w-md text-sm leading-7">
+            {isUr ? brand.blurbUr : brand.blurbEn}
           </p>
         </div>
         <div>
@@ -38,17 +39,32 @@ export default function SiteFooter() {
             accentUr="رابطہ"
             isUr={isUr}
           />
-          <p className="mt-2 text-sm">0321-4964013</p>
-          <p className="text-sm">0300-4785384</p>
-          <p className="text-sm">Ph: 37700794</p>
-          <p className="mt-2 text-sm">
-            <a
-              href="mailto:hajisaeed2018@gmail.com"
-              className="text-cyan-300/95 underline-offset-2 hover:text-white hover:underline"
-            >
-              hajisaeed2018@gmail.com
-            </a>
-          </p>
+          <ul className="mt-3 space-y-1.5 text-sm">
+            {brand.phones.map((phone) => (
+              <li key={phone.tel}>
+                <a href={`tel:${phone.tel}`} translate="no" className={`notranslate ${phone.main ? 'font-semibold text-[#F5E8C8] hover:text-white' : 'hover:text-white'}`}>
+                  <span className={phone.main ? 'text-[#B8923D]' : 'text-slate-500'}>{isUr ? phone.labelUr : phone.labelEn}</span>
+                  <span className="mx-2 text-slate-600">·</span>
+                  <span className="tabular-nums">{isUr ? phone.displayUr : phone.displayEn}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <ul className="mt-3 space-y-1.5 text-sm">
+            {brand.emails.map((item) => (
+              <li key={item.address}>
+                <a
+                  href={`mailto:${item.address}`}
+                  translate="no"
+                  className={`notranslate ${item.main ? 'font-semibold text-[#F5E8C8] hover:text-white' : 'hover:text-white'}`}
+                >
+                  <span className={item.main ? 'text-[#B8923D]' : 'text-slate-500'}>{isUr ? item.labelUr : item.labelEn}</span>
+                  <span className="mx-2 text-slate-600">·</span>
+                  <span className="break-all">{item.address}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         <div>
           <SectionHeading
@@ -59,16 +75,23 @@ export default function SiteFooter() {
             primaryUr="پتہ"
             isUr={isUr}
           />
-          <p className="mt-2 text-sm">Shop No. 43, Ramzan Chamber, 91/140 Badami Bagh, Lahore</p>
-          <p className="mt-2 text-sm" dir="rtl" lang="ur">
-            دکان نمبر 43، رمضان چیمبر، 91/140 بادامی باغ، لاہور
-          </p>
+          <address
+            className="mt-3 text-sm not-italic leading-7"
+            dir={isUr ? 'rtl' : 'ltr'}
+            lang={isUr ? 'ur' : 'en'}
+          >
+            {address.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </address>
         </div>
       </div>
-      <div className="border-t border-slate-800 px-4 py-4 text-center text-xs text-slate-400">
-        {lang === 'en'
-          ? 'Copyright 2026 Vicky Tractor Fahad Autos. All rights reserved.'
-          : 'کاپی رائٹ 2026 وکی ٹریکٹر فہد آٹوز۔ جملہ حقوق محفوظ ہیں۔'}
+      <div className="border-t border-white/10 px-8 py-4 text-center font-mono text-xs text-[#6F675F] md:px-14 lg:px-20">
+        {isUr
+          ? `کاپی رائٹ 2026 ${brand.ur}۔ جملہ حقوق محفوظ ہیں۔`
+          : `Copyright 2026 ${brand.en}. All rights reserved.`}
       </div>
     </footer>
   )

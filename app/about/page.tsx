@@ -1,24 +1,25 @@
 'use client'
 
 import Link from 'next/link'
-import { SectionHeading } from '@/app/components/section-heading'
+import { GlowEllipse } from '@/app/components/motion'
+import { brand } from '@/app/lib/brand'
 import { useLanguage } from '@/app/lib/language-context'
 
 const focusItems = [
   {
-    en: 'Fiat, Massey & Ford local parts',
-    ur: 'فیاٹ، میسی اور فورڈ کے لوکل پارٹس',
+    en: 'Fiat, New Holland and other brands.',
+    ur: 'فیاٹ، نیو ہالینڈ اور دیگر برانڈز',
   },
   {
-    en: 'Top Link & Lift Link wholesale',
+    en: 'Top Link & Lift Link wholesale.',
     ur: 'ٹاپ لنک اور لفٹ لنک ہول سیل',
   },
   {
-    en: 'Manufacturing & bulk supply',
-    ur: 'مینوفیکچرنگ اور بلک سپلائی',
+    en: 'Export quotations and shipment follow-up.',
+    ur: 'ایکسپورٹ کوٹیشن اور شپمنٹ فالو اپ',
   },
   {
-    en: 'Model-wise fitting guidance',
+    en: 'Model-wise fitting guidance.',
     ur: 'ماڈل کے مطابق فٹنگ رہنمائی',
   },
 ] as const
@@ -27,167 +28,148 @@ const values = [
   {
     titleEn: 'Experience',
     titleUr: 'تجربہ',
-    descEn: 'Years of dealing with local market demand, workshop needs and seasonal part pressure.',
-    descUr: 'مقامی مارکیٹ، ورکشاپ کی ضرورت اور موسمی پارٹس کی دباؤ سے نمٹنے کا تجربہ۔',
-    bar: 'from-cyan-500 via-indigo-600 to-violet-600',
+    descEn: '25 years supplying tractor parts for workshops, dealers and farmers.',
+    descUr: 'ورکشاپ، ڈیلر اور کسانوں کے لئے ٹریکٹر پارٹس میں ۲۵ سال کا تجربہ۔',
   },
   {
     titleEn: 'Trust',
     titleUr: 'بھروسہ',
     descEn: 'Straight rates, clear stock talk, and guidance that matches real field use.',
     descUr: 'سیدھے ریٹ، واضح اسٹاک بات، اور کھیت کے اصل استعمال سے میل کھاتی رہنمائی۔',
-    bar: 'from-amber-400 via-orange-500 to-rose-600',
   },
   {
     titleEn: 'Service',
     titleUr: 'سروس',
-    descEn: 'Quick response for shops and farmers, practical recommendations you can act on.',
-    descUr: 'دکانوں اور کسانوں کے لئے تیز جواب، عملی مشورے جو آپ استعمال کر سکیں۔',
-    bar: 'from-emerald-500 via-teal-600 to-cyan-700',
+    descEn: 'A written quotation for importers and distributors, with order and shipment follow-up.',
+    descUr: 'درآمدکنندگان اور ڈسٹری بیوٹرز کے لئے تحریری کوٹیشن، پھر آرڈر اور شپمنٹ کی پیروی۔',
   },
 ] as const
+
+const cardWash = [
+  'linear-gradient(155deg, rgba(217,185,106,0.45) 0%, #161616 58%)',
+  'linear-gradient(205deg, rgba(166,133,58,0.55) 0%, #1a1408 48%, #0c0c0c 100%)',
+  'linear-gradient(165deg, rgba(184,146,61,0.4) 0%, #12100c 64%)',
+]
 
 export default function AboutPage() {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
+  const poster = isUr ? '' : 'font-poster uppercase tracking-[0.02em]'
 
   return (
-    <main className="min-h-screen bg-slate-950">
-      <section className="relative overflow-hidden px-4 pb-16 pt-14 md:px-8 md:pb-20 md:pt-20">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(99,102,241,0.25),transparent)]" />
-        <div className="pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full bg-indigo-600/20 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl" />
-
-        <div className="relative mx-auto max-w-3xl text-center">
-          <p className="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-cyan-200">
-            {isUr ? 'وکی ٹریکٹر فہد آٹوز' : 'Vicky Tractor Fahad Autos'}
+    <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
+      <section className="relative overflow-hidden px-8 pb-6 pt-28 md:px-14 md:pt-32 lg:px-20">
+        <GlowEllipse />
+        <div className="relative z-10 mx-auto max-w-8xl">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
+            {isUr ? brand.ur : brand.en}
           </p>
-          <SectionHeading
-            as="h1"
-            variant="dark"
-            size="page"
-            centered
-            primaryEn="About"
-            accentEn="Us"
-            primaryUr="ہمارے بارے"
-            accentUr="میں"
-            isUr={isUr}
-          />
-          <p className="mt-5 text-lg leading-relaxed text-blue-100/95">
+          <h1
+            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-5xl' : 'text-6xl md:text-7xl'} leading-none`}
+            style={isUr ? { lineHeight: 1.7 } : undefined}
+          >
+            {isUr ? 'ہمارے بارے میں' : 'About us'}
+          </h1>
+          <p className="mt-4 max-w-2xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
             {isUr
-              ? 'لاہور، بادامی باغ میں خاندانی کاروبار: کسان، مکینک اور مارکیٹ ڈیلرز کے لئے معیاری ٹریکٹر پارٹس اور ہول سیل سپورٹ۔'
-              : 'A family-run shop in Badami Bagh, Lahore, focused on quality tractor parts and wholesale support for farmers, mechanics and dealers.'}
+              ? 'لاہور سے ٹریکٹر اسپیئر پارٹس: ہول سیل، ریٹیل، اور بیرونِ ملک خریداروں کے لئے کوٹیشن۔'
+              : 'Tractor spare parts from Lahore: wholesale, retail, and quotations for overseas buyers.'}
           </p>
         </div>
       </section>
 
-      <div className="relative -mt-8 rounded-t-[2rem] bg-slate-100 px-4 pb-16 pt-10 md:rounded-t-[2.5rem] md:px-8 md:pb-24 md:pt-14">
-        <div className="mx-auto max-w-6xl">
-          {/* Story */}
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
-              {isUr ? 'کہانی' : 'Our story'}
-            </p>
-            <h2 className="mt-2 text-2xl font-extrabold text-slate-900 md:text-3xl">
-              {isUr ? 'ہم کون ہیں' : 'Who we are'}
+      <section className="mx-auto max-w-8xl px-8 pb-16 md:px-14 lg:px-20">
+        <article className="relative overflow-hidden rounded-[22px] border border-[#B8923D]/35 p-6 md:p-8" style={{ background: cardWash[0] }}>
+          <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'کہانی' : 'The story'}</p>
+          <h2 className={`mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-3xl' : 'text-4xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'ہم کون ہیں' : 'Who we are'}
+          </h2>
+          <p className="mt-5 max-w-3xl text-base leading-7 text-[#F4F0E6]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+            {isUr
+              ? `${brand.ur} لاہور سے ۲۵ سال سے ٹریکٹر پارٹس دیتا ہے۔ قیمت سے پہلے اسٹاک، کوالٹی، ہول سیل ریٹ اور پیکنگ کنفرم ہوتی ہے۔ بیرونِ ملک خریدار کو تحریری کوٹ ملتا ہے، پھر پیکنگ اور شپمنٹ بادامی باغ کی دکان سے ہوتی ہے۔`
+              : `${brand.en} has supplied tractor parts from Lahore for 25 years. Stock, quality, the wholesale rate and packing are confirmed before a price is sent. An overseas buyer receives a written quotation, then packing and shipment from the shop in Badami Bagh.`}
+          </p>
+          <p className="mt-4 max-w-3xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+            {isUr
+              ? 'فیاٹ، نیو ہالینڈ اور دیگر برانڈز کے اسپیئر پارٹس، ٹاپ لنک، لفٹ لنک اور لنکیج آئٹمز ہول سیل، ریٹیل اور ایکسپورٹ کے لئے دستیاب ہیں۔'
+              : 'Spare parts for Fiat, New Holland and other brands, plus Top Link, Lift Link and linkage items, are available for wholesale, retail and export.'}
+          </p>
+        </article>
+
+        <div className="mt-10">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'توجہ' : 'The focus'}</p>
+          <h2 className={`mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-3xl' : 'text-4xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'ہماری خصوصی توجہ' : 'What we focus on'}
+          </h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {focusItems.map((item, index) => (
+              <article
+                key={item.en}
+                className="relative overflow-hidden rounded-[22px] border border-[#B8923D]/35 p-5"
+                style={{ background: cardWash[index % cardWash.length] }}
+              >
+                <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#B8923D] to-transparent" />
+                <p className="font-mono text-xs text-[#B8923D]">0{index + 1}</p>
+                <p className="mt-3 text-sm leading-6 text-[#F4F0E6]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                  {isUr ? item.ur : item.en}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'اقدار' : 'The values'}</p>
+          <h2 className={`mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-3xl' : 'text-4xl'} leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+            {isUr ? 'ہماری اقدار' : 'Our values'}
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {values.map((item, index) => (
+              <article
+                key={item.titleEn}
+                className="relative overflow-hidden rounded-[22px] border border-[#B8923D]/35 p-6"
+                style={{ background: cardWash[index % cardWash.length] }}
+              >
+                <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
+                <h3 className={`text-[#F4F0E6] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+                  {isUr ? item.titleUr : item.titleEn}
+                </h3>
+                <p className="mt-3 font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+                  {isUr ? item.descUr : item.descEn}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <article className="relative mt-10 overflow-hidden rounded-[22px] border border-[#B8923D]/40 bg-[#161616] p-6 md:flex md:items-center md:justify-between md:gap-8">
+          <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#B8923D] to-transparent" />
+          <div>
+            <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'مقام' : 'Location'}</p>
+            <h2 className={`mt-3 text-[#F4F0E6] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>
+              {isUr ? 'لاہور، پاکستان' : 'Lahore, Pakistan'}
             </h2>
-            <div className="mx-auto mt-4 h-1 w-14 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600" />
-            <p className="mt-6 text-base leading-relaxed text-slate-700 md:text-lg" dir={isUr ? 'rtl' : 'ltr'}>
-              {isUr
-                ? 'وکی ٹریکٹر فہد آٹوز ایک خاندانی کاروبار ہے جہاں مقامی کھیتی ضروریات اور ورکشاپ ڈیمانڈ کو سامنے رکھ کر ٹریکٹر پارٹس فراہم کیے جاتے ہیں۔ ہمارا مقصد صرف فروخت نہیں، بلکہ مناسب قیمت، قابلِ اعتماد کوالٹی اور ایماندار مشورہ ہے تاکہ آپ کو درست پارٹ درست وقت پر ملے۔'
-                : 'Vicky Tractor Fahad Autos is built around local farming needs and workshop demand. We are not only here to sell parts, but to offer fair pricing, dependable quality and honest guidance so you get the right part at the right time.'}
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg" dir={isUr ? 'rtl' : 'ltr'}>
-              {isUr
-                ? 'ہم فیاٹ، میسی اور فورڈ کے لوکل پارٹس، ٹاپ لنک، لفٹ لنک اور لنکیج اشیاء پر خصوصی توجہ دیتے ہیں، ساتھ ہی مارکیٹ ڈیلرز اور بلک خریداروں کے لئے مینوفیکچرنگ اور مستقل سپلائی کی سہولت بھی فراہم کرتے ہیں۔'
-                : 'We specialize in Fiat, Massey and Ford local parts, Top Link, Lift Link and linkage items, with manufacturing and steady supply options for market dealers and bulk buyers when required.'}
+            <p className="mt-3 max-w-xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+              {(isUr ? brand.addressUr : brand.addressEn).join(isUr ? '، ' : ', ')}
             </p>
           </div>
-
-          {/* Focus grid */}
-          <div className="mt-14">
-            <h3 className="text-center text-lg font-bold text-slate-900 md:text-xl">
-              {isUr ? 'ہماری خصوصی توجہ' : 'What we focus on'}
-            </h3>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {focusItems.map((item) => (
-                <div
-                  key={item.en}
-                  className="flex items-center gap-3 rounded-2xl border border-indigo-100 bg-white px-4 py-3 shadow-sm ring-1 ring-slate-900/5"
-                  dir={isUr ? 'rtl' : 'ltr'}
-                >
-                  <span className="flex h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-br from-cyan-500 to-indigo-600" aria-hidden />
-                  <span className="text-sm font-semibold text-slate-800">{isUr ? item.ur : item.en}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Values */}
-          <div className="mt-16">
-            <h3 className="text-center text-lg font-bold text-slate-900 md:text-xl">
-              {isUr ? 'ہماری اقدار' : 'Our values'}
-            </h3>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {values.map((v) => (
-                <article
-                  key={v.titleEn}
-                  className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_14px_40px_-18px_rgba(15,23,42,0.15)] ring-1 ring-slate-900/5"
-                >
-                  <div className={`h-1.5 bg-gradient-to-r ${v.bar}`} aria-hidden />
-                  <div className="p-6 md:p-7">
-                    <SectionHeading
-                      as="h2"
-                      size="card"
-                      className="!text-lg md:!text-xl"
-                      primaryEn={v.titleEn}
-                      primaryUr={v.titleUr}
-                      isUr={isUr}
-                    />
-                    <p className="mt-3 text-sm leading-relaxed text-slate-600" dir={isUr ? 'rtl' : 'ltr'}>
-                      {isUr ? v.descUr : v.descEn}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Location */}
-          <div className="mt-14 overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-md md:flex md:items-center md:justify-between md:gap-8 md:p-8">
-            <div className="flex items-start gap-4" dir={isUr ? 'rtl' : 'ltr'}>
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-800 to-indigo-900 text-cyan-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wide text-indigo-600">
-                  {isUr ? 'مقام' : 'Location'}
-                </p>
-                <p className="mt-1 font-semibold text-slate-900">{isUr ? 'لاہور، بادامی باغ' : 'Lahore, Badami Bagh'}</p>
-                <p className="mt-2 text-sm text-slate-600">
-                  {isUr ? 'Shop 43، Ramzan Chamber، 91/140 بادامی باغ' : 'Shop No. 43, Ramzan Chamber, 91/140 Badami Bagh'}
-                </p>
-              </div>
-            </div>
-            <Link href="/contact" className="btn-cta-indigo-xl mt-6 w-full md:mt-0 md:w-auto">
-              {isUr ? 'مکمل پتہ اور رابطہ' : 'Full address & contact'}
-            </Link>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/parts" className="btn-cta-amber-lg">
+          <div className="mt-6 flex flex-wrap gap-3 md:mt-0">
+            <Link
+              href="/parts"
+              className="inline-flex min-h-12 items-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-6 text-sm font-semibold tracking-wide text-[#1A1408]"
+            >
               {isUr ? 'پارٹس دیکھیں' : 'View parts'}
             </Link>
-            <Link href="/contact" className="btn-cta-outline-slate">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-12 items-center rounded-full border border-[#B8923D]/50 px-6 text-sm font-semibold tracking-wide text-[#F4F0E6] hover:border-[#F5E8C8] hover:text-[#F5E8C8]"
+            >
               {isUr ? 'رابطہ' : 'Contact'}
             </Link>
           </div>
-        </div>
-      </div>
+        </article>
+      </section>
     </main>
   )
 }
