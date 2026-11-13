@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import LanguageMenu from '@/app/components/language-menu'
+import ThemeToggle from '@/app/components/theme-toggle'
 import { GlowEllipse } from '@/app/components/motion'
 import { useLanguage } from '@/app/lib/language-context'
 
@@ -135,6 +136,7 @@ export default function TopNavbar() {
 
         {/* End: language + menu (mobile). EN: both on the right; UR: mirrored to the left via dir. */}
         <div className="relative z-30 flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
+          <ThemeToggle />
           <LanguageMenu />
 
           <button

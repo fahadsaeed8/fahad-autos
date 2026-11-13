@@ -59,15 +59,34 @@ export default function PartCategoryPage() {
             const cardTitle = isUr ? item.ur : item.en
             const cardBody = isUr ? item.descUr : item.descEn
             const altLine = isUr ? item.en : item.ur
+            const photo = item.image ?? src
             return (
               <article
                 key={`${slug}-${index}`}
+                id={item.partNo}
                 className="relative overflow-hidden rounded-[22px] border border-white/15 bg-[#161616] transition duration-500 hover:-translate-y-2 hover:border-[#B8923D]"
               >
-                <div className="relative h-48">
-                  <Image src={src} alt={cardTitle} fill sizes="(max-width: 640px) 100vw, 33vw" className="slow-zoom object-cover" />
-                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/10 via-[#8A6B25]/25 to-[#0c0c0c]" />
+                <div className="relative h-64">
+                  <Image
+                    src={photo}
+                    alt={cardTitle}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="slow-zoom object-cover"
+                    style={item.focus ? { objectPosition: item.focus } : undefined}
+                  />
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c0c0c] via-[#0c0c0c]/20 to-transparent" />
                   <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#B8923D] to-transparent" />
+                  {item.partNo ? (
+                    <span className="absolute bottom-3 start-3 rounded-xl border border-[#F5E8C8]/50 bg-[#1A1408]/85 px-3 py-2">
+                      <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-[#B8923D]">
+                        {isUr ? 'پارٹ نمبر' : 'Part no.'}
+                      </span>
+                      <span className="mt-0.5 block font-poster text-3xl leading-none tracking-wide text-[#F5E8C8]">
+                        {item.partNo}
+                      </span>
+                    </span>
+                  ) : null}
                 </div>
                 <div className="p-5">
                   <h2 className={`text-[#F4F0E6] ${poster} text-2xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>

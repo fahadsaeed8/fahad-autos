@@ -458,8 +458,8 @@ export default function Home() {
           </div>
           <p className="mt-6 max-w-3xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
             {isUr
-              ? 'دکان نمبر 43، رمضان چیمبر، بادامی باغ، لاہور۔ فیاٹ، میسی اور فورڈ کے لوکل پارٹس۔ ٹاپ لنک کے ہول سیل ڈیلر اور مینوفیکچرر۔'
-              : 'Shop No. 43, Ramzan Chamber, Badami Bagh, Lahore. Local parts for Fiat, Massey and Ford. Wholesale dealer and manufacturer of Top Link.'}
+              ? `دکان نمبر 43، رمضان چیمبر، بادامی باغ، لاہور۔ فیاٹ، میسی اور فورڈ کے لوکل پارٹس۔ ٹاپ لنک برانڈ ${brand.manufacturingUr} کے تحت تیار ہوتا ہے۔`
+              : `Shop No. 43, Ramzan Chamber, Badami Bagh, Lahore. Local parts for Fiat, Massey and Ford. Top Link is manufactured under ${brand.manufacturingEn}.`}
           </p>
         </div>
       </section>

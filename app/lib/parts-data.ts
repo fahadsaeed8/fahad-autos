@@ -9,6 +9,10 @@ export type PartSubItem = {
   descEn: string
   descUr: string
   imageIndex: number
+  /** Fahad catalog number, printed on the photo for the buyer. */
+  partNo?: string
+  image?: string
+  focus?: string
 }
 
 export type PartCategory = {
@@ -28,9 +32,10 @@ function sub(
   ur: string,
   descEn: string,
   descUr: string,
-  imageIndex: number
+  imageIndex: number,
+  extra?: Pick<PartSubItem, 'partNo' | 'image' | 'focus'>
 ): PartSubItem {
-  return { en, ur, descEn, descUr, imageIndex: imageIndex % N }
+  return { en, ur, descEn, descUr, imageIndex: imageIndex % N, ...extra }
 }
 
 export const PART_CATEGORIES: PartCategory[] = [
@@ -276,9 +281,10 @@ export const PART_CATEGORIES: PartCategory[] = [
     accentEn: 'Lift Link',
     primaryUr: 'ٹاپ لنک اور',
     accentUr: 'لفٹ لنک',
-    descEn: 'Wholesale and retail for three-point linkage, pins, balls and category-wise fittings.',
+    descEn:
+      'Manufactured under the brand Fahad Tractor & Auto Parts. The number on each photo is the Fahad part number a buyer can point to. A Fiat, Massey or New Holland OEM number is matched to that part on the quotation.',
     descUr:
-      'تین نقطہ لنکیج، پن، بال اور کیٹیگری کے مطابق فٹنگ ہول سیل اور ریٹیل دونوں میں۔',
+      'برانڈ فہد ٹریکٹر اینڈ آٹو پارٹس کے تحت تیار۔ ہر تصویر پر فہد کا پارٹ نمبر ہے، خریدار اسی کی طرف اشارہ کر سکتا ہے۔ فیاٹ، میسی یا نیو ہالینڈ کا OEM نمبر کوٹیشن پر اسی پارٹ سے ملایا جاتا ہے۔',
     imageIndex: 3,
     items: [
       sub(
@@ -286,56 +292,64 @@ export const PART_CATEGORIES: PartCategory[] = [
         'ٹاپ لنک پائپ ایڈجسٹیبل',
         'Threaded pipe with handle for implement height and angle.',
         'لمبائی اور زاویہ ایڈجسٹ کرنے کے لیے تھریڈ والا پائپ۔',
-        3
+        3,
+        { partNo: 'FTA-01', image: '/parts/top-link.jpg', focus: '50% 55%' }
       ),
       sub(
         'Lift link / lower link set',
         'لفٹ لنک اور لوئر لنک سیٹ',
         'Left/right lower arms and lift rods for category I & II.',
         'کیٹ ۱ اور ۲ کے لیے بائیں دائیں بازو اور لفٹ راڈ۔',
-        4
+        4,
+        { partNo: 'FTA-02', image: '/parts/lift-link.jpg', focus: '50% 45%' }
       ),
       sub(
         'Cat-1 / Cat-2 ball ends',
         'کیٹ ۱ اور ۲ بال اینڈ',
         'Hitch balls and retainers matching implement drawbar size.',
         'مشین ڈرا بار سائز کے مطابق بال اور ریٹینر۔',
-        5
+        5,
+        { partNo: 'FTA-03', image: '/gallery/linkage.jpg', focus: '50% 70%' }
       ),
       sub(
         'Linch pins & R-pins',
         'لنچ پن اور آر پن',
         'Quick secure pins for lower link and implement hooks.',
         'لوئر لنک اور ہک فوری لاک کرنے کے لیے۔',
-        6
+        6,
+        { partNo: 'FTA-04', image: '/parts/wholesale.jpg', focus: '18% 62%' }
       ),
       sub(
         'Stabilizer chain & turnbuckle',
         'اسٹیبلائزر چین اور ٹرن بکل',
         'Side sway control for mounted plough and trolleys.',
         'پلاؤ اور ٹرالی سائیڈ حرکت کم کرنے کے لیے۔',
-        0
+        0,
+        { partNo: 'FTA-05', image: '/gallery/linkage.jpg', focus: '22% 40%' }
       ),
       sub(
         'Linkage pins & bush kits',
         'لنکیج پن اور بش کٹ',
         'Replace worn pins and bronze bushes on lift arms.',
         'کھلے بازوؤں پر پن اور برونز بش بدلیں۔',
-        1
+        1,
+        { partNo: 'FTA-06', image: '/parts/wholesale.jpg', focus: '82% 68%' }
       ),
       sub(
         'Top link handle & nut',
         'ٹاپ لنک ہینڈل اور نٹ',
         'Grip and locknut sets for fast adjustment in the field.',
         'کھیت میں تیز ایڈجسٹ کے لیے گریپ اور لاک نٹ۔',
-        2
+        2,
+        { partNo: 'FTA-07', image: '/parts/top-link.jpg', focus: '48% 28%' }
       ),
       sub(
         'Drawbar hooks & extensions',
         'ڈرا بار ہک اور ایکسٹینشن',
         'Tow pins and extenders for trailers and tubewell sets.',
         'ٹریلر اور ٹیوب ویل کھینچنے کے لیے۔',
-        3
+        3,
+        { partNo: 'FTA-08', image: '/gallery/linkage.jpg', focus: '50% 88%' }
       ),
     ],
   },
@@ -878,9 +892,9 @@ export const PART_CATEGORIES: PartCategory[] = [
     primaryUr: 'ہول سیل',
     accentUr: 'سپلائی',
     descEn:
-      'Cartons for dealers and workshops. Top Link is manufactured here and sold wholesale. Other lines are quoted only after the stock is checked.',
+      'Cartons for dealers and workshops. Top Link is manufactured here under Fahad Tractor & Auto Parts and sold wholesale. Other lines are quoted only after the stock is checked.',
     descUr:
-      'ڈیلر اور ورکشاپ کے کارٹن۔ ٹاپ لنک یہیں بنتا ہے اور ہول سیل بکتا ہے۔ باقی پارٹس کا کوٹ اسٹاک چیک کے بعد ہوتا ہے۔',
+      'ڈیلر اور ورکشاپ کے کارٹن۔ ٹاپ لنک یہیں، برانڈ فہد ٹریکٹر اینڈ آٹو پارٹس کے تحت، بنتا ہے اور ہول سیل بکتا ہے۔ باقی پارٹس کا کوٹ اسٹاک چیک کے بعد ہوتا ہے۔',
     imageIndex: 5,
     items: [
       sub(

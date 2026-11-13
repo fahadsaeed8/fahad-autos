@@ -60,6 +60,11 @@ export default async function RootLayout({
   return (
     <html lang={initialLang} dir={initialLang === 'ur' ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <body className={`${inter.className} ${notoUrdu.variable} ${anton.variable} ${plex.variable}`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('fahad-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}`,
+          }}
+        />
         <SiteChrome initialLang={initialLang}>{children}</SiteChrome>
       </body>
     </html>

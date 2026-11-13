@@ -236,3 +236,83 @@ html[lang='ur'] h1.brand-title {
     @apply inline-flex items-center rounded-xl border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-800 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-indigo-400 hover:text-indigo-900 hover:shadow-md active:scale-[0.98];
   }
 }
+
+/* Light mode: black surfaces become warm white. Dark mode classes stay as written. Gold and photo captions stay. */
+html[data-theme='light'] body {
+  background: #f6f3ec;
+  color: #1a1408;
+}
+
+html[data-theme='light'] .bg-\[\#0c0c0c\] {
+  background-color: #f6f3ec;
+}
+
+html[data-theme='light'] .bg-\[\#161616\] {
+  background-color: #ffffff;
+}
+
+html[data-theme='light'] .text-\[\#F4F0E6\],
+html[data-theme='light'] .text-\[\#F4F0E6\]\/80,
+html[data-theme='light'] .text-\[\#F4F0E6\]\/85 {
+  color: #1a1408;
+}
+
+html[data-theme='light'] .text-\[\#A39B90\] {
+  color: #5c564e;
+}
+
+html[data-theme='light'] .text-\[\#F5E8C8\],
+html[data-theme='light'] .text-\[\#F5E8C8\]\/80 {
+  color: #8a6b25;
+}
+
+html[data-theme='light'] .border-white\/10 {
+  border-color: rgba(26, 20, 8, 0.1);
+}
+
+html[data-theme='light'] .border-white\/15 {
+  border-color: rgba(26, 20, 8, 0.12);
+}
+
+html[data-theme='light'] .group .absolute .text-\[\#F4F0E6\],
+html[data-theme='light'] .group .absolute .text-\[\#F4F0E6\]\/80,
+html[data-theme='light'] .group .absolute .text-\[\#F4F0E6\]\/85,
+html[data-theme='light'] .group .absolute .text-\[\#F5E8C8\],
+html[data-theme='light'] .group .absolute .text-\[\#F5E8C8\]\/80 {
+  color: #f4f0e6;
+}
+
+html[data-theme='light'] .bg-\[\#1A1408\]\/85 .text-\[\#F5E8C8\] {
+  color: #f5e8c8;
+}
+
+html[data-theme='light'] .bg-\[\#1A1408\].text-\[\#F5E8C8\] {
+  background-color: #1a1408;
+  color: #f5e8c8;
+}
+
+html[data-theme='light'] [style*='#161616'],
+html[data-theme='light'] [style*='#12100c'],
+html[data-theme='light'] [style*='#1a1408'],
+html[data-theme='light'] [style*='#0c0c0c'] {
+  background-image: linear-gradient(155deg, rgba(217, 185, 106, 0.42) 0%, #ffffff 64%) !important;
+}
+
+html[data-theme='light'] header button.border-white\/25 {
+  border-color: rgba(26, 20, 8, 0.18);
+  background-color: rgba(26, 20, 8, 0.05);
+  color: #1a1408;
+}
+
+html[data-theme='light'] header button.border-white\/25 .text-white {
+  color: #1a1408;
+}
+
+html[data-theme='light'] .hover\:bg-white\/10:hover {
+  background-color: rgba(26, 20, 8, 0.06);
+}
+
+html[data-theme='light'] footer .hover\:text-white:hover,
+html[data-theme='light'] .hover\:text-\[\#F5E8C8\]:hover {
+  color: #1a1408;
+}
