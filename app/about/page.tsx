@@ -90,10 +90,15 @@ export default function AboutPage() {
               ? `${brand.ur} لاہور سے ۲۵ سال سے ٹریکٹر پارٹس دیتا ہے۔ قیمت سے پہلے اسٹاک، کوالٹی، ہول سیل ریٹ اور پیکنگ کنفرم ہوتی ہے۔ بیرونِ ملک خریدار کو تحریری کوٹ ملتا ہے، پھر پیکنگ اور شپمنٹ بادامی باغ کی دکان سے ہوتی ہے۔`
               : `${brand.en} has supplied tractor parts from Lahore for 25 years. Stock, quality, the wholesale rate and packing are confirmed before a price is sent. An overseas buyer receives a written quotation, then packing and shipment from the shop in Badami Bagh.`}
           </p>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-[#F5E8C8]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+            {isUr
+              ? 'گھریلو ہول سیل اور مینوفیکچرنگ کے دہائیوں کے تجربے کی بنیاد پر، فہد ٹریکٹرز اینڈ آٹوز عالمی زرعی منڈیوں کی خدمت کرتا ہے۔'
+              : 'Backed by decades of domestic wholesale and manufacturing expertise, Fahad Tractors and Autos serves global agricultural markets.'}
+          </p>
           <p className="mt-4 max-w-3xl font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
             {isUr
-              ? 'فیاٹ، نیو ہالینڈ اور دیگر برانڈز کے اسپیئر پارٹس، ٹاپ لنک، لفٹ لنک اور لنکیج آئٹمز ہول سیل، ریٹیل اور ایکسپورٹ کے لئے دستیاب ہیں۔'
-              : 'Spare parts for Fiat, New Holland and other brands, plus Top Link, Lift Link and linkage items, are available for wholesale, retail and export.'}
+              ? `تیار شدہ ٹاپ لنک اور لنکیج برانڈ ${brand.manufacturingUr} کے تحت سپلائی ہوتے ہیں۔ فیاٹ، نیو ہالینڈ اور دیگر برانڈز کے اسپیئر پارٹس، ٹاپ لنک، لفٹ لنک اور لنکیج آئٹمز ہول سیل، ریٹیل اور ایکسپورٹ کے لئے دستیاب ہیں۔ ٹریکٹر ماڈل کا OEM نمبر تحریری کوٹیشن پر لکھا جاتا ہے۔`
+              : `Manufactured Top Link and linkage are supplied under the brand ${brand.manufacturingEn}. Spare parts for Fiat, New Holland and other brands, plus Top Link, Lift Link and linkage items, are available for wholesale, retail and export. The OEM number for the tractor model is written on the quotation.`}
           </p>
         </article>
 

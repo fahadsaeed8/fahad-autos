@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { GlowEllipse } from '@/app/components/motion'
+import { brand } from '@/app/lib/brand'
 import { useLanguage } from '@/app/lib/language-context'
 
 const services = [
@@ -75,18 +76,20 @@ const services = [
     primaryUr: 'ٹاپ لنک',
     accentUr: 'مینوفیکچرنگ',
     detailEn:
-      'Top Link is manufactured at the shop and sold wholesale. Other parts are quoted only after the stock is checked. Orders can be picked up in Badami Bagh or packed for shipment.',
+      `Top Link is manufactured at the shop under the brand ${brand.manufacturingEn} and sold wholesale. Other parts are quoted only after the stock is checked. Orders can be picked up in Badami Bagh or packed for shipment.`,
     detailUr:
-      'ٹاپ لنک دکان پر بنتا ہے اور ہول سیل بکتا ہے۔ باقی پارٹس کا کوٹ اسٹاک چیک کے بعد ہوتا ہے۔ آرڈر بادامی باغ سے لیا جا سکتا ہے یا شپمنٹ کے لئے پیک کیا جا سکتا ہے۔',
+      `ٹاپ لنک دکان پر، برانڈ ${brand.manufacturingUr} کے تحت، بنتا ہے اور ہول سیل بکتا ہے۔ باقی پارٹس کا کوٹ اسٹاک چیک کے بعد ہوتا ہے۔ آرڈر بادامی باغ سے لیا جا سکتا ہے یا شپمنٹ کے لئے پیک کیا جا سکتا ہے۔`,
     bulletsEn: [
+      `Manufactured under ${brand.manufacturingEn}`,
       'Top Link made and packed for dealers',
+      'OEM number for the tractor model written on the quotation',
       'Other parts quoted from checked stock',
-      'Shop pickup, or packing for shipment',
     ],
     bulletsUr: [
+      `برانڈ ${brand.manufacturingUr} کے تحت تیار`,
       'ڈیلر کے لئے بنا اور پیک کیا ہوا ٹاپ لنک',
+      'ٹریکٹر ماڈل کا OEM نمبر کوٹیشن پر لکھا جاتا ہے',
       'باقی پارٹس چیک شدہ اسٹاک سے کوٹ',
-      'دکان سے پک اپ، یا شپمنٹ کے لئے پیکنگ',
     ],
   },
 ]

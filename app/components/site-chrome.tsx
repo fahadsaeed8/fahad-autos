@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { LanguageProvider, type Lang } from '@/app/lib/language-context'
+import { ThemeProvider } from '@/app/lib/theme-context'
 import SiteFooter from '@/app/components/site-footer'
 import TopNavbar from '@/app/components/top-navbar'
 import WhatsAppFloat from '@/app/components/whatsapp-float'
@@ -16,11 +17,13 @@ export default function SiteChrome({ children, initialLang }: SiteChromeProps) {
   const isHomePage = pathname === '/'
 
   return (
-    <LanguageProvider initialLang={initialLang}>
-      <TopNavbar />
-      <div className={isHomePage ? '' : 'pt-20 md:pt-28'}>{children}</div>
-      <SiteFooter />
-      <WhatsAppFloat />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider initialLang={initialLang}>
+        <TopNavbar />
+        <div className={isHomePage ? '' : 'pt-20 md:pt-28'}>{children}</div>
+        <SiteFooter />
+        <WhatsAppFloat />
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }

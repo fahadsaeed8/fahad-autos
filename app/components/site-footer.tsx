@@ -27,6 +27,12 @@ export default function SiteFooter() {
           <p className="mt-4 max-w-md text-sm leading-7">
             {isUr ? brand.blurbUr : brand.blurbEn}
           </p>
+          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-[#B8923D]">
+            {isUr ? 'مینوفیکچرنگ برانڈ' : 'Manufacturing brand'}
+          </p>
+          <p className="mt-1 text-sm text-[#F4F0E6]" style={isUr ? { lineHeight: 1.9 } : undefined}>
+            {isUr ? brand.manufacturingUr : brand.manufacturingEn}
+          </p>
         </div>
         <div>
           <SectionHeading

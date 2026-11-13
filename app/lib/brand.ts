@@ -2,6 +2,9 @@
 export const brand = {
   en: 'Fahad Tractors and Autos',
   ur: 'فہد ٹریکٹرز اینڈ آٹوز',
+  /** Name used on manufactured linkage. The shop name stays `en`. */
+  manufacturingEn: 'Fahad Tractor & Auto Parts',
+  manufacturingUr: 'فہد ٹریکٹر اینڈ آٹو پارٹس',
   mark: 'Fahad',
   accentEn: 'Tractor & Auto Parts',
   accentUr: 'ٹریکٹر اینڈ آٹو پارٹس',
