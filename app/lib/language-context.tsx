@@ -1,7 +1,7 @@
 'use client'
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { readTranslateCode } from '@/app/lib/translate-languages'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { clearTranslateCookie, readTranslateCode } from '@/app/lib/translate-languages'
 
 export type Lang = 'en' | 'ur'
 
@@ -27,18 +27,31 @@ export function LanguageProvider({
   children: React.ReactNode
   initialLang?: Lang
 }) {
-  const [lang, setLang] = useState<Lang>(initialLang)
+  const [lang, setLangState] = useState<Lang>(initialLang)
+
+  const setLang = useCallback((next: Lang) => {
+    setLangState(next)
+    window.localStorage.setItem('site-lang-choice', next)
+    window.localStorage.setItem('site-lang', next)
+    window.localStorage.removeItem('site-lang-explicit')
+    document.cookie = `site-lang=${next}; path=/; max-age=31536000; samesite=lax`
+    document.cookie = `site-lang-choice=${next}; path=/; max-age=31536000; samesite=lax`
+    document.cookie = 'site-lang-explicit=; path=/; max-age=0; samesite=lax'
+  }, [])
 
   useEffect(() => {
-    const cookieMatch = document.cookie.match(/(?:^|; )site-lang=(en|ur)/)
-    if (cookieMatch?.[1] === 'en' || cookieMatch?.[1] === 'ur') {
-      setLang(cookieMatch[1])
+    const saved = window.localStorage.getItem('site-lang-choice')
+    if (saved === 'ur') {
+      setLangState('ur')
       return
     }
-    const stored = window.localStorage.getItem('site-lang')
-    if (stored === 'en' || stored === 'ur') {
-      setLang(stored)
-    }
+    setLangState('en')
+    if (saved) return
+    window.localStorage.setItem('site-lang', 'en')
+    window.localStorage.removeItem('site-lang-explicit')
+    document.cookie = 'site-lang=en; path=/; max-age=31536000; samesite=lax'
+    document.cookie = 'site-lang-explicit=; path=/; max-age=0; samesite=lax'
+    clearTranslateCookie()
   }, [])
 
   useEffect(() => {
@@ -46,18 +59,13 @@ export function LanguageProvider({
     applyDocumentDirection(lang)
   }, [lang])
 
-  useEffect(() => {
-    window.localStorage.setItem('site-lang', lang)
-    document.cookie = `site-lang=${lang}; path=/; max-age=31536000; samesite=lax`
-  }, [lang])
-
   const value = useMemo(
     () => ({
       lang,
       setLang,
-      toggleLang: () => setLang((prev) => (prev === 'en' ? 'ur' : 'en')),
+      toggleLang: () => setLang(lang === 'en' ? 'ur' : 'en'),
     }),
-    [lang]
+    [lang, setLang]
   )
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
