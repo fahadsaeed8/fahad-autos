@@ -154,6 +154,8 @@ export default function LanguageMenu() {
     setLang('en')
     document.cookie = 'site-lang=en; path=/; max-age=31536000; samesite=lax'
     window.localStorage.setItem('site-lang', 'en')
+    window.localStorage.setItem('site-lang-choice', item.code)
+    document.cookie = `site-lang-choice=${item.code}; path=/; max-age=31536000; samesite=lax`
     writeTranslateCookie(item.code)
     window.location.reload()
   }

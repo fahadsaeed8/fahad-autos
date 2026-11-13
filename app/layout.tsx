@@ -32,7 +32,7 @@ function langFromCookie(siteLang: string | undefined) {
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies()
-  const lang = langFromCookie(cookieStore.get('site-lang')?.value)
+  const lang = langFromCookie(cookieStore.get('site-lang-choice')?.value)
   return {
     title:
       lang === 'ur'
@@ -55,14 +55,14 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const cookieStore = await cookies()
-  const initialLang = langFromCookie(cookieStore.get('site-lang')?.value)
+  const initialLang = langFromCookie(cookieStore.get('site-lang-choice')?.value)
 
   return (
     <html lang={initialLang} dir={initialLang === 'ur' ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <body className={`${inter.className} ${notoUrdu.variable} ${anton.variable} ${plex.variable}`}>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem('fahad-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}`,
+            __html: `try{if(localStorage.getItem('fahad-theme')==='light')document.documentElement.setAttribute('data-theme','light');var choice=localStorage.getItem('site-lang-choice');if(choice!=='ur'){document.documentElement.lang='en';document.documentElement.dir='ltr'}if(!choice){localStorage.removeItem('site-lang-explicit');localStorage.setItem('site-lang','en');document.cookie='site-lang=en; path=/; max-age=31536000; samesite=lax';document.cookie='site-lang-explicit=; path=/; max-age=0; samesite=lax';var exp='expires=Thu, 01 Jan 1970 00:00:00 GMT';document.cookie='googtrans=;'+exp+';path=/';var host=location.hostname;document.cookie='googtrans=;'+exp+';path=/;domain='+host;if(host.indexOf('.')!==-1)document.cookie='googtrans=;'+exp+';path=/;domain=.'+host}}catch(e){}`,
           }}
         />
         <SiteChrome initialLang={initialLang}>{children}</SiteChrome>
