@@ -129,18 +129,22 @@ export default function Home() {
     const html = document.documentElement
     const previousHtml = html.style.overflow
     const previousBody = document.body.style.overflow
-    html.style.overflow = 'hidden'
-    document.body.style.overflow = 'hidden'
-
+    const stackQuery = window.matchMedia('(max-width: 1023px), (max-height: 699px)')
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const stacked = () => stackQuery.matches
     let target = 0
     let current = 0
     let frame = 0
 
-    const limit = () => Math.max(0, (trackRef.current?.scrollWidth ?? 0) - window.innerWidth)
+    const limit = () =>
+      stacked()
+        ? Math.max(0, html.scrollHeight - window.innerHeight)
+        : Math.max(0, (trackRef.current?.scrollWidth ?? 0) - window.innerWidth)
 
     const paint = (x: number) => {
-      if (trackRef.current) trackRef.current.style.transform = `translate3d(${-x}px,0,0)`
+      if (trackRef.current) {
+        trackRef.current.style.transform = stacked() ? 'none' : `translate3d(${-x}px,0,0)`
+      }
       if (dashRef.current) dashRef.current.style.transform = `translate3d(${-(x * 2.4)}px,0,0)`
       if (postRef.current) postRef.current.style.transform = `translate3d(${-(x * 3.1)}px,0,0)`
       const spin = reduce ? 0 : x * 0.55
@@ -150,16 +154,21 @@ export default function Home() {
         const max = limit()
         const progress = max === 0 ? 0 : Math.min(1, Math.max(0, x / max))
         const width = tractorRef.current.offsetWidth || 132
-        const start = 36
-        const end = Math.max(start, window.innerWidth - width - 72)
+        const narrow = window.innerWidth < 720
+        const start = narrow ? 12 : 36
+        const end = Math.max(start, window.innerWidth - width - (narrow ? 16 : 72))
         tractorRef.current.style.left = `${start + (end - start) * progress}px`
       }
     }
 
     const tick = () => {
-      current += (target - current) * (reduce ? 1 : 0.14)
-      if (Math.abs(target - current) < 0.5) current = target
-      paint(current)
+      if (stacked()) {
+        paint(window.scrollY)
+      } else {
+        current += (target - current) * (reduce ? 1 : 0.14)
+        if (Math.abs(target - current) < 0.5) current = target
+        paint(current)
+      }
       frame = requestAnimationFrame(tick)
     }
     frame = requestAnimationFrame(tick)
@@ -169,6 +178,7 @@ export default function Home() {
     }
 
     const onWheel = (event: WheelEvent) => {
+      if (stacked()) return
       event.preventDefault()
       const line = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1
       move(event.deltaY * line + event.deltaX * line)
@@ -179,6 +189,7 @@ export default function Home() {
       lastTouch = event.touches[0].clientX
     }
     const onTouchMove = (event: TouchEvent) => {
+      if (stacked()) return
       const x = event.touches[0].clientX
       move(lastTouch - x)
       lastTouch = x
@@ -186,6 +197,7 @@ export default function Home() {
     }
 
     const onKey = (event: KeyboardEvent) => {
+      if (stacked()) return
       if (event.key === 'ArrowDown' || event.key === 'ArrowRight' || event.key === 'PageDown') {
         event.preventDefault()
         move(window.innerWidth * 0.9)
@@ -196,12 +208,30 @@ export default function Home() {
       }
     }
 
-    const onResize = () => move(0)
+    const lock = () => {
+      if (stacked()) {
+        html.style.overflow = previousHtml
+        document.body.style.overflow = previousBody
+        target = 0
+        current = 0
+        if (trackRef.current) trackRef.current.style.transform = 'none'
+      } else {
+        html.style.overflow = 'hidden'
+        document.body.style.overflow = 'hidden'
+      }
+    }
+
+    const onResize = () => {
+      lock()
+      if (!stacked()) move(0)
+    }
+    lock()
     window.addEventListener('wheel', onWheel, { passive: false })
     window.addEventListener('touchstart', onTouchStart, { passive: true })
     window.addEventListener('touchmove', onTouchMove, { passive: false })
     window.addEventListener('keydown', onKey)
     window.addEventListener('resize', onResize)
+    stackQuery.addEventListener('change', onResize)
 
     return () => {
       cancelAnimationFrame(frame)
@@ -210,15 +240,16 @@ export default function Home() {
       window.removeEventListener('touchmove', onTouchMove)
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('resize', onResize)
+      stackQuery.removeEventListener('change', onResize)
       html.style.overflow = previousHtml
       document.body.style.overflow = previousBody
     }
   }, [])
 
   return (
-    <main className="fixed inset-0 overflow-hidden bg-[#0c0c0c] text-[#F4F0E6]">
-      <div ref={trackRef} className="flex h-full will-change-transform">
-        <section className="relative flex h-full w-screen shrink-0 items-center overflow-hidden">
+    <main className="home-stage fixed inset-0 overflow-hidden bg-[#0c0c0c] text-[#F4F0E6]">
+      <div ref={trackRef} className="home-track flex h-full will-change-transform">
+        <section className="home-panel home-hero relative flex h-full w-screen shrink-0 items-center overflow-hidden">
           <GlowEllipse />
           <p
             aria-hidden
@@ -227,13 +258,13 @@ export default function Home() {
           >
             Parts
           </p>
-          <div className="relative z-10 mx-auto grid w-full max-w-8xl items-center gap-8 px-8 pb-28 pt-28 md:px-14 lg:grid-cols-2 lg:px-20">
+          <div className="home-hero-grid relative z-10 mx-auto grid w-full max-w-8xl items-center gap-8 px-8 pb-28 pt-28 md:px-14 lg:grid-cols-2 lg:px-20">
             <div className="min-w-0" style={{ containerType: 'inline-size' }}>
-              <p className="font-mono text-[13px] uppercase tracking-[0.18em] text-[#B8923D]">
+              <p className="max-w-full break-words font-mono text-[11px] uppercase tracking-[0.12em] text-[#B8923D] sm:text-[13px] sm:tracking-[0.18em]">
                 {isUr ? brand.channelsUr : brand.channelsEn}
               </p>
               <h1
-                className={`mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-[clamp(2.4rem,8vw,4.5rem)]' : 'text-[clamp(3rem,7vw,6.5rem)] leading-[0.88]'}`}
+                className={`home-title mt-3 text-[#F4F0E6] ${poster} ${isUr ? 'text-[clamp(2.4rem,8vw,4.5rem)]' : 'text-[clamp(3rem,7vw,6.5rem)] leading-[0.88]'}`}
                 style={isUr ? { lineHeight: 1.6 } : undefined}
               >
                 {isUr ? (
@@ -248,18 +279,18 @@ export default function Home() {
                   </>
                 )}
               </h1>
-              <p className="mt-4 max-w-xl font-mono text-sm leading-7 text-[#A39B90]">{isUr ? brand.lineUr : brand.lineEn}</p>
+              <p className="mt-4 max-w-full break-words font-mono text-sm leading-7 text-[#A39B90] sm:max-w-xl">{isUr ? brand.lineUr : brand.lineEn}</p>
               <p className="mt-2 font-mono text-sm text-[#F5E8C8]">{isUr ? brand.yearsUr : brand.yearsEn}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   href="/catalogue"
-                  className="inline-flex min-h-12 items-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-6 text-sm font-semibold text-[#1A1408]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-6 text-sm font-semibold text-[#1A1408] max-sm:w-full"
                 >
                   {isUr ? 'کیٹلاگ کھولیں' : 'Open the catalogue'}
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex min-h-12 items-center rounded-full border border-[#B8923D]/50 px-6 text-sm font-semibold text-[#F4F0E6] hover:border-[#F5E8C8] hover:text-[#F5E8C8]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#B8923D]/50 px-6 text-sm font-semibold text-[#F4F0E6] hover:border-[#F5E8C8] hover:text-[#F5E8C8] max-sm:w-full"
                 >
                   {isUr ? 'کوٹیشن مانگیں' : 'Request a quotation'}
                 </Link>
@@ -271,19 +302,20 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="flex h-full shrink-0 items-center overflow-hidden px-8 pb-28 pt-28 md:px-14">
-          <div className="flex items-stretch gap-4">
-            <div className="flex w-56 shrink-0 flex-col justify-center">
+        <section className="home-panel flex h-full shrink-0 items-center overflow-hidden px-8 pb-28 pt-28 md:px-14">
+          <div className="home-pages-wrap flex items-stretch gap-4">
+            <div className="home-pages-intro flex w-56 shrink-0 flex-col justify-center">
               <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'صفحات' : 'Pages'}</p>
               <h2
-                className={`mt-2 text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl'} leading-none`}
+                className={`home-stack-title mt-2 text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl'} leading-none`}
                 style={isUr ? { lineHeight: 1.6 } : undefined}
               >
                 {isUr ? 'صفحہ کھولیں' : 'Open a page'}
               </h2>
             </div>
+            <div className="home-cards contents">
             {pages.map((page) => (
-              <article key={page.href} className="relative flex w-72 shrink-0 flex-col overflow-hidden rounded-[22px] border border-white/15 bg-[#161616] shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)]">
+              <article key={page.href} className="home-card relative flex w-72 shrink-0 flex-col overflow-hidden rounded-[22px] border border-white/15 bg-[#161616] shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)]">
                 <span className="absolute inset-x-0 top-0 z-10 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
                 <img src={page.src} alt={isUr ? page.altUr : page.altEn} className="h-40 w-full object-cover" />
                 <div className="flex flex-1 flex-col px-4 py-4">
@@ -302,19 +334,20 @@ export default function Home() {
                 </div>
               </article>
             ))}
+            </div>
           </div>
         </section>
 
-        <section className="flex h-full w-screen shrink-0 items-center overflow-hidden">
-          <div className="mx-auto w-full max-w-8xl px-8 pb-28 pt-28 md:px-14 lg:px-20">
+        <section className="home-panel flex h-full w-screen shrink-0 items-center overflow-hidden">
+          <div className="home-block mx-auto w-full max-w-8xl px-8 pb-28 pt-28 md:px-14 lg:px-20">
             <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'دکان' : 'The shop'}</p>
             <h2
-              className={`mt-2 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`}
+              className={`home-stack-title mt-2 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`}
               style={isUr ? { lineHeight: 1.6 } : undefined}
             >
               {isUr ? 'فیاٹ، میسی، فورڈ اور ٹاپ لنک' : 'Fiat, Massey, Ford and Top Link'}
             </h2>
-            <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <ul className="mt-6 grid grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:grid-cols-4">
               {supply.map((item) => (
                 <li key={item.en} className="rounded-xl border border-white/10 bg-[#161616] px-3 py-3 text-sm text-[#F4F0E6]">
                   {isUr ? item.ur : item.en}
@@ -336,11 +369,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="flex h-full w-screen shrink-0 items-center overflow-hidden">
-          <div className="mx-auto w-full max-w-8xl px-8 pb-28 pt-28 md:px-14 lg:px-20">
+        <section className="home-panel flex h-full w-screen shrink-0 items-center overflow-hidden">
+          <div className="home-block mx-auto w-full max-w-8xl px-8 pb-28 pt-28 md:px-14 lg:px-20">
             <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'آرڈر' : 'An order'}</p>
             <h2
-              className={`mt-2 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`}
+              className={`home-stack-title mt-2 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-4xl' : 'text-5xl md:text-6xl'} leading-none`}
               style={isUr ? { lineHeight: 1.6 } : undefined}
             >
               {isUr ? 'لسٹ بھیجیں، ریٹ لکھ کر آئے' : 'Send the list. The rate comes in writing.'}
@@ -366,14 +399,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="flex h-full w-screen shrink-0 items-end overflow-hidden pb-28">
+        <section className="home-panel home-end flex h-full w-screen shrink-0 items-end overflow-hidden pb-28">
           <div className="w-full">
             <SiteFooter compact />
           </div>
         </section>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[108px] overflow-hidden" aria-hidden>
+      <div className="home-road pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[108px] overflow-hidden" aria-hidden>
         <div className="absolute inset-x-0 top-0 h-7 bg-gradient-to-b from-[#1a2418] to-[#2f4a28]">
           <div
             ref={postRef}
@@ -398,7 +431,7 @@ export default function Home() {
           <div className="absolute inset-x-0 bottom-1.5 h-1 bg-[#c45c26]" />
           <div className="absolute inset-x-0 bottom-0 h-1.5 bg-[#e8e4dc]" />
         </div>
-        <div ref={tractorRef} className="tractor-bob absolute bottom-2 left-9 h-[78px] w-[132px]">
+        <div ref={tractorRef} className="home-tractor tractor-bob absolute bottom-2 left-9 h-[78px] w-[132px]">
           <span className="road-puff absolute bottom-2 -left-3 h-2 w-2 rounded-full bg-[#d9d3c7]/80" />
           <span className="road-puff absolute bottom-3 -left-6 h-2.5 w-2.5 rounded-full bg-[#a39b90]/70 [animation-delay:0.3s]" />
           <span className="headlamp absolute left-[90%] top-[48%] h-2 w-12 rounded-full bg-[#fff6d8] blur-[1px]" />

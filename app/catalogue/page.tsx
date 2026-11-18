@@ -33,13 +33,13 @@ export default function CataloguePage() {
   const href = orderHref(shown === 0 ? query.trim() : '')
 
   return (
-    <main className="min-h-screen bg-[#0c0c0c] px-8 pb-16 pt-28 text-[#F4F0E6] md:px-14 lg:px-20">
+    <main className="min-h-screen bg-[#0c0c0c] px-4 pb-16 pt-4 text-[#F4F0E6] sm:px-6 md:px-14 md:pt-28 lg:px-20">
       <div className="mx-auto max-w-8xl">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">FTA-01 to FTA-97</p>
             <h1
-              className={`mt-2 text-[#F4F0E6] ${isUr ? 'text-4xl' : 'font-poster text-5xl uppercase tracking-[0.02em]'} leading-none`}
+              className={`mt-2 text-[#F4F0E6] ${isUr ? 'text-3xl sm:text-4xl' : 'font-poster text-4xl uppercase tracking-[0.02em] sm:text-5xl'} leading-none`}
               style={isUr ? { lineHeight: 1.6 } : undefined}
             >
               {isUr ? 'پارٹس کیٹلاگ' : 'Parts catalogue'}
@@ -77,8 +77,8 @@ export default function CataloguePage() {
 
         <section className="relative mt-8 overflow-hidden rounded-[22px] border border-[#B8923D]/40 bg-[#161616]">
           <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
-          <div className="px-6 py-8 md:px-10">
-            <p className="max-w-3xl text-2xl font-semibold leading-snug text-[#F5E8C8]" style={isUr ? { lineHeight: 1.8 } : undefined}>
+          <div className="px-4 py-6 sm:px-6 sm:py-8 md:px-10">
+            <p className="max-w-3xl text-xl font-semibold leading-snug text-[#F5E8C8] sm:text-2xl" style={isUr ? { lineHeight: 1.8 } : undefined}>
               {isUr
                 ? 'اگر کوئی پارٹ اس فہرست میں نہیں، ہم وہ بھی بنا سکتے ہیں۔ ہمیں وہ پروڈکٹ بتا دیں۔'
                 : 'If a part is not in this list, we can make it. Tell us the product.'}

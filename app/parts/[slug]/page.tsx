@@ -25,7 +25,7 @@ export default function PartCategoryPage() {
 
   return (
     <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
-      <section className="relative overflow-hidden px-8 pb-6 pt-28 md:px-14 md:pt-32 lg:px-20">
+      <section className="relative overflow-hidden px-4 pb-6 pt-4 sm:px-6 md:px-14 md:pt-32 lg:px-20">
         <GlowEllipse />
         <div className="relative z-10 mx-auto max-w-8xl">
           <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-[0.14em] text-[#A39B90]" aria-label="Breadcrumb">
@@ -42,7 +42,7 @@ export default function PartCategoryPage() {
             </span>
           </nav>
           <h1
-            className={`mt-4 max-w-4xl text-[#F4F0E6] ${poster} ${isUr ? 'text-5xl' : 'text-6xl md:text-7xl'} leading-none`}
+            className={`mt-4 max-w-4xl text-[#F4F0E6] ${poster} ${isUr ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl'} leading-none`}
             style={isUr ? { lineHeight: 1.7 } : undefined}
           >
             {titleStr}
@@ -53,7 +53,7 @@ export default function PartCategoryPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-8xl px-8 pb-16 md:px-14 lg:px-20">
+      <section className="mx-auto max-w-8xl px-4 pb-16 sm:px-6 md:px-14 lg:px-20">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {category.items.map((item, index) => {
             const cardTitle = isUr ? item.ur : item.en

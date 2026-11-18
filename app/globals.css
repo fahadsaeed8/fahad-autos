@@ -364,3 +364,117 @@ html[data-theme='light'] footer .hover\:text-white:hover,
 html[data-theme='light'] .hover\:text-\[\#F5E8C8\]:hover {
   color: #1a1408;
 }
+
+/* Phone, tablet, and short windows: homepage reads top to bottom.
+   Wide, tall screens keep the horizontal road. */
+@media (max-width: 1023px), (max-height: 699px) {
+  .home-stage {
+    position: relative !important;
+    inset: auto !important;
+    height: auto !important;
+    min-height: 100svh;
+    overflow: visible !important;
+    padding-bottom: 4.75rem;
+  }
+
+  .home-track {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+
+  .home-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    padding: 1.5rem 1rem !important;
+  }
+
+  .home-hero {
+    padding-top: 5.5rem !important;
+  }
+
+  .home-hero-grid,
+  .home-block {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    box-sizing: border-box;
+  }
+
+  .home-hero-grid > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .home-title {
+    font-size: clamp(2.15rem, 11vw, 3.4rem) !important;
+    overflow-wrap: anywhere;
+  }
+
+  .home-stack-title {
+    font-size: clamp(1.85rem, 8vw, 2.75rem) !important;
+    overflow-wrap: anywhere;
+  }
+
+  .home-pages-wrap {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .home-pages-intro {
+    width: 100% !important;
+  }
+
+  .home-cards {
+    display: grid !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .home-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .home-end {
+    align-items: stretch !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  .home-road {
+    position: fixed;
+    height: 72px;
+  }
+
+  .home-tractor {
+    height: 54px !important;
+    width: 92px !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px), (max-height: 699px) and (min-width: 640px) {
+  .home-cards {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .home-panel {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}

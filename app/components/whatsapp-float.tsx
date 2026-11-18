@@ -11,7 +11,7 @@ export default function WhatsAppFloat() {
       href={brand.whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed end-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md transition hover:bg-[#20bd5a] md:end-5 ${onHome ? 'bottom-32' : 'bottom-4 md:bottom-5'}`}
+      className={`fixed end-4 z-[100] flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md transition hover:bg-[#20bd5a] md:end-5 ${onHome ? 'bottom-[4.75rem] lg:bottom-32' : 'bottom-4 md:bottom-5'}`}
       aria-label="WhatsApp: 0313-4426717"
       title="WhatsApp"
     >

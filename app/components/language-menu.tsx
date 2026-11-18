@@ -165,7 +165,7 @@ export default function LanguageMenu() {
       <div id="google_translate_element" className="google-translate-host" />
       <button
         type="button"
-        className="inline-flex h-11 max-w-[9.5rem] items-center gap-1.5 rounded-xl border border-amber-300/70 bg-slate-900/70 px-2.5 text-xs font-bold text-amber-100 shadow-lg shadow-slate-950/40 transition hover:border-amber-300 sm:text-sm"
+        className="inline-flex h-11 w-11 shrink-0 items-center justify-center gap-1.5 rounded-xl border border-amber-300/70 bg-slate-900/70 px-0 text-xs font-bold text-amber-100 shadow-lg shadow-slate-950/40 transition hover:border-amber-300 sm:w-auto sm:px-2.5 sm:text-sm"
         aria-expanded={open}
         aria-controls={panelId}
         aria-haspopup="listbox"
@@ -175,7 +175,7 @@ export default function LanguageMenu() {
           <circle cx="12" cy="12" r="9" />
           <path d="M3 12h18M12 3c2.5 2.8 3.8 5.8 3.8 9s-1.3 6.2-3.8 9c-2.5-2.8-3.8-5.8-3.8-9s1.3-6.2 3.8-9z" />
         </svg>
-        <span className="truncate">{active.native}</span>
+        <span className="hidden truncate sm:inline">{active.native}</span>
       </button>
 
       {open ? (
@@ -183,7 +183,7 @@ export default function LanguageMenu() {
           id={panelId}
           role="listbox"
           aria-label="Language"
-          className="absolute end-0 top-[calc(100%+0.5rem)] z-[80] w-72 max-w-[calc(100vw-2rem)] overflow-hidden rounded-[18px] border border-[#B8923D]/50 bg-[#161616] text-[#F4F0E6] shadow-2xl"
+          className="fixed inset-x-3 top-20 z-[80] max-h-[calc(100vh-6rem)] overflow-hidden rounded-[18px] border border-[#B8923D]/50 bg-[#161616] text-[#F4F0E6] shadow-2xl sm:absolute sm:inset-x-auto sm:end-0 sm:top-[calc(100%+0.5rem)] sm:w-72"
         >
           <div className="border-b border-white/10 p-2">
             <input

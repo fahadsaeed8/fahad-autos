@@ -108,12 +108,12 @@ export default function ServicesPage() {
 
   return (
     <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
-      <section className="relative overflow-hidden px-8 pb-6 pt-28 md:px-14 md:pt-32 lg:px-20">
+      <section className="relative overflow-hidden px-4 pb-6 pt-4 sm:px-6 md:px-14 md:pt-32 lg:px-20">
         <GlowEllipse />
         <div className="relative z-10 mx-auto max-w-8xl">
           <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'سروس' : 'The work'}</p>
           <h1
-            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-5xl' : 'text-6xl md:text-7xl'} leading-none`}
+            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl'} leading-none`}
             style={isUr ? { lineHeight: 1.7 } : undefined}
           >
             {isUr ? 'ہماری سروسز' : 'Our services'}
@@ -126,7 +126,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-8xl px-8 pb-16 md:px-14 lg:px-20">
+      <section className="mx-auto max-w-8xl px-4 pb-16 sm:px-6 md:px-14 lg:px-20">
         <div className="grid gap-4 lg:grid-cols-2">
           {services.map((service, index) => (
             <article
@@ -135,7 +135,7 @@ export default function ServicesPage() {
               style={{ background: cardWash[index % cardWash.length] }}
             >
               <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
-              <p className="font-poster text-6xl leading-none text-transparent" style={{ WebkitTextStroke: '1.5px #6d645e' }}>
+              <p className="font-poster text-5xl leading-none text-transparent sm:text-6xl" style={{ WebkitTextStroke: '1.5px #6d645e' }}>
                 0{index + 1}
               </p>
               <h2 className={`relative mt-2 text-[#F4F0E6] ${poster} text-3xl leading-none`} style={isUr ? { lineHeight: 1.7 } : undefined}>

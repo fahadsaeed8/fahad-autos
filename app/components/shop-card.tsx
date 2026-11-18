@@ -2,7 +2,7 @@ function TractorMark({ flip = false }: { flip?: boolean }) {
   return (
     <svg
       viewBox="0 0 128 78"
-      className={`h-10 w-16 shrink-0 ${flip ? '-scale-x-100' : ''}`}
+      className={`h-8 w-12 shrink-0 sm:h-10 sm:w-16 ${flip ? '-scale-x-100' : ''}`}
       aria-hidden
     >
       <circle cx="34" cy="56" r="20" fill="#111827" />
@@ -78,7 +78,7 @@ export default function ShopCards({ isUr }: { isUr: boolean }) {
           <div className="flex items-center justify-center gap-2">
             <TractorMark />
             <h2
-              className={`min-w-0 flex-1 text-center text-blue-800 ${isUr ? 'text-2xl' : 'font-poster text-[1.55rem] uppercase leading-none tracking-[0.02em] sm:text-[1.85rem]'}`}
+              className={`min-w-0 flex-1 text-center text-blue-800 ${isUr ? 'text-xl sm:text-2xl' : 'font-poster text-lg uppercase leading-none tracking-[0.02em] min-[400px]:text-xl sm:text-[1.7rem]'}`}
               style={isUr ? { lineHeight: 1.85 } : undefined}
             >
               {text.title}
