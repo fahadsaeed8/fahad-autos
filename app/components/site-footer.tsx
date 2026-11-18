@@ -6,14 +6,20 @@ import { SectionHeading } from '@/app/components/section-heading'
 import { brand } from '@/app/lib/brand'
 import { useLanguage } from '@/app/lib/language-context'
 
-export default function SiteFooter() {
+export default function SiteFooter({ compact = false }: { compact?: boolean }) {
   const { lang } = useLanguage()
   const isUr = lang === 'ur'
   const address = isUr ? brand.addressUr : brand.addressEn
 
   return (
     <footer className="border-t border-[#B8923D]/40 bg-[#0c0c0c] text-[#A39B90]">
-      <div className="mx-auto grid max-w-8xl gap-8 px-8 py-10 md:grid-cols-[1.6fr_1fr_1fr] md:px-14 lg:px-20">
+      <div
+        className={
+          compact
+            ? 'mx-auto grid max-w-8xl grid-cols-3 gap-4 px-8 py-5 md:px-14 lg:px-20'
+            : 'mx-auto grid max-w-8xl gap-8 px-8 py-10 md:grid-cols-[1.6fr_1fr_1fr] md:px-14 lg:px-20'
+        }
+      >
         <div>
           <Link href="/" className="inline-flex">
             <Image
@@ -21,10 +27,10 @@ export default function SiteFooter() {
               alt="Fahad Tractor Parts and Services logo"
               width={460}
               height={140}
-              className="h-24 w-80 object-contain md:w-96"
+              className={compact ? 'h-14 w-44 object-contain md:h-16 md:w-56' : 'h-24 w-80 object-contain md:w-96'}
             />
           </Link>
-          <p className="mt-4 max-w-md text-sm leading-7">
+          <p className={compact ? 'mt-3 max-w-md text-xs leading-5 md:text-sm md:leading-6' : 'mt-4 max-w-md text-sm leading-7'}>
             {isUr ? brand.blurbUr : brand.blurbEn}
           </p>
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-[#B8923D]">

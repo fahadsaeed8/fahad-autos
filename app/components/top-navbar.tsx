@@ -28,7 +28,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { href: '/', en: 'Home', ur: 'ہوم' },
-  { href: '/parts', en: 'Parts', ur: 'پارٹس' },
+  { href: '/catalogue', en: 'Catalogue', ur: 'کیٹلاگ' },
   { href: '/services', en: 'Services', ur: 'سروسز' },
   { href: '/gallery', en: 'Gallery', ur: 'گیلری' },
   { href: '/about', en: 'About', ur: 'ہمارے بارے میں' },

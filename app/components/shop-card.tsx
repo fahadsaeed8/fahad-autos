@@ -10,8 +10,8 @@ function TractorMark({ flip = false }: { flip?: boolean }) {
       <circle cx="34" cy="56" r="4" fill="#f8fafc" />
       <circle cx="102" cy="58" r="12" fill="#111827" />
       <circle cx="102" cy="58" r="6.5" fill="#9ca3af" />
-      <path d="M22 48h48l8-16h26v16h12v10H90" fill="#dc2626" />
-      <path d="M50 22h28l6 12H54z" fill="#991b1b" />
+      <path d="M22 48h48l8-16h26v16h12v10H90" fill="#f59e0b" />
+      <path d="M50 22h28l6 12H54z" fill="#b45309" />
       <path d="M58 26h14v8H58z" fill="#e0f2fe" />
       <rect x="44" y="10" width="5" height="16" rx="1.5" fill="#334155" />
     </svg>
