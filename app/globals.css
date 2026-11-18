@@ -365,9 +365,8 @@ html[data-theme='light'] .hover\:text-\[\#F5E8C8\]:hover {
   color: #1a1408;
 }
 
-/* Phone, tablet, and short windows: homepage reads top to bottom.
-   Wide, tall screens keep the horizontal road. */
-@media (max-width: 1023px), (max-height: 699px) {
+/* Phone and tablet only. Wide screens keep the horizontal road. */
+@media (max-width: 1023px) {
   .home-stage {
     position: relative !important;
     inset: auto !important;
@@ -468,7 +467,7 @@ html[data-theme='light'] .hover\:text-\[\#F5E8C8\]:hover {
   }
 }
 
-@media (min-width: 640px) and (max-width: 1023px), (max-height: 699px) and (min-width: 640px) {
+@media (min-width: 640px) and (max-width: 1023px) {
   .home-cards {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }

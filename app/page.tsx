@@ -129,7 +129,7 @@ export default function Home() {
     const html = document.documentElement
     const previousHtml = html.style.overflow
     const previousBody = document.body.style.overflow
-    const stackQuery = window.matchMedia('(max-width: 1023px), (max-height: 699px)')
+    const stackQuery = window.matchMedia('(max-width: 1023px)')
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const stacked = () => stackQuery.matches
     let target = 0

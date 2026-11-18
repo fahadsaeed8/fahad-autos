@@ -77,11 +77,11 @@ export default function TopNavbar() {
       : idleHeaderSurface()
 
   const logoSizes = isScrolled
-    ? 'h-10 w-auto max-w-[6.75rem] sm:h-12 sm:max-w-[11rem] lg:h-14 lg:max-w-[13rem] xl:h-16 xl:max-w-[300px]'
-    : 'h-10 w-auto max-w-[7.25rem] sm:h-14 sm:max-w-[12rem] lg:h-16 lg:max-w-[13rem] xl:h-20 xl:max-w-[16rem]'
+    ? 'h-10 w-auto max-w-[6.75rem] sm:h-12 sm:max-w-[11rem] lg:h-16 lg:max-w-[300px]'
+    : 'h-10 w-auto max-w-[7.25rem] sm:h-14 sm:max-w-[12rem] lg:h-24 lg:max-w-[380px]'
 
   const linkClass = (active: boolean) =>
-    `rounded-lg px-4 py-3 text-base font-semibold transition duration-200 ease-out lg:px-2 lg:py-2 lg:text-sm xl:px-3 xl:text-base ${
+    `rounded-lg px-4 py-3 text-base font-semibold transition duration-200 ease-out lg:px-3 lg:py-2 ${
       active
         ? 'bg-[#B8923D]/20 text-[#F5E8C8] ring-1 ring-[#B8923D]/60'
         : 'text-[#F4F0E6] hover:bg-white/10 hover:text-[#F5E8C8]'
@@ -96,7 +96,7 @@ export default function TopNavbar() {
       </div>
       {/* Stays above the dim overlay so menu / close controls stay visible on every page */}
       <div
-        className={`relative mx-auto flex w-full max-w-8xl items-center justify-between gap-2 px-3 transition-all duration-300 sm:px-6 lg:px-10 xl:px-20 ${
+        className={`relative mx-auto flex w-full max-w-8xl items-center justify-between gap-2 px-3 transition-all duration-300 sm:px-6 lg:px-14 xl:px-20 ${
           mobileOpen ? 'z-[210]' : ''
         } ${isScrolled ? 'py-2' : 'py-2'}`}
       >
@@ -116,7 +116,7 @@ export default function TopNavbar() {
         </Link>
 
         <nav
-          className="absolute left-1/2 z-30 hidden -translate-x-1/2 items-center gap-1 lg:flex xl:gap-3"
+          className="absolute left-1/2 z-30 hidden -translate-x-1/2 items-center gap-2 lg:flex lg:gap-3"
           aria-label="Main"
         >
           {navItems.map((item) => {
