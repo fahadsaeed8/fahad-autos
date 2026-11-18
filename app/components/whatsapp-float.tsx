@@ -1,14 +1,17 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { brand } from '@/app/lib/brand'
 
 export default function WhatsAppFloat() {
+  const onHome = usePathname() === '/'
+
   return (
     <a
       href={brand.whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-4 end-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md transition hover:bg-[#20bd5a] md:bottom-5 md:end-5"
+      className={`fixed end-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md transition hover:bg-[#20bd5a] md:end-5 ${onHome ? 'bottom-32' : 'bottom-4 md:bottom-5'}`}
       aria-label="WhatsApp: 0313-4426717"
       title="WhatsApp"
     >

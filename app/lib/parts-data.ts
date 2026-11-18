@@ -1,4 +1,4 @@
-import { partsPageImages } from '@/app/lib/site-images'
+import { imageForPart, partsPageImages } from '@/app/lib/site-images'
 
 const N = partsPageImages.length
 
@@ -948,3 +948,53 @@ export function getCategoryBySlug(slug: string): PartCategory | undefined {
 }
 
 export const PART_SLUGS = PART_CATEGORIES.map((c) => c.id)
+
+export type IndividualPart = {
+  slug: string
+  en: string
+  ur: string
+  descEn: string
+  descUr: string
+  image: string
+  focus?: string
+  partNo?: string
+}
+
+function partSlug(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+/** Every sale item on its own, with manufactured part numbers first. */
+export function allIndividualParts(): IndividualPart[] {
+  const used = new Set<string>()
+  const list: IndividualPart[] = []
+
+  for (const category of PART_CATEGORIES) {
+    for (const item of category.items) {
+      let slug = item.partNo ? item.partNo.toLowerCase() : partSlug(item.en)
+      if (used.has(slug)) slug = `${slug}-${used.size + 1}`
+      used.add(slug)
+      list.push({
+        slug,
+        en: item.en,
+        ur: item.ur,
+        descEn: item.descEn,
+        descUr: item.descUr,
+        image: item.image ?? imageForPart(category.id),
+        focus: item.focus,
+        partNo: item.partNo,
+      })
+    }
+  }
+
+  return list.sort((a, b) => {
+    if (a.partNo && b.partNo) return a.partNo.localeCompare(b.partNo)
+    if (a.partNo) return -1
+    if (b.partNo) return 1
+    return a.en.localeCompare(b.en)
+  })
+}

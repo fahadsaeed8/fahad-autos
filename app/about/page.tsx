@@ -161,10 +161,10 @@ export default function AboutPage() {
           </div>
           <div className="mt-6 flex flex-wrap gap-3 md:mt-0">
             <Link
-              href="/parts"
+              href="/catalogue"
               className="inline-flex min-h-12 items-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-6 text-sm font-semibold tracking-wide text-[#1A1408]"
             >
-              {isUr ? 'پارٹس دیکھیں' : 'View parts'}
+              {isUr ? 'کیٹلاگ کھولیں' : 'Open the catalogue'}
             </Link>
             <Link
               href="/contact"

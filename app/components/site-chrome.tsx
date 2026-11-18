@@ -21,7 +21,7 @@ export default function SiteChrome({ children, initialLang }: SiteChromeProps) {
       <LanguageProvider initialLang={initialLang}>
         <TopNavbar />
         <div className={isHomePage ? '' : 'pt-20 md:pt-28'}>{children}</div>
-        <SiteFooter />
+        {isHomePage ? null : <SiteFooter />}
         <WhatsAppFloat />
       </LanguageProvider>
     </ThemeProvider>

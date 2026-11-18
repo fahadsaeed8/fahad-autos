@@ -109,13 +109,13 @@ export default function PartCategoryPage() {
             href="/parts"
             className="inline-flex min-h-12 items-center rounded-full border border-[#B8923D]/50 px-6 text-sm font-semibold tracking-wide text-[#F4F0E6] hover:border-[#F5E8C8] hover:text-[#F5E8C8]"
           >
-            {isUr ? 'تمام کیٹیگریز' : 'All categories'}
+            {isUr ? 'تمام انفرادی پارٹس' : 'All individual parts'}
           </Link>
           <Link
             href="/contact"
             className="inline-flex min-h-12 items-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-6 text-sm font-semibold tracking-wide text-[#1A1408]"
           >
-            {isUr ? 'اس کیٹیگری کے لیے رابطہ' : 'Contact about this category'}
+            {isUr ? 'ان پارٹس کا ریٹ مانگیں' : 'Ask for these parts'}
           </Link>
         </div>
       </section>

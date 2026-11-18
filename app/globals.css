@@ -142,12 +142,60 @@ iframe.goog-te-banner-frame,
   animation: slow-zoom 18s ease-in-out infinite alternate;
 }
 
+@keyframes tractor-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.2deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1.2deg);
+  }
+}
+
+@keyframes road-puff {
+  0% {
+    opacity: 0.7;
+    transform: translate(0, 0) scale(0.35);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-64px, -10px) scale(1.35);
+  }
+}
+
+@keyframes headlamp {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.tractor-bob {
+  transform-origin: 60% 80%;
+  animation: tractor-bob 0.42s ease-in-out infinite;
+}
+
+.road-puff {
+  animation: road-puff 0.85s ease-out infinite;
+}
+
+.headlamp {
+  transform-origin: left center;
+  animation: headlamp 0.7s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .glow-breath,
   .glow-corner,
   .stroke-pulse,
-  .slow-zoom {
+  .slow-zoom,
+  .tractor-bob,
+  .road-puff,
+  .headlamp {
     animation: none;
   }
 }

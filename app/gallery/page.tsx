@@ -94,8 +94,8 @@ export default function GalleryPage() {
             <Link href="/contact" className="inline-flex min-h-12 items-center rounded-full bg-[#1A1408] px-6 text-sm font-semibold text-[#F5E8C8]">
               {isUr ? 'رابطہ' : 'Contact'}
             </Link>
-            <Link href="/parts" className="inline-flex min-h-12 items-center rounded-full border border-[#1A1408]/30 px-6 text-sm font-semibold text-[#1A1408]">
-              {isUr ? 'پارٹس کی فہرست' : 'Browse parts'}
+            <Link href="/catalogue" className="inline-flex min-h-12 items-center rounded-full border border-[#1A1408]/30 px-6 text-sm font-semibold text-[#1A1408]">
+              {isUr ? 'کیٹلاگ' : 'Catalogue'}
             </Link>
           </div>
         </article>
