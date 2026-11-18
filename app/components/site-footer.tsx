@@ -16,8 +16,8 @@ export default function SiteFooter({ compact = false }: { compact?: boolean }) {
       <div
         className={
           compact
-            ? 'mx-auto grid max-w-8xl grid-cols-3 gap-4 px-8 py-5 md:px-14 lg:px-20'
-            : 'mx-auto grid max-w-8xl gap-8 px-8 py-10 md:grid-cols-[1.6fr_1fr_1fr] md:px-14 lg:px-20'
+            ? 'mx-auto grid max-w-8xl grid-cols-1 gap-6 px-4 py-6 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:gap-4 lg:px-20'
+            : 'mx-auto grid max-w-8xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.6fr_1fr_1fr] md:px-14 lg:px-20'
         }
       >
         <div>
@@ -27,7 +27,7 @@ export default function SiteFooter({ compact = false }: { compact?: boolean }) {
               alt="Fahad Tractor Parts and Services logo"
               width={460}
               height={140}
-              className={compact ? 'h-14 w-44 object-contain md:h-16 md:w-56' : 'h-24 w-80 object-contain md:w-96'}
+              className={compact ? 'h-12 w-36 object-contain sm:h-14 sm:w-44 md:h-16 md:w-56' : 'h-16 w-52 object-contain sm:h-20 sm:w-72 md:h-24 md:w-96'}
             />
           </Link>
           <p className={compact ? 'mt-3 max-w-md text-xs leading-5 md:text-sm md:leading-6' : 'mt-4 max-w-md text-sm leading-7'}>
@@ -100,7 +100,7 @@ export default function SiteFooter({ compact = false }: { compact?: boolean }) {
           </address>
         </div>
       </div>
-      <div className="border-t border-white/10 px-8 py-4 text-center font-mono text-xs text-[#6F675F] md:px-14 lg:px-20">
+      <div className="border-t border-white/10 px-4 py-4 text-center font-mono text-xs text-[#6F675F] sm:px-6 md:px-14 lg:px-20">
         {isUr
           ? `کاپی رائٹ 2026 ${brand.ur}۔ جملہ حقوق محفوظ ہیں۔`
           : `Copyright 2026 ${brand.en}. All rights reserved.`}

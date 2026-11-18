@@ -58,14 +58,14 @@ export default function AboutPage() {
 
   return (
     <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
-      <section className="relative overflow-hidden px-8 pb-6 pt-28 md:px-14 md:pt-32 lg:px-20">
+      <section className="relative overflow-hidden px-4 pb-6 pt-4 sm:px-6 md:px-14 md:pt-32 lg:px-20">
         <GlowEllipse />
         <div className="relative z-10 mx-auto max-w-8xl">
           <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
             {isUr ? brand.ur : brand.en}
           </p>
           <h1
-            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-5xl' : 'text-6xl md:text-7xl'} leading-none`}
+            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl'} leading-none`}
             style={isUr ? { lineHeight: 1.7 } : undefined}
           >
             {isUr ? 'ہمارے بارے میں' : 'About us'}
@@ -78,7 +78,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-8xl px-8 pb-16 md:px-14 lg:px-20">
+      <section className="mx-auto max-w-8xl px-4 pb-16 sm:px-6 md:px-14 lg:px-20">
         <article className="relative overflow-hidden rounded-[22px] border border-[#B8923D]/35 p-6 md:p-8" style={{ background: cardWash[0] }}>
           <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#F5E8C8] via-[#B8923D] to-transparent" />
           <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">{isUr ? 'کہانی' : 'The story'}</p>

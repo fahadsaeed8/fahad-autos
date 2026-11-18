@@ -77,11 +77,11 @@ export default function TopNavbar() {
       : idleHeaderSurface()
 
   const logoSizes = isScrolled
-    ? 'h-14 w-auto max-w-[min(72vw,280px)] sm:max-w-[300px] md:h-16 md:max-w-[300px]'
-    : 'h-[4.25rem] w-auto max-w-[min(78vw,320px)] sm:h-[4.75rem] sm:max-w-[340px] md:h-24 md:max-w-[380px]'
+    ? 'h-10 w-auto max-w-[6.75rem] sm:h-12 sm:max-w-[11rem] lg:h-14 lg:max-w-[13rem] xl:h-16 xl:max-w-[300px]'
+    : 'h-10 w-auto max-w-[7.25rem] sm:h-14 sm:max-w-[12rem] lg:h-16 lg:max-w-[13rem] xl:h-20 xl:max-w-[16rem]'
 
   const linkClass = (active: boolean) =>
-    `rounded-lg px-4 py-3 text-base font-semibold transition duration-200 ease-out md:px-3 md:py-2 ${
+    `rounded-lg px-4 py-3 text-base font-semibold transition duration-200 ease-out lg:px-2 lg:py-2 lg:text-sm xl:px-3 xl:text-base ${
       active
         ? 'bg-[#B8923D]/20 text-[#F5E8C8] ring-1 ring-[#B8923D]/60'
         : 'text-[#F4F0E6] hover:bg-white/10 hover:text-[#F5E8C8]'
@@ -96,7 +96,7 @@ export default function TopNavbar() {
       </div>
       {/* Stays above the dim overlay so menu / close controls stay visible on every page */}
       <div
-        className={`relative mx-auto flex w-full max-w-8xl items-center justify-between gap-2 px-8 transition-all duration-300 sm:gap-3 md:px-14 lg:px-20 ${
+        className={`relative mx-auto flex w-full max-w-8xl items-center justify-between gap-2 px-3 transition-all duration-300 sm:px-6 lg:px-10 xl:px-20 ${
           mobileOpen ? 'z-[210]' : ''
         } ${isScrolled ? 'py-2' : 'py-2'}`}
       >
@@ -116,7 +116,7 @@ export default function TopNavbar() {
         </Link>
 
         <nav
-          className="absolute left-1/2 z-30 hidden -translate-x-1/2 items-center gap-2 md:flex md:gap-3"
+          className="absolute left-1/2 z-30 hidden -translate-x-1/2 items-center gap-1 lg:flex xl:gap-3"
           aria-label="Main"
         >
           {navItems.map((item) => {
@@ -135,13 +135,13 @@ export default function TopNavbar() {
         </nav>
 
         {/* End: language + menu (mobile). EN: both on the right; UR: mirrored to the left via dir. */}
-        <div className="relative z-30 flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
+        <div className="relative z-30 flex shrink-0 items-center gap-1.5 sm:gap-2">
           <ThemeToggle />
           <LanguageMenu />
 
           <button
             type="button"
-            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 shadow-md transition duration-200 active:scale-95 md:hidden ${
+            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 shadow-md transition duration-200 active:scale-95 lg:hidden ${
               mobileOpen
                 ? 'border-amber-400 bg-slate-900 text-white shadow-amber-900/40 ring-2 ring-amber-400/50'
                 : isScrolled
@@ -175,7 +175,7 @@ export default function TopNavbar() {
       {mobileOpen
         ? createPortal(
             <div
-              className="fixed inset-0 z-[180] md:hidden"
+              className="fixed inset-0 z-[180] lg:hidden"
               id="mobile-nav"
               role="dialog"
               aria-modal="true"

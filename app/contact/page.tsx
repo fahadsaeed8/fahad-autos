@@ -45,14 +45,14 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
-      <section className="relative overflow-hidden px-8 pb-10 pt-28 md:px-14 md:pt-32 lg:px-20">
+      <section className="relative overflow-hidden px-4 pb-8 pt-4 sm:px-6 md:px-14 md:pb-10 md:pt-32 lg:px-20">
         <GlowEllipse />
         <div className="relative z-10 mx-auto max-w-8xl">
           <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#B8923D]">
             {isUr ? 'کوٹ' : 'Quotation'}
           </p>
           <h1
-            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-5xl' : 'text-6xl md:text-7xl'} leading-none`}
+            className={`mt-3 max-w-3xl text-[#F4F0E6] ${poster} ${isUr ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl'} leading-none`}
             style={isUr ? { lineHeight: 1.7 } : undefined}
           >
             {isUr ? 'پارٹس لسٹ بھیجیں' : 'Send the parts list'}
@@ -65,7 +65,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-8xl gap-4 px-8 pb-16 md:px-14 lg:grid-cols-[0.9fr_1.1fr] lg:px-20">
+      <section className="mx-auto grid max-w-8xl gap-4 px-4 pb-16 sm:px-6 md:px-14 lg:grid-cols-[0.9fr_1.1fr] lg:px-20">
         <article className="relative overflow-hidden rounded-[22px] bg-gradient-to-br from-[#8A6B25] via-[#B8923D] to-[#D9B96A] p-6 text-[#1A1408] md:p-8">
           <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-white/70 to-transparent" />
           <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-[#3d2e10]">

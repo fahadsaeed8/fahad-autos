@@ -33,7 +33,7 @@ export default function PartsPage() {
 
   return (
     <main className="min-h-screen bg-[#0c0c0c] text-[#F4F0E6]">
-      <section className="relative overflow-hidden px-8 pb-6 pt-28 md:px-14 md:pt-32 lg:px-20">
+      <section className="relative overflow-hidden px-4 pb-6 pt-4 sm:px-6 md:px-14 md:pt-32 lg:px-20">
         <GlowEllipse />
         <div className="relative z-10 mx-auto max-w-8xl">
           <Link href="/catalogue" className="inline-flex min-h-11 items-center rounded-full border border-[#F5E8C8]/70 bg-gradient-to-br from-[#F5E8C8] via-[#C6A04A] to-[#8A6B25] px-5 text-sm font-semibold text-[#1A1408]">
@@ -43,7 +43,7 @@ export default function PartsPage() {
             {isUr ? 'ہر پارٹ الگ' : 'Each part on its own'}
           </p>
           <h1
-            className={`mt-3 text-[#F4F0E6] ${isUr ? 'text-5xl' : 'font-poster text-6xl uppercase tracking-[0.02em] md:text-7xl'} leading-none`}
+            className={`mt-3 text-[#F4F0E6] ${isUr ? 'text-3xl sm:text-4xl md:text-5xl' : 'font-poster text-4xl uppercase tracking-[0.02em] sm:text-5xl md:text-6xl lg:text-7xl'} leading-none`}
             style={isUr ? { lineHeight: 1.7 } : undefined}
           >
             {isUr ? 'انفرادی پارٹس' : 'Individual parts'}
@@ -74,7 +74,7 @@ export default function PartsPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-8xl px-8 pb-20 md:px-14 lg:px-20">
+      <section className="mx-auto max-w-8xl px-4 pb-20 sm:px-6 md:px-14 lg:px-20">
         {visible.length === 0 ? (
           <p className="font-mono text-sm leading-7 text-[#A39B90]" style={isUr ? { lineHeight: 1.9 } : undefined}>
             {isUr
